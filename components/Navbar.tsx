@@ -48,7 +48,7 @@ export function Navbar() {
     <header className="pointer-events-none fixed inset-x-0 top-3 z-50 px-3 transition-all duration-300">
       <nav className={`liquid-glass pointer-events-auto mx-auto flex h-[66px] w-full max-w-[1180px] items-center justify-between rounded-[24px] px-4 sm:px-6 ${scrolled ? "liquid-glass-scrolled" : ""}`} aria-label="Main navigation">
         <a href="#home" className="focus-ring rounded-full px-2 text-base font-bold tracking-[-0.035em] text-[#1d1d1f]" aria-label="Sarthak Madan — home">Sarthak Madan<span className="text-[#2563eb]">.</span></a>
-        <div className="hidden items-center gap-7 lg:flex">{navItems.map((item) => <a key={item.id} href={`#${item.id}`} className="focus-ring rounded-full px-1 text-xs font-medium text-[#55555a] transition hover:text-black">{item.label}</a>)}</div>
+        <div className="hidden items-center gap-1 lg:flex">{navItems.map((item) => <a key={item.id} href={`#${item.id}`} className="focus-ring inline-flex min-h-11 items-center rounded-full px-3 text-xs font-medium text-[#55555a] transition hover:bg-black/[0.045] hover:text-black">{item.label}</a>)}</div>
         <div className="flex items-center gap-3">
           <a href="/Sarthak-Madan-Resume.pdf" download className="focus-ring hidden items-center gap-2 rounded-full bg-[#1d1d1f] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[#353538] sm:flex"><Download size={13} /> Resume</a>
           <button onClick={() => setOpen((value) => !value)} className="focus-ring grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white/70 text-[#1d1d1f] lg:hidden" aria-expanded={open} aria-label="Toggle menu">{open ? <X size={18} /> : <Menu size={18} />}</button>
