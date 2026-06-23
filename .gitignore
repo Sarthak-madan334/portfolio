@@ -1,0 +1,9 @@
+node_modules
+.next
+.next-dev
+.pnpm-store
+out
+.vercel
+*.log
+.DS_Store
+tmp
