@@ -11,17 +11,6 @@ Next.js · TypeScript · Tailwind CSS · Framer Motion · Lucide React
 - Responsive, premium interface with subtle scroll animations
 - Categorized technical stack and project showcases
 - Integrated résumé and contact links
-- Security headers and production-ready Vercel configuration
-
-## Run locally
-
-```bash
-pnpm install
-pnpm dev
-```
-
-Open [localhost:3000](http://localhost:3000) in your browser.
-
 ---
 
 Made with ♥ by **Sarthak Madan**
