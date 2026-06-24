@@ -24,11 +24,13 @@ export function Hero() {
           <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38 }} className="mt-8">
             <a href="#projects" className="focus-ring group inline-flex items-center gap-3 rounded-full bg-[#1d1d1f] px-7 py-4 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(0,0,0,.18)] transition hover:scale-[1.02] hover:bg-black">Explore selected work <ArrowDown size={15} className="transition group-hover:translate-y-0.5" /></a>
           </motion.div>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .48 }} className="mt-6 flex max-w-lg flex-wrap items-center gap-3 border-t border-black/[0.08] pt-5">
-            <span className="mr-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#9a9aa0]">More</span>
-            <a href="/Sarthak-Madan-Resume.pdf" target="_blank" className="focus-ring inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold text-[#2563eb] transition hover:bg-white">Résumé <ArrowUpRight size={13} /></a>
-            <a href={links.github} target="_blank" rel="noreferrer" aria-label="GitHub profile" className="focus-ring inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-medium text-[#5f6368] transition hover:bg-white hover:text-black"><Github size={14} /> GitHub</a>
-            <a href={links.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn profile" className="focus-ring inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-medium text-[#5f6368] transition hover:bg-white hover:text-black"><Linkedin size={14} /> LinkedIn</a>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .48 }} className="mt-7 flex max-w-xl flex-wrap items-center gap-3">
+            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[#85858b]">More</span>
+            <div className="flex flex-wrap items-center gap-2.5">
+              <a href="/Sarthak-Madan-Resume.pdf" target="_blank" className="ios-glass-action focus-ring inline-flex min-h-12 items-center gap-2 rounded-full px-4 text-sm font-semibold text-[#2563eb]">Résumé <ArrowUpRight size={15} /></a>
+              <a href={links.github} target="_blank" rel="noreferrer" aria-label="GitHub profile" className="ios-glass-action focus-ring inline-flex min-h-12 items-center gap-2 rounded-full px-4 text-sm font-semibold text-[#45464b]"><Github size={17} /> GitHub</a>
+              <a href={links.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn profile" className="ios-glass-action focus-ring inline-flex min-h-12 items-center gap-2 rounded-full px-4 text-sm font-semibold text-[#45464b]"><Linkedin size={17} /> LinkedIn</a>
+            </div>
           </motion.div>
         </div>
         <ProductStage />
