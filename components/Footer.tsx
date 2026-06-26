@@ -1,8 +1,59 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
+import { ArrowUp } from "lucide-react";
+import { links } from "@/lib/data";
 
 export function Footer() {
-  return <footer className="border-t border-white/10 bg-[#0b0b0f] py-9 text-white"><div className="site-shell flex flex-col items-center justify-between gap-7 sm:flex-row"><div><p className="text-base font-bold tracking-[-0.035em]">Sarthak Madan<span className="text-[#60a5fa]">.</span></p><p className="mt-1 text-[9px] uppercase tracking-[0.14em] text-white/35">© 2026 · Delhi NCR, India</p></div><div className="flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.05] px-5 py-3 text-xs text-white/65">Made with <motion.span animate={{scale:[1,1.22,1]}} transition={{duration:1.4,repeat:Infinity}}><Heart size={14} fill="#ff375f" className="text-[#ff375f]"/></motion.span> by <span className="font-semibold text-white">Sarthak</span></div></div></footer>;
+  return (
+    <footer className="bg-[#07080a] py-14 text-white sm:py-20">
+      <div className="site-shell">
+        <div className="grid gap-12 md:grid-cols-[1fr_auto] md:items-start">
+          <div>
+            <h2 className="max-w-xl text-4xl font-semibold tracking-[-0.045em] text-white sm:text-5xl">
+              Thanks for visiting.
+            </h2>
+            <p className="mt-6 max-w-md text-lg font-medium leading-8 text-white/35 sm:text-xl">
+              I&apos;m always open to discussing new opportunities, thoughtful ideas, and interesting problems worth solving.
+            </p>
+          </div>
+
+          <ul className="space-y-4 text-lg font-medium text-white/45 sm:text-xl">
+            <li className="flex items-center gap-3">
+              <span className="h-2 w-2 rounded-full bg-emerald-500" />
+              Open to internships · 2026
+            </li>
+            <li className="flex items-center gap-3">
+              <span className="h-2 w-2 rounded-full bg-white/20" />
+              Next.js &amp; Tailwind CSS
+            </li>
+            <li className="flex items-center gap-3">
+              <span className="h-2 w-2 rounded-full bg-white/20" />
+              Building useful software
+            </li>
+          </ul>
+        </div>
+
+        <div className="mt-16 border-t border-white/10 pt-10">
+          <div className="flex flex-col gap-8 text-base font-medium text-white/25 sm:flex-row sm:items-center sm:justify-between sm:text-lg">
+            <p>© 2026 Sarthak Madan</p>
+            <div className="flex flex-wrap items-center gap-x-9 gap-y-4">
+              <a className="transition hover:text-white/70" href={links.github} target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+              <a className="transition hover:text-white/70" href={links.linkedin} target="_blank" rel="noreferrer">
+                LinkedIn
+              </a>
+              <a className="transition hover:text-white/70" href={links.email}>
+                Email
+              </a>
+            </div>
+            <a className="inline-flex items-center gap-3 transition hover:text-white/70" href="#home">
+              <span className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white/55">
+                <ArrowUp size={18} />
+              </span>
+              Back to top
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 }
