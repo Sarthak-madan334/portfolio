@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowUpRight, Github, Heart, Search, ShoppingBag, Sparkles } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Github, Heart, Search, ShoppingBag, Sparkles } from "lucide-react";
 import type { ReactNode } from "react";
+import { useRef, useState } from "react";
 import { projects } from "@/lib/data";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
@@ -10,7 +11,7 @@ import { SectionHeading } from "./SectionHeading";
 export function Projects() {
   return (
     <section id="projects" className="section-pad bg-white">
-      <div className="site-shell">
+      <div className="site-shell hidden lg:block">
         <SectionHeading number="03" eyebrow="Selected work" title="Projects, presented as products." description="Two end-to-end builds that show how I think across product structure, interface craft, integrations, and deployment." />
         <div className="mt-12 space-y-8">
           {projects.map((project, index) => <Reveal key={project.title} delay={index * .08}>
@@ -27,7 +28,299 @@ export function Projects() {
           </Reveal>)}
         </div>
       </div>
+      <MobileProjects />
     </section>
+  );
+}
+
+function MobileProjects() {
+  const railRef = useRef<HTMLDivElement>(null);
+  const [activeProject, setActiveProject] = useState(0);
+
+  const scrollProject = (direction: 1 | -1) => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const firstCard = rail.querySelector<HTMLElement>("[data-mobile-project-card]");
+    rail.scrollBy({ left: direction * ((firstCard?.offsetWidth ?? 290) + 16), behavior: "smooth" });
+  };
+
+  const previousProject = () => scrollProject(-1);
+  const nextProject = () => scrollProject(1);
+
+  const updateActiveProject = () => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const firstCard = rail.querySelector<HTMLElement>("[data-mobile-project-card]");
+    const step = (firstCard?.offsetWidth ?? 290) + 16;
+    setActiveProject(Math.round(rail.scrollLeft / step));
+  };
+
+  return (
+    <div className="lg:hidden">
+      <div className="mx-auto max-w-[430px] overflow-hidden rounded-[34px] bg-[#fbfbfa] py-8 shadow-[0_28px_90px_rgba(0,0,0,0.10)]">
+        <div className="px-6">
+          <div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#8c8c91]">
+                03 · Selected work
+              </p>
+              <h2 className="mt-4 text-[2.45rem] font-semibold leading-[0.98] tracking-[-0.07em] text-black min-[390px]:text-[2.8rem]">
+                Projects, presented
+                <br />
+                as products.
+              </h2>
+            </div>
+          </div>
+          <p className="mt-5 max-w-[325px] text-[13px] leading-6 text-[#6f7075]">
+            End-to-end builds that cover product structure, interface craft,
+            integrations, and deployment.
+          </p>
+        </div>
+
+        <div className="relative mt-7">
+          <AnimatePresence>
+            {activeProject > 0 && (
+              <motion.button
+                type="button"
+                onClick={previousProject}
+                aria-label="Previous project"
+                initial={{ opacity: 0, x: -12, scale: 0.86 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: -12, scale: 0.86 }}
+                whileTap={{ scale: 0.92 }}
+                transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute left-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-black/10 bg-white/90 text-[#111113] shadow-[0_12px_34px_rgba(0,0,0,0.14)] backdrop-blur-xl"
+              >
+                <ChevronLeft size={20} />
+              </motion.button>
+            )}
+          </AnimatePresence>
+
+          <div
+            ref={railRef}
+            onScroll={updateActiveProject}
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-6 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {projects.map((project, index) => (
+              <MobileProjectCard key={project.title} project={project} index={index} active={activeProject === index} />
+            ))}
+          </div>
+
+          <AnimatePresence>
+            {activeProject < projects.length - 1 && (
+              <motion.button
+                type="button"
+                onClick={nextProject}
+                aria-label="Next project"
+                initial={{ opacity: 0, x: 12, scale: 0.86 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: 12, scale: 0.86 }}
+                whileTap={{ scale: 0.92 }}
+                transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute right-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-black/10 bg-white/90 text-[#111113] shadow-[0_12px_34px_rgba(0,0,0,0.14)] backdrop-blur-xl"
+              >
+                <ChevronRight size={20} />
+              </motion.button>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MobileProjectCard({ project, index, active }: { project: (typeof projects)[number]; index: number; active: boolean }) {
+  const dark = index === 0;
+  const title = project.title === "DEADLOCK" ? "Deadlock" : project.title;
+
+  return (
+    <motion.article
+      data-mobile-project-card
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      animate={{ scale: active ? 1 : 0.965, opacity: active ? 1 : 0.82 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.42, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      className={`relative min-h-[560px] w-[82vw] max-w-[320px] shrink-0 snap-start overflow-hidden rounded-[24px] border ${
+        dark
+          ? "border-white/10 bg-[#0d0d0f] text-white shadow-[0_22px_70px_rgba(0,0,0,0.30)]"
+          : "border-[#dfe4f4] bg-[#f3f6ff] text-[#111113] shadow-[0_18px_55px_rgba(75,91,140,0.13)]"
+      }`}
+    >
+      <motion.div
+        aria-hidden="true"
+        animate={{ opacity: active ? [0.1, 0.22, 0.1] : 0, scale: active ? [1, 1.08, 1] : 1 }}
+        transition={{ duration: 3.6, repeat: active ? Infinity : 0, ease: "easeInOut" }}
+        className={`pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full blur-3xl ${
+          dark ? "bg-[#ff5b62]" : "bg-[#7c91ff]"
+        }`}
+      />
+      <div
+        className={`pointer-events-none absolute inset-0 ${
+          dark
+            ? "bg-[radial-gradient(circle_at_96%_0%,rgba(143,37,41,0.55),transparent_30%),radial-gradient(circle_at_0%_100%,rgba(255,255,255,0.07),transparent_38%)]"
+            : "bg-[radial-gradient(circle_at_86%_8%,rgba(91,119,255,0.12),transparent_36%),radial-gradient(circle_at_0%_100%,rgba(255,255,255,0.9),transparent_42%)]"
+        }`}
+      />
+
+      <div className="relative p-3 pb-0">
+        <div className={`overflow-hidden rounded-[17px] border ${dark ? "border-white/12 bg-[#121318]" : "border-white/80 bg-white"}`}>
+          {dark ? <MobileDeadlockPreview /> : <MobileStorePreview />}
+        </div>
+      </div>
+
+      <div className="relative p-5 pt-6">
+        <p className={`text-[10px] font-bold uppercase tracking-[0.13em] ${dark ? "text-[#ff766b]" : "text-[#7f8eff]"}`}>
+          Project {project.index} · Live
+        </p>
+        <h3 className={`mt-3 text-[2.35rem] font-semibold leading-none tracking-[-0.065em] ${dark ? "text-white" : "text-[#111113]"}`}>
+          {title}
+        </h3>
+        <p className={`mt-3 text-sm font-semibold ${dark ? "text-[#ff766b]" : "text-[#2f63ff]"}`}>
+          {project.subtitle}
+        </p>
+        <p className={`mt-4 text-[13px] leading-6 ${dark ? "text-white/82" : "text-[#656a78]"}`}>
+          {project.description}
+        </p>
+
+        <div className="mt-5 flex flex-wrap gap-2">
+          {project.tech.map((tech) => (
+            <span
+              key={tech}
+              className={`rounded-full px-3 py-1.5 text-[10px] font-semibold ${
+                dark ? "bg-white/[0.11] text-white/84" : "bg-black/[0.055] text-[#4f5360]"
+              }`}
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-5 flex flex-wrap gap-3">
+          <MobileProjectLink href={project.live} label="View live" primary dark={dark} icon={<ArrowUpRight size={15} />} />
+          <MobileProjectLink href={project.github} label="GitHub" dark={dark} icon={<Github size={15} />} />
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
+function MobileDeadlockPreview() {
+  return (
+    <div className="relative h-[190px] bg-[linear-gradient(150deg,#17181f_0%,#0d0d10_68%)]">
+      <div className="absolute inset-y-0 left-0 w-[46px] border-r border-white/8 bg-white/[0.025] p-2.5">
+        <span className="grid h-7 w-7 place-items-center rounded-xl bg-[#ff343d] text-[9px] font-black">D</span>
+        <div className="mt-4 space-y-2.5">
+          {[0, 1, 2, 3, 4].map((item) => (
+            <span key={item} className="grid h-7 w-7 place-items-center rounded-lg bg-white/[0.08]">
+              <span className="h-2 w-2 rounded-sm border border-white/25" />
+            </span>
+          ))}
+        </div>
+      </div>
+      <div className="ml-[46px] p-4">
+        <div className="flex items-start justify-between">
+          <div>
+            <p className="text-[7px] font-bold uppercase tracking-[0.12em] text-white/42">Failure intelligence dashboard</p>
+            <h4 className="mt-2 text-[12px] font-semibold tracking-[-0.03em] text-white">Your plan has 6 hidden risks.</h4>
+          </div>
+          <span className="grid h-7 w-7 place-items-center rounded-full bg-white/[0.06] text-[#ff7d78]">
+            <Sparkles size={12} />
+          </span>
+        </div>
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          <div className="rounded-xl bg-white/[0.075] p-3">
+            <p className="text-[6px] font-semibold uppercase text-white/38">Readiness score</p>
+            <p className="mt-2 text-2xl font-semibold">74</p>
+            <div className="mt-3 h-1.5 rounded-full bg-white/12">
+              <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-[#ff424a] to-[#ffb0b0]" />
+            </div>
+          </div>
+          <div className="rounded-xl bg-[#2a1f23]/85 p-3">
+            <p className="text-[6px] font-semibold uppercase text-[#ff6f69]">Primary risk</p>
+            <p className="mt-2 text-[10px] font-semibold text-white">Delayed validation loop</p>
+            <p className="mt-2 text-[7px] leading-3 text-white/48">Run customer testing before launch.</p>
+          </div>
+        </div>
+        <div className="mt-4 rounded-xl border border-white/8 bg-black/10 p-3">
+          <div className="flex h-9 items-end gap-1.5">
+            {[20, 22, 20, 35, 31, 46, 58, 68, 80, 91].map((height, i) => (
+              <motion.span
+                key={i}
+                initial={{ height: 8 }}
+                whileInView={{ height: `${height}%` }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: i * 0.03 }}
+                className="flex-1 rounded-t-full bg-gradient-to-t from-[#88363c] to-[#ff7771]"
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MobileStorePreview() {
+  return (
+    <div className="relative bg-white">
+      <div className="flex h-11 items-center justify-between border-b border-black/[0.06] px-3.5">
+        <strong className="text-[13px] tracking-[-0.04em]">
+          Nex<span className="text-[#2563eb]">Store</span>
+        </strong>
+        <div className="flex gap-3 text-[7px] font-medium text-[#6e6e73]">
+          <span>Shop</span>
+          <span>Deals</span>
+        </div>
+        <div className="flex gap-2 text-[#50535a]">
+          <Search size={12} />
+          <ShoppingBag size={12} />
+        </div>
+      </div>
+      <div className="grid grid-cols-[0.95fr_1fr] gap-2.5 bg-[#fbfcff] p-3.5">
+        <div className="rounded-2xl bg-gradient-to-br from-[#e7edff] to-[#f5f0ff] p-3.5">
+          <p className="text-[6px] font-bold uppercase tracking-[0.08em] text-[#315cf6]">AI-curated for you</p>
+          <h4 className="mt-3 text-base font-bold leading-tight tracking-[-0.055em]">Find your next favorite thing.</h4>
+          <span className="mt-4 inline-flex rounded-full bg-[#111113] px-3 py-1.5 text-[8px] font-bold text-white">Shop now</span>
+        </div>
+        <div>
+          <p className="mb-2.5 text-[8px] font-semibold text-[#33343a]">Trending now</p>
+          <div className="grid grid-cols-3 gap-1.5">
+            {[
+              ["#f6d4de", "AirOne", "$129"],
+              ["#d7f0e0", "Studio", "$24"],
+              ["#faeccb", "Pulse", "$79"],
+            ].map(([bg, name, price]) => (
+              <div key={name}>
+                <div style={{ backgroundColor: bg }} className="relative grid aspect-[0.88] place-items-center rounded-xl">
+                  <div className="h-6 w-6 rounded-xl bg-white/80 shadow-md" />
+                  <Heart size={8} className="absolute right-1 top-1 text-[#858893]" />
+                </div>
+                <p className="mt-1.5 text-[7px] font-semibold">{name}</p>
+                <p className="text-[6px] text-[#6e6e73]">{price}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MobileProjectLink({ href, label, icon, primary = false, dark = false }: { href: string; label: string; icon: ReactNode; primary?: boolean; dark?: boolean }) {
+  const cls = primary
+    ? dark
+      ? "bg-white text-[#111113]"
+      : "bg-[#111113] text-white"
+    : dark
+      ? "border border-white/20 text-white"
+      : "border border-black/15 text-[#1d1d1f]";
+
+  return (
+    <a href={href} target="_blank" rel="noreferrer" className={`focus-ring inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-xs font-semibold transition active:scale-[0.98] ${cls}`}>
+      {label}
+      {icon}
+    </a>
   );
 }
 
