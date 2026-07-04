@@ -57,7 +57,7 @@ function MobileProjects() {
 
   return (
     <div className="lg:hidden">
-      <div className="mx-auto max-w-[430px] overflow-hidden rounded-[34px] bg-[#fbfbfa] py-8 shadow-[0_28px_90px_rgba(0,0,0,0.10)]">
+      <div className="mx-auto max-w-[430px] overflow-hidden rounded-[34px] bg-[#fbfbfa] pb-0 pt-8 shadow-[0_28px_90px_rgba(0,0,0,0.10)]">
         <div className="px-6">
           <div>
             <div>
@@ -99,7 +99,7 @@ function MobileProjects() {
           <div
             ref={railRef}
             onScroll={updateActiveProject}
-            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-6 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-6 pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {projects.map((project, index) => (
               <MobileProjectCard key={project.title} project={project} index={index} active={activeProject === index} />
