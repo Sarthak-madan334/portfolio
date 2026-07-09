@@ -19,7 +19,7 @@ export function Hero() {
             <span className="mt-2 block bg-gradient-to-r from-[#2563eb] via-[#7c3aed] to-[#e11d48] bg-clip-text text-transparent">Practical AI.<br />Beautifully built.</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28 }} className="mt-7 max-w-xl text-base leading-7 text-[#6e6e73] sm:text-lg sm:leading-8">
-            I turn ambitious ideas into fast, thoughtful web products—combining full-stack engineering, polished interfaces, and practical AI.
+            I build fast, thoughtful web products using React, Next.js, and practical AI — focused on clean interfaces, real usability, and production-ready execution.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38 }} className="mt-8">
             <a href="#projects" className="focus-ring group inline-flex items-center gap-3 rounded-full bg-[#1d1d1f] px-7 py-4 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(0,0,0,.18)] transition hover:scale-[1.02] hover:bg-black">Explore selected work <ArrowDown size={15} className="transition group-hover:translate-y-0.5" /></a>
