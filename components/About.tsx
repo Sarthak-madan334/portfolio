@@ -12,7 +12,7 @@ export function About() {
   return (
     <section id="about" className="section-pad relative bg-white">
       <div className="site-shell">
-        <SectionHeading number="01" eyebrow="About" title="Learning fast. Building carefully." description="I’m a first-year Computer Science student at SRM University, developing strong foundations while shipping full-stack products in public." />
+        <SectionHeading number="01" eyebrow="About" title="Still learning. Already shipping." description="I’m a first-year Computer Science student at SRM University, developing strong foundations while shipping full-stack products in public." />
         <Reveal className="mt-12 rounded-[36px] bg-[#1d1d1f] p-8 sm:p-12 lg:p-16">
           <p className="max-w-5xl text-3xl font-medium leading-[1.22] tracking-[-0.045em] text-white sm:text-5xl lg:text-6xl">
             I like the moment when a <span className="text-[#5ac8fa]">complicated problem</span> becomes a product that feels <span className="text-[#a7f3d0]">effortless to use.</span>
