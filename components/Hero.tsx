@@ -15,8 +15,8 @@ export function Hero() {
             <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2"><p className="text-base font-semibold text-[#2563eb] sm:text-lg">Full-stack developer</p><span className="hidden h-1 w-1 rounded-full bg-[#a0a0a5] sm:block" /><p className="flex items-center gap-2 text-xs font-medium text-[#77777d]"><span className="h-2 w-2 rounded-full bg-[#34c759]" /> Open to internships · 2026</p></div>
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.12, ease: [0.22, 1, 0.36, 1] }} className="mt-8 max-w-[780px] text-[clamp(3.4rem,5.25vw,5.5rem)] font-semibold leading-[0.92] tracking-[-0.07em] text-[#1d1d1f]">
-            Useful software.
-            <span className="mt-2 block bg-gradient-to-r from-[#2563eb] via-[#7c3aed] to-[#e11d48] bg-clip-text text-transparent">Beautifully built.</span>
+            Full-stack products.
+            <span className="mt-2 block bg-gradient-to-r from-[#2563eb] via-[#7c3aed] to-[#e11d48] bg-clip-text text-transparent">Practical AI.<br />Beautifully built.</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28 }} className="mt-7 max-w-xl text-base leading-7 text-[#6e6e73] sm:text-lg sm:leading-8">
             I turn ambitious ideas into fast, thoughtful web products—combining full-stack engineering, polished interfaces, and practical AI.
