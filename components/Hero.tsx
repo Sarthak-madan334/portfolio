@@ -25,7 +25,6 @@ export function Hero() {
             <a href="#projects" className="focus-ring group inline-flex items-center gap-3 rounded-full bg-[#1d1d1f] px-7 py-4 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(0,0,0,.18)] transition hover:scale-[1.02] hover:bg-black">View my projects <ArrowDown size={15} className="transition group-hover:translate-y-0.5" /></a>
           </motion.div>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .48 }} className="mt-7 flex max-w-xl flex-wrap items-center gap-3">
-            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[#85858b]">More</span>
             <div className="flex flex-wrap items-center gap-2.5">
               <a href="/Sarthak-Madan-Resume.pdf" target="_blank" className="ios-glass-action focus-ring inline-flex min-h-12 items-center gap-2 rounded-full px-4 text-sm font-semibold text-[#2563eb]">Résumé <ArrowUpRight size={15} /></a>
               <a href={links.github} target="_blank" rel="noreferrer" aria-label="GitHub profile" className="ios-glass-action focus-ring inline-flex min-h-12 items-center gap-2 rounded-full px-4 text-sm font-semibold text-[#45464b]"><Github size={17} /> GitHub</a>
