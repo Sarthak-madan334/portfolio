@@ -22,7 +22,7 @@ export function Hero() {
             I build fast, thoughtful web products using React, Next.js, and practical AI — focused on clean interfaces, real usability, and production-ready execution.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38 }} className="mt-8">
-            <a href="#projects" className="focus-ring group inline-flex items-center gap-3 rounded-full bg-[#1d1d1f] px-7 py-4 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(0,0,0,.18)] transition hover:scale-[1.02] hover:bg-black">Explore selected work <ArrowDown size={15} className="transition group-hover:translate-y-0.5" /></a>
+            <a href="#projects" className="focus-ring group inline-flex items-center gap-3 rounded-full bg-[#1d1d1f] px-7 py-4 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(0,0,0,.18)] transition hover:scale-[1.02] hover:bg-black">View my projects <ArrowDown size={15} className="transition group-hover:translate-y-0.5" /></a>
           </motion.div>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .48 }} className="mt-7 flex max-w-xl flex-wrap items-center gap-3">
             <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[#85858b]">More</span>
