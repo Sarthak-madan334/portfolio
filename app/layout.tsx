@@ -32,6 +32,9 @@ export const metadata: Metadata = {
     description: "Building reliable web products where thoughtful engineering meets useful AI.",
     type: "website",
   },
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
