@@ -63,7 +63,7 @@ function DesktopOpenSource() {
         description="The best way to understand a codebase is to improve it-carefully, clearly, and in collaboration with others."
       />
       <div className="mt-12 grid gap-6">
-        {contributions.map((contribution, index) => (
+        {mobileContributions.map((contribution, index) => (
           <Reveal
             key={contribution.pr}
             delay={index * 0.08}
