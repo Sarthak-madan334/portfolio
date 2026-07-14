@@ -143,7 +143,7 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
       transition={{ duration: 0.42, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
       className={`relative min-h-[560px] w-[82vw] max-w-[320px] shrink-0 snap-start overflow-hidden rounded-[24px] border ${
         dark
-          ? "border-white/10 bg-[#0d0d0f] text-white shadow-[0_22px_70px_rgba(0,0,0,0.30)]"
+          ? "border-[#e6e6ea] bg-white text-[#111113] shadow-[0_18px_55px_rgba(0,0,0,0.10)] dark:border-white/10 dark:bg-[#0d0d0f] dark:text-white dark:shadow-[0_22px_70px_rgba(0,0,0,0.30)]"
           : "border-[#dfe4f4] bg-[#f3f6ff] text-[#111113] shadow-[0_18px_55px_rgba(75,91,140,0.13)] dark:border-white/10 dark:bg-[#15171c] dark:text-white dark:shadow-[0_18px_55px_rgba(0,0,0,0.3)]"
       }`}
     >
@@ -152,13 +152,13 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
         animate={{ opacity: active ? [0.1, 0.22, 0.1] : 0, scale: active ? [1, 1.08, 1] : 1 }}
         transition={{ duration: 3.6, repeat: active ? Infinity : 0, ease: "easeInOut" }}
         className={`pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full blur-3xl ${
-          dark ? "bg-[#ff5b62]" : "bg-[#7c91ff]"
+          dark ? "bg-transparent dark:bg-[#ff5b62]" : "bg-[#7c91ff]"
         }`}
       />
       <div
         className={`pointer-events-none absolute inset-0 ${
           dark
-            ? "bg-[radial-gradient(circle_at_96%_0%,rgba(143,37,41,0.55),transparent_30%),radial-gradient(circle_at_0%_100%,rgba(255,255,255,0.07),transparent_38%)]"
+            ? "bg-transparent dark:bg-[radial-gradient(circle_at_96%_0%,rgba(143,37,41,0.55),transparent_30%),radial-gradient(circle_at_0%_100%,rgba(255,255,255,0.07),transparent_38%)]"
             : "bg-[radial-gradient(circle_at_86%_8%,rgba(91,119,255,0.12),transparent_36%),radial-gradient(circle_at_0%_100%,rgba(255,255,255,0.9),transparent_42%)] dark:bg-[radial-gradient(circle_at_86%_8%,rgba(91,119,255,0.18),transparent_36%),radial-gradient(circle_at_0%_100%,rgba(255,255,255,0.04),transparent_42%)]"
         }`}
       />
@@ -173,13 +173,13 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
         <p className={`text-[10px] font-bold uppercase tracking-[0.13em] ${dark ? "text-[#ff766b]" : "text-[#7f8eff]"}`}>
           Project {project.index} · Live
         </p>
-        <h3 className={`mt-3 text-[2.35rem] font-semibold leading-none tracking-[-0.065em] ${dark ? "text-white" : "text-[#111113] dark:text-white"}`}>
+        <h3 className={`mt-3 text-[2.35rem] font-semibold leading-none tracking-[-0.065em] ${dark ? "text-[#111113] dark:text-white" : "text-[#111113] dark:text-white"}`}>
           {title}
         </h3>
         <p className={`mt-3 text-sm font-semibold ${dark ? "text-[#ff766b]" : "text-[#2f63ff]"}`}>
           {project.subtitle}
         </p>
-        <p className={`mt-4 text-[13px] leading-6 ${dark ? "text-white/82" : "text-[#656a78] dark:text-white/60"}`}>
+        <p className={`mt-4 text-[13px] leading-6 ${dark ? "text-[#555963] dark:text-white/82" : "text-[#656a78] dark:text-white/60"}`}>
           {project.description}
         </p>
 
@@ -188,7 +188,7 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
             <span
               key={tech}
               className={`rounded-full px-3 py-1.5 text-[10px] font-semibold ${
-                dark ? "bg-white/[0.11] text-white/84" : "bg-black/[0.055] text-[#4f5360] dark:bg-white/[0.09] dark:text-white/65"
+                dark ? "bg-black/[0.055] text-[#4f5360] dark:bg-white/[0.11] dark:text-white/84" : "bg-black/[0.055] text-[#4f5360] dark:bg-white/[0.09] dark:text-white/65"
               }`}
             >
               {tech}
@@ -310,10 +310,10 @@ function MobileStorePreview() {
 function MobileProjectLink({ href, label, icon, primary = false, dark = false }: { href: string; label: string; icon: ReactNode; primary?: boolean; dark?: boolean }) {
   const cls = primary
     ? dark
-      ? "bg-white text-[#111113]"
+      ? "bg-[#111113] text-white dark:bg-white dark:text-[#111113]"
       : "bg-[#111113] text-white dark:bg-white dark:text-[#111113]"
     : dark
-      ? "border border-white/20 text-white"
+      ? "border border-black/15 text-[#1d1d1f] dark:border-white/20 dark:text-white"
       : "border border-black/15 text-[#1d1d1f] dark:border-white/20 dark:text-white";
 
   return (

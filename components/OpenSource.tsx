@@ -222,7 +222,7 @@ function MobileContributionCard({
       transition={{ duration: 0.42, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
       className={`relative min-h-[545px] w-[82vw] max-w-[320px] shrink-0 snap-start overflow-hidden rounded-[24px] border ${
         dark
-          ? "border-white/10 bg-[#101114] text-white shadow-[0_22px_70px_rgba(0,0,0,0.25)]"
+          ? "border-[#dce9e1] bg-white text-[#111113] shadow-[0_18px_55px_rgba(35,95,61,0.11)] dark:border-white/10 dark:bg-[#101114] dark:text-white dark:shadow-[0_22px_70px_rgba(0,0,0,0.25)]"
           : "border-[#dbe5ff] bg-white text-[#111113] shadow-[0_18px_55px_rgba(37,99,235,0.12)] dark:border-white/10 dark:bg-[#15171c] dark:text-white dark:shadow-[0_18px_55px_rgba(0,0,0,0.3)]"
       }`}
     >
@@ -258,17 +258,17 @@ function MobileContributionCard({
 
       <div className="relative p-5 pt-3">
         <div className="flex flex-wrap gap-2">
-          <span className={`${dark ? "bg-white/10 text-white/78" : "bg-[#e6f4ea] text-[#137333] dark:bg-emerald-400/10 dark:text-emerald-300"} rounded-full px-3 py-1.5 text-[10px] font-semibold`}>
+          <span className={`${dark ? "bg-[#e6f4ea] text-[#137333] dark:bg-white/10 dark:text-white/78" : "bg-[#e6f4ea] text-[#137333] dark:bg-emerald-400/10 dark:text-emerald-300"} rounded-full px-3 py-1.5 text-[10px] font-semibold`}>
             Open source
           </span>
-          <span className={`${dark ? "bg-white/10 text-white/62" : "bg-[#f1f3f4] text-[#5f6368] dark:bg-white/[0.08] dark:text-white/55"} rounded-full px-3 py-1.5 text-[10px] font-semibold`}>
+          <span className={`${dark ? "bg-[#f1f3f4] text-[#5f6368] dark:bg-white/10 dark:text-white/62" : "bg-[#f1f3f4] text-[#5f6368] dark:bg-white/[0.08] dark:text-white/55"} rounded-full px-3 py-1.5 text-[10px] font-semibold`}>
             Jun 2026
           </span>
         </div>
-        <h3 className={`mt-5 text-[2rem] font-semibold leading-[1.03] tracking-[-0.055em] ${dark ? "text-white" : "text-[#111113] dark:text-white"}`}>
+        <h3 className={`mt-5 text-[2rem] font-semibold leading-[1.03] tracking-[-0.055em] ${dark ? "text-[#111113] dark:text-white" : "text-[#111113] dark:text-white"}`}>
           {contribution.title}
         </h3>
-        <p className={`mt-4 text-[13px] leading-6 ${dark ? "text-white/72" : "text-[#656a78] dark:text-white/60"}`}>
+        <p className={`mt-4 text-[13px] leading-6 ${dark ? "text-[#656a78] dark:text-white/72" : "text-[#656a78] dark:text-white/60"}`}>
           {contribution.description}
         </p>
         <div className="mt-5 flex flex-wrap gap-3">
@@ -339,10 +339,10 @@ function MobileOpenSourceLink({
 }) {
   const cls = primary
     ? dark
-      ? "bg-white text-[#111113]"
+      ? "bg-[#111113] text-white dark:bg-white dark:text-[#111113]"
       : "bg-[#111113] text-white dark:bg-white dark:text-[#111113]"
     : dark
-      ? "border border-white/20 text-white"
+      ? "border border-black/15 text-[#1d1d1f] dark:border-white/20 dark:text-white"
       : "border border-black/15 text-[#1d1d1f] dark:border-white/20 dark:text-white";
 
   return (
