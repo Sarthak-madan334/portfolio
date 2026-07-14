@@ -14,7 +14,7 @@ const contributions = [
     description: (
       <>
         Reproduced the issue, traced it through the{" "}
-        <span className="font-medium text-[#1d1d1f]">react-to-print</span>{" "}
+        <span className="font-medium text-[#1d1d1f] dark:text-white">react-to-print</span>{" "}
         integration, and submitted a focused fix to restore reliable crossword
         printing.
       </>
@@ -45,7 +45,7 @@ export function OpenSource() {
   return (
     <section
       id="open-source"
-      className="section-pad border-y border-black/[0.06] bg-[#f5f5f7]"
+      className="section-pad border-y border-black/[0.06] bg-[#f5f5f7] transition-colors duration-500 dark:border-white/[0.07] dark:bg-[#0e0f12]"
     >
       <DesktopOpenSource />
       <MobileOpenSource />
@@ -67,7 +67,7 @@ function DesktopOpenSource() {
           <Reveal
             key={contribution.pr}
             delay={index * 0.08}
-            className="overflow-hidden rounded-[36px] border border-black/[0.06] bg-white shadow-[0_16px_60px_rgba(0,0,0,.06)]"
+            className="overflow-hidden rounded-[36px] border border-black/[0.06] bg-white shadow-[0_16px_60px_rgba(0,0,0,.06)] dark:border-white/[0.08] dark:bg-[#15161a] dark:shadow-[0_16px_60px_rgba(0,0,0,.24)]"
           >
             <div className="grid lg:grid-cols-[0.38fr_0.62fr]">
               <div
@@ -128,17 +128,17 @@ function MobileOpenSource() {
 
   return (
     <div className="lg:hidden">
-      <div className="mx-auto max-w-[430px] overflow-hidden rounded-[34px] bg-[#fbfbfa] pb-0 pt-8 shadow-[0_28px_90px_rgba(0,0,0,0.10)]">
+      <div className="mx-auto max-w-[430px] overflow-hidden rounded-[34px] bg-[#fbfbfa] pb-0 pt-8 shadow-[0_28px_90px_rgba(0,0,0,0.10)] dark:bg-[#121316] dark:shadow-[0_28px_90px_rgba(0,0,0,0.35)]">
         <div className="px-6">
-          <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#8c8c91]">
+          <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#8c8c91] dark:text-white/45">
             04 · Open source
           </p>
-          <h2 className="mt-4 text-[2.35rem] font-semibold leading-[0.98] tracking-[-0.07em] text-black min-[390px]:text-[2.72rem]">
+          <h2 className="mt-4 text-[2.35rem] font-semibold leading-[0.98] tracking-[-0.07em] text-black dark:text-white min-[390px]:text-[2.72rem]">
             Learning in public.
             <br />
             Contributing for real.
           </h2>
-          <p className="mt-5 max-w-[325px] text-[13px] leading-6 text-[#6f7075]">
+          <p className="mt-5 max-w-[325px] text-[13px] leading-6 text-[#6f7075] dark:text-white/50">
             Real pull requests, careful debugging, and small improvements that make
             open-source projects better.
           </p>
@@ -156,7 +156,7 @@ function MobileOpenSource() {
                 exit={{ opacity: 0, x: -12, scale: 0.86 }}
                 whileTap={{ scale: 0.92 }}
                 transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute left-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-black/10 bg-white/90 text-[#111113] shadow-[0_12px_34px_rgba(0,0,0,0.14)] backdrop-blur-xl"
+                className="absolute left-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-black/10 bg-white/90 text-[#111113] shadow-[0_12px_34px_rgba(0,0,0,0.14)] backdrop-blur-xl dark:border-white/15 dark:bg-[#26272c]/90 dark:text-white"
               >
                 <ChevronLeft size={20} />
               </motion.button>
@@ -189,7 +189,7 @@ function MobileOpenSource() {
                 exit={{ opacity: 0, x: 12, scale: 0.86 }}
                 whileTap={{ scale: 0.92 }}
                 transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute right-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-black/10 bg-white/90 text-[#111113] shadow-[0_12px_34px_rgba(0,0,0,0.14)] backdrop-blur-xl"
+                className="absolute right-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-black/10 bg-white/90 text-[#111113] shadow-[0_12px_34px_rgba(0,0,0,0.14)] backdrop-blur-xl dark:border-white/15 dark:bg-[#26272c]/90 dark:text-white"
               >
                 <ChevronRight size={20} />
               </motion.button>
@@ -223,7 +223,7 @@ function MobileContributionCard({
       className={`relative min-h-[545px] w-[82vw] max-w-[320px] shrink-0 snap-start overflow-hidden rounded-[24px] border ${
         dark
           ? "border-white/10 bg-[#101114] text-white shadow-[0_22px_70px_rgba(0,0,0,0.25)]"
-          : "border-[#dbe5ff] bg-white text-[#111113] shadow-[0_18px_55px_rgba(37,99,235,0.12)]"
+          : "border-[#dbe5ff] bg-white text-[#111113] shadow-[0_18px_55px_rgba(37,99,235,0.12)] dark:border-white/10 dark:bg-[#15171c] dark:text-white dark:shadow-[0_18px_55px_rgba(0,0,0,0.3)]"
       }`}
     >
       <motion.div
@@ -258,17 +258,17 @@ function MobileContributionCard({
 
       <div className="relative p-5 pt-3">
         <div className="flex flex-wrap gap-2">
-          <span className={`${dark ? "bg-white/10 text-white/78" : "bg-[#e6f4ea] text-[#137333]"} rounded-full px-3 py-1.5 text-[10px] font-semibold`}>
+          <span className={`${dark ? "bg-white/10 text-white/78" : "bg-[#e6f4ea] text-[#137333] dark:bg-emerald-400/10 dark:text-emerald-300"} rounded-full px-3 py-1.5 text-[10px] font-semibold`}>
             Open source
           </span>
-          <span className={`${dark ? "bg-white/10 text-white/62" : "bg-[#f1f3f4] text-[#5f6368]"} rounded-full px-3 py-1.5 text-[10px] font-semibold`}>
+          <span className={`${dark ? "bg-white/10 text-white/62" : "bg-[#f1f3f4] text-[#5f6368] dark:bg-white/[0.08] dark:text-white/55"} rounded-full px-3 py-1.5 text-[10px] font-semibold`}>
             Jun 2026
           </span>
         </div>
-        <h3 className={`mt-5 text-[2rem] font-semibold leading-[1.03] tracking-[-0.055em] ${dark ? "text-white" : "text-[#111113]"}`}>
+        <h3 className={`mt-5 text-[2rem] font-semibold leading-[1.03] tracking-[-0.055em] ${dark ? "text-white" : "text-[#111113] dark:text-white"}`}>
           {contribution.title}
         </h3>
-        <p className={`mt-4 text-[13px] leading-6 ${dark ? "text-white/72" : "text-[#656a78]"}`}>
+        <p className={`mt-4 text-[13px] leading-6 ${dark ? "text-white/72" : "text-[#656a78] dark:text-white/60"}`}>
           {contribution.description}
         </p>
         <div className="mt-5 flex flex-wrap gap-3">
@@ -296,10 +296,10 @@ function DesktopContributionBody({ contribution }: { contribution: (typeof contr
           </span>
         )}
       </div>
-      <h3 className="mt-8 text-3xl font-semibold tracking-[-0.045em] text-[#1d1d1f] sm:text-4xl">
+      <h3 className="mt-8 text-3xl font-semibold tracking-[-0.045em] text-[#1d1d1f] dark:text-white sm:text-4xl">
         {contribution.title}
       </h3>
-      <p className="mt-5 max-w-2xl text-base leading-8 text-[#6e6e73]">
+      <p className="mt-5 max-w-2xl text-base leading-8 text-[#6e6e73] dark:text-white/55">
         {contribution.description}
       </p>
       <div className="mt-9 flex flex-wrap gap-3">
@@ -307,7 +307,7 @@ function DesktopContributionBody({ contribution }: { contribution: (typeof contr
           href={contribution.href}
           target="_blank"
           rel="noreferrer"
-          className="focus-ring inline-flex items-center gap-2 rounded-full bg-[#1d1d1f] px-5 py-3 text-xs font-semibold text-white"
+          className="focus-ring inline-flex items-center gap-2 rounded-full bg-[#1d1d1f] px-5 py-3 text-xs font-semibold text-white dark:bg-white dark:text-[#111113]"
         >
           View pull request <ArrowUpRight size={14} />
         </a>
@@ -315,7 +315,7 @@ function DesktopContributionBody({ contribution }: { contribution: (typeof contr
           href="https://github.com/Sarthak-madan334"
           target="_blank"
           rel="noreferrer"
-          className="focus-ring inline-flex items-center gap-2 rounded-full border border-black/15 px-5 py-3 text-xs font-semibold text-[#1d1d1f]"
+          className="focus-ring inline-flex items-center gap-2 rounded-full border border-black/15 px-5 py-3 text-xs font-semibold text-[#1d1d1f] dark:border-white/20 dark:text-white"
         >
           <Github size={14} /> GitHub profile
         </a>
@@ -340,10 +340,10 @@ function MobileOpenSourceLink({
   const cls = primary
     ? dark
       ? "bg-white text-[#111113]"
-      : "bg-[#111113] text-white"
+      : "bg-[#111113] text-white dark:bg-white dark:text-[#111113]"
     : dark
       ? "border border-white/20 text-white"
-      : "border border-black/15 text-[#1d1d1f]";
+      : "border border-black/15 text-[#1d1d1f] dark:border-white/20 dark:text-white";
 
   return (
     <a

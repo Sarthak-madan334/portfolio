@@ -10,17 +10,17 @@ import { SectionHeading } from "./SectionHeading";
 
 export function Projects() {
   return (
-    <section id="projects" className="section-pad bg-white">
+    <section id="projects" className="section-pad bg-white transition-colors duration-500 dark:bg-[#0b0c0f]">
       <div className="site-shell hidden lg:block">
         <SectionHeading number="03" eyebrow="Selected work" title="Projects, presented as products." description="Two end-to-end builds that show how I think across product structure, interface craft, integrations, and deployment." />
         <div className="mt-12 space-y-8">
           {projects.map((project, index) => <Reveal key={project.title} delay={index * .08}>
-            <motion.article whileHover={{ y: -4 }} transition={{ duration: .3 }} className={`relative overflow-hidden rounded-[40px] ${index === 0 ? "bg-[#0b0b0f] text-white" : "bg-[#e8f0fe] text-[#1d1d1f]"}`}>
+            <motion.article whileHover={{ y: -4 }} transition={{ duration: .3 }} className={`relative overflow-hidden rounded-[40px] ${index === 0 ? "bg-[#0b0b0f] text-white" : "bg-[#e8f0fe] text-[#1d1d1f] dark:bg-[#151925] dark:text-white"}`}>
               {index === 0 && <><div className="absolute -right-24 -top-28 h-96 w-96 rounded-full bg-[#e50914]/30 blur-[100px]" /><div className="absolute bottom-0 left-[30%] h-64 w-64 rounded-full bg-[#7c3aed]/20 blur-[90px]" /></>}
               <div className="relative grid min-h-[620px] lg:grid-cols-[0.82fr_1.18fr]">
                 <div className="flex flex-col justify-between p-8 sm:p-12 lg:p-14">
-                  <div><span className={`text-xs font-semibold ${index === 0 ? "text-white/45" : "text-[#5f6368]"}`}>PROJECT {project.index} · LIVE</span><h3 className="mt-8 text-5xl font-semibold tracking-[-0.065em] sm:text-7xl">{project.title}</h3><p className={`mt-4 text-sm font-semibold ${index === 0 ? "text-[#ff6b73]" : "text-[#1967d2]"}`}>{project.subtitle}</p><p className={`mt-8 max-w-lg text-base leading-8 ${index === 0 ? "text-white/60" : "text-[#5f6368]"}`}>{project.description}</p></div>
-                  <div className="mt-10"><div className="flex flex-wrap gap-2">{project.tech.map((tech)=><span key={tech} className={`rounded-full px-3 py-1.5 text-[10px] font-semibold ${index === 0 ? "bg-white/10 text-white/65" : "bg-white/70 text-[#4b5563]"}`}>{tech}</span>)}</div><div className="mt-8 flex gap-3"><ProjectLink href={project.live} label="View live" primary dark={index===0} icon={<ArrowUpRight size={15} />} /><ProjectLink href={project.github} label="GitHub" dark={index===0} icon={<Github size={15} />} /></div></div>
+                  <div><span className={`text-xs font-semibold ${index === 0 ? "text-white/45" : "text-[#5f6368] dark:text-white/45"}`}>PROJECT {project.index} · LIVE</span><h3 className="mt-8 text-5xl font-semibold tracking-[-0.065em] sm:text-7xl">{project.title}</h3><p className={`mt-4 text-sm font-semibold ${index === 0 ? "text-[#ff6b73]" : "text-[#1967d2] dark:text-[#78a6ff]"}`}>{project.subtitle}</p><p className={`mt-8 max-w-lg text-base leading-8 ${index === 0 ? "text-white/60" : "text-[#5f6368] dark:text-white/55"}`}>{project.description}</p></div>
+                  <div className="mt-10"><div className="flex flex-wrap gap-2">{project.tech.map((tech)=><span key={tech} className={`rounded-full px-3 py-1.5 text-[10px] font-semibold ${index === 0 ? "bg-white/10 text-white/65" : "bg-white/70 text-[#4b5563] dark:bg-white/10 dark:text-white/65"}`}>{tech}</span>)}</div><div className="mt-8 flex gap-3"><ProjectLink href={project.live} label="View live" primary dark={index===0} icon={<ArrowUpRight size={15} />} /><ProjectLink href={project.github} label="GitHub" dark={index===0} icon={<Github size={15} />} /></div></div>
                 </div>
                 <div className="relative min-h-[460px] overflow-hidden p-6 lg:min-h-full lg:p-10">{index === 0 ? <DeadlockVisual /> : <StoreVisual />}</div>
               </div>
@@ -57,21 +57,21 @@ function MobileProjects() {
 
   return (
     <div className="lg:hidden">
-      <div className="mx-auto max-w-[430px] overflow-hidden rounded-[34px] bg-[#fbfbfa] pb-0 pt-8 shadow-[0_28px_90px_rgba(0,0,0,0.10)]">
+      <div className="mx-auto max-w-[430px] overflow-hidden rounded-[34px] bg-[#fbfbfa] pb-0 pt-8 shadow-[0_28px_90px_rgba(0,0,0,0.10)] dark:bg-[#121316] dark:shadow-[0_28px_90px_rgba(0,0,0,0.35)]">
         <div className="px-6">
           <div>
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#8c8c91]">
+              <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#8c8c91] dark:text-white/45">
                 03 · Selected work
               </p>
-              <h2 className="mt-4 text-[2.45rem] font-semibold leading-[0.98] tracking-[-0.07em] text-black min-[390px]:text-[2.8rem]">
+              <h2 className="mt-4 text-[2.45rem] font-semibold leading-[0.98] tracking-[-0.07em] text-black dark:text-white min-[390px]:text-[2.8rem]">
                 Projects, presented
                 <br />
                 as products.
               </h2>
             </div>
           </div>
-          <p className="mt-5 max-w-[325px] text-[13px] leading-6 text-[#6f7075]">
+          <p className="mt-5 max-w-[325px] text-[13px] leading-6 text-[#6f7075] dark:text-white/50">
             End-to-end builds that cover product structure, interface craft,
             integrations, and deployment.
           </p>
@@ -89,7 +89,7 @@ function MobileProjects() {
                 exit={{ opacity: 0, x: -12, scale: 0.86 }}
                 whileTap={{ scale: 0.92 }}
                 transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute left-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-black/10 bg-white/90 text-[#111113] shadow-[0_12px_34px_rgba(0,0,0,0.14)] backdrop-blur-xl"
+                className="absolute left-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-black/10 bg-white/90 text-[#111113] shadow-[0_12px_34px_rgba(0,0,0,0.14)] backdrop-blur-xl dark:border-white/15 dark:bg-[#26272c]/90 dark:text-white"
               >
                 <ChevronLeft size={20} />
               </motion.button>
@@ -117,7 +117,7 @@ function MobileProjects() {
                 exit={{ opacity: 0, x: 12, scale: 0.86 }}
                 whileTap={{ scale: 0.92 }}
                 transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute right-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-black/10 bg-white/90 text-[#111113] shadow-[0_12px_34px_rgba(0,0,0,0.14)] backdrop-blur-xl"
+                className="absolute right-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-black/10 bg-white/90 text-[#111113] shadow-[0_12px_34px_rgba(0,0,0,0.14)] backdrop-blur-xl dark:border-white/15 dark:bg-[#26272c]/90 dark:text-white"
               >
                 <ChevronRight size={20} />
               </motion.button>
@@ -144,7 +144,7 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
       className={`relative min-h-[560px] w-[82vw] max-w-[320px] shrink-0 snap-start overflow-hidden rounded-[24px] border ${
         dark
           ? "border-white/10 bg-[#0d0d0f] text-white shadow-[0_22px_70px_rgba(0,0,0,0.30)]"
-          : "border-[#dfe4f4] bg-[#f3f6ff] text-[#111113] shadow-[0_18px_55px_rgba(75,91,140,0.13)]"
+          : "border-[#dfe4f4] bg-[#f3f6ff] text-[#111113] shadow-[0_18px_55px_rgba(75,91,140,0.13)] dark:border-white/10 dark:bg-[#15171c] dark:text-white dark:shadow-[0_18px_55px_rgba(0,0,0,0.3)]"
       }`}
     >
       <motion.div
@@ -159,12 +159,12 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
         className={`pointer-events-none absolute inset-0 ${
           dark
             ? "bg-[radial-gradient(circle_at_96%_0%,rgba(143,37,41,0.55),transparent_30%),radial-gradient(circle_at_0%_100%,rgba(255,255,255,0.07),transparent_38%)]"
-            : "bg-[radial-gradient(circle_at_86%_8%,rgba(91,119,255,0.12),transparent_36%),radial-gradient(circle_at_0%_100%,rgba(255,255,255,0.9),transparent_42%)]"
+            : "bg-[radial-gradient(circle_at_86%_8%,rgba(91,119,255,0.12),transparent_36%),radial-gradient(circle_at_0%_100%,rgba(255,255,255,0.9),transparent_42%)] dark:bg-[radial-gradient(circle_at_86%_8%,rgba(91,119,255,0.18),transparent_36%),radial-gradient(circle_at_0%_100%,rgba(255,255,255,0.04),transparent_42%)]"
         }`}
       />
 
       <div className="relative p-3 pb-0">
-        <div className={`overflow-hidden rounded-[17px] border ${dark ? "border-white/12 bg-[#121318]" : "border-white/80 bg-white"}`}>
+        <div className={`overflow-hidden rounded-[17px] border ${dark ? "border-white/12 bg-[#121318]" : "border-white/80 bg-white dark:border-white/10 dark:bg-[#111318]"}`}>
           {dark ? <MobileDeadlockPreview /> : <MobileStorePreview />}
         </div>
       </div>
@@ -173,13 +173,13 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
         <p className={`text-[10px] font-bold uppercase tracking-[0.13em] ${dark ? "text-[#ff766b]" : "text-[#7f8eff]"}`}>
           Project {project.index} · Live
         </p>
-        <h3 className={`mt-3 text-[2.35rem] font-semibold leading-none tracking-[-0.065em] ${dark ? "text-white" : "text-[#111113]"}`}>
+        <h3 className={`mt-3 text-[2.35rem] font-semibold leading-none tracking-[-0.065em] ${dark ? "text-white" : "text-[#111113] dark:text-white"}`}>
           {title}
         </h3>
         <p className={`mt-3 text-sm font-semibold ${dark ? "text-[#ff766b]" : "text-[#2f63ff]"}`}>
           {project.subtitle}
         </p>
-        <p className={`mt-4 text-[13px] leading-6 ${dark ? "text-white/82" : "text-[#656a78]"}`}>
+        <p className={`mt-4 text-[13px] leading-6 ${dark ? "text-white/82" : "text-[#656a78] dark:text-white/60"}`}>
           {project.description}
         </p>
 
@@ -188,7 +188,7 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
             <span
               key={tech}
               className={`rounded-full px-3 py-1.5 text-[10px] font-semibold ${
-                dark ? "bg-white/[0.11] text-white/84" : "bg-black/[0.055] text-[#4f5360]"
+                dark ? "bg-white/[0.11] text-white/84" : "bg-black/[0.055] text-[#4f5360] dark:bg-white/[0.09] dark:text-white/65"
               }`}
             >
               {tech}
@@ -263,28 +263,28 @@ function MobileDeadlockPreview() {
 
 function MobileStorePreview() {
   return (
-    <div className="relative bg-white">
-      <div className="flex h-11 items-center justify-between border-b border-black/[0.06] px-3.5">
+    <div className="relative bg-white dark:bg-[#111318] dark:text-white">
+      <div className="flex h-11 items-center justify-between border-b border-black/[0.06] px-3.5 dark:border-white/10">
         <strong className="text-[13px] tracking-[-0.04em]">
           Nex<span className="text-[#2563eb]">Store</span>
         </strong>
-        <div className="flex gap-3 text-[7px] font-medium text-[#6e6e73]">
+        <div className="flex gap-3 text-[7px] font-medium text-[#6e6e73] dark:text-white/45">
           <span>Shop</span>
           <span>Deals</span>
         </div>
-        <div className="flex gap-2 text-[#50535a]">
+        <div className="flex gap-2 text-[#50535a] dark:text-white/55">
           <Search size={12} />
           <ShoppingBag size={12} />
         </div>
       </div>
-      <div className="grid grid-cols-[0.95fr_1fr] gap-2.5 bg-[#fbfcff] p-3.5">
-        <div className="rounded-2xl bg-gradient-to-br from-[#e7edff] to-[#f5f0ff] p-3.5">
+      <div className="grid grid-cols-[0.95fr_1fr] gap-2.5 bg-[#fbfcff] p-3.5 dark:bg-[#0d0f14]">
+        <div className="rounded-2xl bg-gradient-to-br from-[#e7edff] to-[#f5f0ff] p-3.5 dark:from-[#17203c] dark:to-[#211a36]">
           <p className="text-[6px] font-bold uppercase tracking-[0.08em] text-[#315cf6]">AI-curated for you</p>
           <h4 className="mt-3 text-base font-bold leading-tight tracking-[-0.055em]">Find your next favorite thing.</h4>
           <span className="mt-4 inline-flex rounded-full bg-[#111113] px-3 py-1.5 text-[8px] font-bold text-white">Shop now</span>
         </div>
         <div>
-          <p className="mb-2.5 text-[8px] font-semibold text-[#33343a]">Trending now</p>
+          <p className="mb-2.5 text-[8px] font-semibold text-[#33343a] dark:text-white/70">Trending now</p>
           <div className="grid grid-cols-3 gap-1.5">
             {[
               ["#f6d4de", "AirOne", "$129"],
@@ -297,7 +297,7 @@ function MobileStorePreview() {
                   <Heart size={8} className="absolute right-1 top-1 text-[#858893]" />
                 </div>
                 <p className="mt-1.5 text-[7px] font-semibold">{name}</p>
-                <p className="text-[6px] text-[#6e6e73]">{price}</p>
+                <p className="text-[6px] text-[#6e6e73] dark:text-white/45">{price}</p>
               </div>
             ))}
           </div>
@@ -311,10 +311,10 @@ function MobileProjectLink({ href, label, icon, primary = false, dark = false }:
   const cls = primary
     ? dark
       ? "bg-white text-[#111113]"
-      : "bg-[#111113] text-white"
+      : "bg-[#111113] text-white dark:bg-white dark:text-[#111113]"
     : dark
       ? "border border-white/20 text-white"
-      : "border border-black/15 text-[#1d1d1f]";
+      : "border border-black/15 text-[#1d1d1f] dark:border-white/20 dark:text-white";
 
   return (
     <a href={href} target="_blank" rel="noreferrer" className={`focus-ring inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-xs font-semibold transition active:scale-[0.98] ${cls}`}>
@@ -333,6 +333,6 @@ function StoreVisual() {
 }
 
 function ProjectLink({ href, label, icon, primary=false, dark=false }: { href:string; label:string; icon:ReactNode; primary?:boolean; dark?:boolean }) {
-  const cls = primary ? (dark ? "bg-white text-black" : "bg-[#1d1d1f] text-white") : (dark ? "border border-white/20 text-white" : "border border-black/15 text-[#1d1d1f]");
+  const cls = primary ? (dark ? "bg-white text-black" : "bg-[#1d1d1f] text-white dark:bg-white dark:text-black") : (dark ? "border border-white/20 text-white" : "border border-black/15 text-[#1d1d1f] dark:border-white/20 dark:text-white");
   return <a href={href} target="_blank" rel="noreferrer" className={`focus-ring inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-xs font-semibold transition hover:scale-[1.02] ${cls}`}>{label}{icon}</a>;
 }

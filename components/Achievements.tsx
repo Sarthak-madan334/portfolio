@@ -9,7 +9,7 @@ const certificates = [
 
 export function Achievements() {
   return (
-    <section id="achievements" className="section-pad bg-white">
+    <section id="achievements" className="section-pad bg-white transition-colors duration-500 dark:bg-[#0b0c0f]">
       <div className="site-shell">
         <SectionHeading number="05" eyebrow="Education" title="Building the foundation." description="Computer science fundamentals, structured learning, and credentials that connect theory to the products I build." />
         <div className="mt-12 grid gap-5 lg:grid-cols-12">
@@ -22,8 +22,8 @@ export function Achievements() {
             </div>
           </Reveal>
           <div className="grid gap-5 lg:col-span-5">
-            {certificates.map((c,i)=><Reveal key={c.title} delay={i*.07}><a href={c.href} target="_blank" rel="noreferrer" className={`focus-ring group relative flex min-h-[220px] h-full flex-col overflow-hidden rounded-[32px] p-7 transition hover:-translate-y-1 hover:shadow-[0_20px_55px_rgba(0,0,0,.1)] ${c.bg}`}><div className="flex items-start justify-between"><span className={`grid h-11 w-11 place-items-center rounded-2xl shadow-sm ${c.badge}`}><Award size={19}/></span><ArrowUpRight size={17} className={`transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 ${c.ink}`}/></div><div className="mt-auto pt-10"><p className={`text-[10px] font-bold uppercase tracking-[0.14em] ${c.ink}`}>{c.issuer} · 2026</p><h3 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-[#1d1d1f]">{c.title}</h3><p className="mt-3 text-xs text-[#6e6e73]">Verified credential</p></div></a></Reveal>)}
-            <Reveal delay={.14}><div className="flex min-h-[116px] items-center gap-5 rounded-[28px] border border-black/[0.06] bg-[#f5f5f7] p-6"><span className="grid h-11 w-11 place-items-center rounded-2xl bg-white text-[#7c3aed] shadow-sm"><BookOpen size={19}/></span><div><p className="text-sm font-semibold text-[#1d1d1f]">Class XII · CBSE</p><p className="mt-1 text-xs text-[#6e6e73]">Swarprastha Public School</p></div></div></Reveal>
+            {certificates.map((c,i)=><Reveal key={c.title} delay={i*.07}><a href={c.href} target="_blank" rel="noreferrer" className={`focus-ring group relative flex min-h-[220px] h-full flex-col overflow-hidden rounded-[32px] p-7 transition hover:-translate-y-1 hover:shadow-[0_20px_55px_rgba(0,0,0,.1)] dark:bg-[#15171b] ${c.bg}`}><div className="flex items-start justify-between"><span className={`grid h-11 w-11 place-items-center rounded-2xl shadow-sm ${c.badge}`}><Award size={19}/></span><ArrowUpRight size={17} className={`transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 ${c.ink}`}/></div><div className="mt-auto pt-10"><p className={`text-[10px] font-bold uppercase tracking-[0.14em] ${c.ink}`}>{c.issuer} · 2026</p><h3 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-[#1d1d1f] dark:text-white">{c.title}</h3><p className="mt-3 text-xs text-[#6e6e73] dark:text-white/50">Verified credential</p></div></a></Reveal>)}
+            <Reveal delay={.14}><div className="flex min-h-[116px] items-center gap-5 rounded-[28px] border border-black/[0.06] bg-[#f5f5f7] p-6 dark:border-white/[0.08] dark:bg-[#15171b]"><span className="grid h-11 w-11 place-items-center rounded-2xl bg-white text-[#7c3aed] shadow-sm dark:bg-white/[0.09] dark:text-[#a78bfa]"><BookOpen size={19}/></span><div><p className="text-sm font-semibold text-[#1d1d1f] dark:text-white">Class XII · CBSE</p><p className="mt-1 text-xs text-[#6e6e73] dark:text-white/50">Swarprastha Public School</p></div></div></Reveal>
           </div>
         </div>
       </div>

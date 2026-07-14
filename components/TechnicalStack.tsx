@@ -37,7 +37,7 @@ export function TechnicalStack() {
   return (
     <section
       id="stack"
-      className="relative overflow-hidden border-y border-black/[0.06] bg-[#f5f5f7] py-14 sm:py-20"
+      className="relative overflow-hidden border-y border-black/[0.06] bg-[#f5f5f7] py-14 transition-colors duration-500 dark:border-white/[0.07] dark:bg-[#0e0f12] sm:py-20"
     >
       <motion.div
         aria-hidden="true"
@@ -67,7 +67,7 @@ export function TechnicalStack() {
                 whileHover={{ y: -3 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.42, delay: index * 0.045 }}
-                className={`group relative border-t border-black/[0.10] py-4 sm:py-5 ${spans[index]}`}
+                className={`group relative border-t border-black/[0.10] py-4 dark:border-white/[0.12] sm:py-5 ${spans[index]}`}
               >
                 <motion.span
                   aria-hidden="true"
@@ -85,10 +85,10 @@ export function TechnicalStack() {
                   >
                     <Icon size={17} />
                   </motion.span>
-                  <h3 className="text-[13px] font-semibold tracking-[-0.025em] text-[#17181c] sm:text-sm">
+                  <h3 className="text-[13px] font-semibold tracking-[-0.025em] text-[#17181c] dark:text-white sm:text-sm">
                     {group.title}
                   </h3>
-                  <span className="ml-auto hidden font-mono text-[9px] text-black/25 sm:block">
+                  <span className="ml-auto hidden font-mono text-[9px] text-black/25 dark:text-white/25 sm:block">
                     0{index + 1}
                   </span>
                 </div>
@@ -100,7 +100,7 @@ export function TechnicalStack() {
                         whileHover={{ y: -2, color: "#111318" }}
                         title={item.use}
                         aria-label={`${item.name}: ${item.use}`}
-                        className="cursor-default text-[11px] font-medium text-[#68686e] sm:text-xs"
+                        className="cursor-default text-[11px] font-medium text-[#68686e] dark:text-white/50 sm:text-xs"
                       >
                         {item.name}
                       </motion.span>

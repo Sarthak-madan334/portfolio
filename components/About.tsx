@@ -10,7 +10,7 @@ const principles = [
 
 export function About() {
   return (
-    <section id="about" className="section-pad relative bg-white">
+    <section id="about" className="section-pad relative bg-white transition-colors duration-500 dark:bg-[#0b0c0f]">
       <div className="site-shell">
         <SectionHeading number="01" eyebrow="About" title="Still learning. Already shipping." description="I’m a first-year Computer Science student at SRM University, developing strong foundations while shipping full-stack products in public." />
         <Reveal className="mt-12 rounded-[36px] bg-[#1d1d1f] p-8 sm:p-12 lg:p-16">
@@ -20,7 +20,7 @@ export function About() {
           <div className="mt-10 flex flex-col gap-6 border-t border-white/15 pt-8 sm:flex-row sm:items-end sm:justify-between"><p className="max-w-2xl text-sm leading-7 text-white/55 sm:text-base">Right now I’m sharpening DSA and systems fundamentals while exploring how modern web engineering and useful AI can create genuinely better experiences.</p><a href="#contact" className="focus-ring inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#1d1d1f] transition hover:bg-[#e8f0fe]">Let’s connect <ArrowUpRight size={15} /></a></div>
         </Reveal>
         <div className="mt-5 grid gap-5 md:grid-cols-3">
-          {principles.map(({ icon: Icon, title, text, color }, i) => <Reveal key={title} delay={i * .07} className="group rounded-[28px] border border-black/[0.06] bg-[#f5f5f7] p-7 transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(0,0,0,.08)]"><span className={`grid h-12 w-12 place-items-center rounded-2xl ${color}`}><Icon size={20} /></span><h3 className="mt-14 text-xl font-semibold tracking-[-0.03em] text-[#1d1d1f]">{title}</h3><p className="mt-3 text-sm leading-6 text-[#6e6e73]">{text}</p></Reveal>)}
+          {principles.map(({ icon: Icon, title, text, color }, i) => <Reveal key={title} delay={i * .07} className="group rounded-[28px] border border-black/[0.06] bg-[#f5f5f7] p-7 transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(0,0,0,.08)] dark:border-white/[0.08] dark:bg-[#141519]"><span className={`grid h-12 w-12 place-items-center rounded-2xl ${color}`}><Icon size={20} /></span><h3 className="mt-14 text-xl font-semibold tracking-[-0.03em] text-[#1d1d1f] dark:text-white">{title}</h3><p className="mt-3 text-sm leading-6 text-[#6e6e73] dark:text-white/50">{text}</p></Reveal>)}
         </div>
       </div>
     </section>
