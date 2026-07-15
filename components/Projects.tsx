@@ -329,7 +329,38 @@ function DeadlockVisual() {
 }
 
 function StoreVisual() {
-  return <div className="absolute bottom-[-4%] left-[8%] right-[-10%] top-[10%] rotate-[2deg] overflow-hidden rounded-[30px] border border-white bg-white shadow-[0_30px_75px_rgba(49,79,130,.2)]"><div className="flex h-14 items-center justify-between border-b border-black/[0.06] px-6"><strong className="text-base tracking-[-0.04em]">Nex<span className="text-[#2563eb]">Store</span></strong><div className="flex gap-4 text-[9px] font-medium text-[#6e6e73]"><span>Shop</span><span>Collections</span><span>Deals</span></div><div className="flex gap-2"><Search size={14} /><ShoppingBag size={14} /></div></div><div className="bg-[#f8fafc] p-7"><div className="rounded-[24px] bg-gradient-to-r from-[#dbeafe] to-[#ede9fe] p-7"><p className="text-[9px] font-semibold uppercase tracking-wider text-[#2563eb]">AI-curated for you</p><h4 className="mt-3 max-w-sm text-3xl font-semibold tracking-[-0.05em]">Find your next favorite thing.</h4><button className="mt-5 rounded-full bg-[#1d1d1f] px-4 py-2 text-[9px] font-semibold text-white">Shop the edit</button></div><div className="mt-6 flex items-center justify-between"><h5 className="font-semibold">Trending now</h5><span className="text-[9px] text-[#6e6e73]">View all →</span></div><div className="mt-4 grid grid-cols-3 gap-3">{[["#fce7f3","Air One","₹4,990"],["#dcfce7","Studio","₹2,490"],["#fef3c7","Pulse","₹3,290"]].map(([bg,name,price],i)=><div key={name} className="rounded-2xl bg-white p-3 shadow-sm"><div style={{background:bg}} className="relative grid aspect-square place-items-center rounded-xl"><div className="h-12 w-12 rounded-[18px] bg-white/80 shadow-md" /><Heart size={12} className="absolute right-2 top-2 text-[#6e6e73]" /></div><p className="mt-3 text-[10px] font-semibold">{name}</p><p className="mt-1 text-[9px] text-[#6e6e73]">{price}</p></div>)}</div></div></div>;
+  return (
+    <div className="absolute bottom-[-4%] left-[8%] right-[-10%] top-[10%] rotate-[2deg] overflow-hidden rounded-[30px] border border-white bg-white shadow-[0_30px_75px_rgba(49,79,130,.2)] dark:border-white/10 dark:bg-[#101217] dark:shadow-[0_30px_75px_rgba(0,0,0,.42)]">
+      <div className="flex h-14 items-center justify-between border-b border-black/[0.06] px-6 dark:border-white/10">
+        <strong className="text-base tracking-[-0.04em]">Nex<span className="text-[#2563eb] dark:text-[#78a6ff]">Store</span></strong>
+        <div className="flex gap-4 text-[9px] font-medium text-[#6e6e73] dark:text-white/45"><span>Shop</span><span>Collections</span><span>Deals</span></div>
+        <div className="flex gap-2"><Search size={14} /><ShoppingBag size={14} /></div>
+      </div>
+      <div className="bg-[#f8fafc] p-7 dark:bg-[#0b0d12]">
+        <div className="rounded-[24px] bg-gradient-to-r from-[#dbeafe] to-[#ede9fe] p-7 dark:from-[#17244a] dark:to-[#2a1f44]">
+          <p className="text-[9px] font-semibold uppercase tracking-wider text-[#2563eb] dark:text-[#78a6ff]">AI-curated for you</p>
+          <h4 className="mt-3 max-w-sm text-3xl font-semibold tracking-[-0.05em] dark:text-white">Find your next favorite thing.</h4>
+          <button className="mt-5 rounded-full bg-[#1d1d1f] px-4 py-2 text-[9px] font-semibold text-white dark:bg-white dark:text-[#111113]">Shop the edit</button>
+        </div>
+        <div className="mt-6 flex items-center justify-between">
+          <h5 className="font-semibold dark:text-white">Trending now</h5>
+          <span className="text-[9px] text-[#6e6e73] dark:text-white/40">View all →</span>
+        </div>
+        <div className="mt-4 grid grid-cols-3 gap-3">
+          {[["#fce7f3","Air One","₹4,990"],["#dcfce7","Studio","₹2,490"],["#fef3c7","Pulse","₹3,290"]].map(([bg,name,price]) => (
+            <div key={name} className="rounded-2xl border border-transparent bg-white p-3 shadow-sm dark:border-white/[0.07] dark:bg-[#17191f]">
+              <div style={{background:bg}} className="relative grid aspect-square place-items-center rounded-xl dark:brightness-[.82]">
+                <div className="h-12 w-12 rounded-[18px] bg-white/80 shadow-md" />
+                <Heart size={12} className="absolute right-2 top-2 text-[#6e6e73]" />
+              </div>
+              <p className="mt-3 text-[10px] font-semibold dark:text-white/85">{name}</p>
+              <p className="mt-1 text-[9px] text-[#6e6e73] dark:text-white/40">{price}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function ProjectLink({ href, label, icon, primary=false, dark=false }: { href:string; label:string; icon:ReactNode; primary?:boolean; dark?:boolean }) {
