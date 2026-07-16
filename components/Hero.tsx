@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, ArrowUpRight, Github, Linkedin } from "lucide-react";
+import { ArrowDown, ArrowUpRight, FileText, Github, Linkedin } from "lucide-react";
 import { links } from "@/lib/data";
 import { ProductStage } from "./ProductStage";
 
@@ -26,9 +26,9 @@ export function Hero() {
           </motion.div>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .48 }} className="mt-7 flex max-w-xl flex-wrap items-center gap-3">
             <div className="flex flex-wrap items-center gap-2.5">
-              <a href="/Sarthak-Madan-Resume.pdf" target="_blank" className="ios-glass-action focus-ring inline-flex min-h-12 items-center gap-2 rounded-full px-4 text-sm font-semibold text-[#2563eb]">Résumé <ArrowUpRight size={15} /></a>
-              <a href={links.github} target="_blank" rel="noreferrer" aria-label="GitHub profile" className="ios-glass-action focus-ring inline-flex min-h-12 items-center gap-2 rounded-full px-4 text-sm font-semibold text-[#45464b]"><Github size={17} /> GitHub</a>
-              <a href={links.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn profile" className="ios-glass-action focus-ring inline-flex min-h-12 items-center gap-2 rounded-full px-4 text-sm font-semibold text-[#45464b]"><Linkedin size={17} /> LinkedIn</a>
+              <a href="/Sarthak-Madan-Resume.pdf" target="_blank" className="hero-profile-button focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-full px-4 text-sm font-semibold"><span className="hero-profile-icon"><FileText size={15} strokeWidth={1.9} /></span><span>Résumé</span><ArrowUpRight size={14} strokeWidth={2} /></a>
+              <a href={links.github} target="_blank" rel="noreferrer" aria-label="GitHub profile" className="hero-profile-button focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-full px-4 text-sm font-semibold"><span className="hero-profile-icon"><Github size={16} fill="currentColor" strokeWidth={1.7} /></span><span>GitHub</span></a>
+              <a href={links.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn profile" className="hero-profile-button focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-full px-4 text-sm font-semibold"><span className="hero-profile-icon"><Linkedin size={16} strokeWidth={2.2} /></span><span>LinkedIn</span></a>
             </div>
           </motion.div>
         </div>
