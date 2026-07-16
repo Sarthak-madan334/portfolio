@@ -25,7 +25,25 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    setDark(document.documentElement.classList.contains("dark"));
+    const deviceTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    const syncTheme = () => {
+      const savedTheme = localStorage.getItem("theme");
+      const nextDark = savedTheme
+        ? savedTheme === "dark"
+        : deviceTheme.matches;
+
+      document.documentElement.classList.toggle("dark", nextDark);
+      setDark(nextDark);
+    };
+
+    syncTheme();
+    deviceTheme.addEventListener("change", syncTheme);
+    window.addEventListener("storage", syncTheme);
+
+    return () => {
+      deviceTheme.removeEventListener("change", syncTheme);
+      window.removeEventListener("storage", syncTheme);
+    };
   }, []);
 
   const toggleTheme = () => {
