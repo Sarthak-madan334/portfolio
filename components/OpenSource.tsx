@@ -130,7 +130,7 @@ function MobileOpenSource() {
     <div className="lg:hidden">
       <div className="mx-auto max-w-[430px] overflow-hidden rounded-[34px] bg-[#fbfbfa] pb-0 pt-8 shadow-[0_28px_90px_rgba(0,0,0,0.10)] dark:bg-[#121316] dark:shadow-[0_28px_90px_rgba(0,0,0,0.35)]">
         <div className="px-6">
-          <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#8c8c91] dark:text-white/45">
+          <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#8c8c91] dark:text-white/60">
             04 · Open source
           </p>
           <h2 className="mt-4 text-[2.35rem] font-semibold leading-[0.98] tracking-[-0.07em] text-black dark:text-white min-[390px]:text-[2.72rem]">
@@ -138,7 +138,7 @@ function MobileOpenSource() {
             <br />
             Contributing for real.
           </h2>
-          <p className="mt-5 max-w-[325px] text-[13px] leading-6 text-[#6f7075] dark:text-white/50">
+          <p className="mt-5 max-w-[325px] text-[13px] leading-6 text-[#6f7075] dark:text-white/70">
             Real pull requests, careful debugging, and small improvements that make
             open-source projects better.
           </p>
@@ -220,10 +220,10 @@ function MobileContributionCard({
       animate={{ scale: active ? 1 : 0.965, opacity: active ? 1 : 0.82 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.42, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className={`relative min-h-[545px] w-[82vw] max-w-[320px] shrink-0 snap-start overflow-hidden rounded-[24px] border ${
+      className={`relative min-h-[545px] w-[82vw] max-w-[320px] shrink-0 snap-start overflow-hidden rounded-[24px] border dark:!opacity-100 ${
         dark
-          ? "border-[#dce9e1] bg-white text-[#111113] shadow-[0_18px_55px_rgba(35,95,61,0.11)] dark:border-white/10 dark:bg-[#101114] dark:text-white dark:shadow-[0_22px_70px_rgba(0,0,0,0.25)]"
-          : "border-[#dbe5ff] bg-white text-[#111113] shadow-[0_18px_55px_rgba(37,99,235,0.12)] dark:border-white/10 dark:bg-[#15171c] dark:text-white dark:shadow-[0_18px_55px_rgba(0,0,0,0.3)]"
+          ? "border-[#dce9e1] bg-white text-[#111113] shadow-[0_18px_55px_rgba(35,95,61,0.11)] dark:border-white/15 dark:bg-[#111217] dark:text-white dark:shadow-[0_22px_70px_rgba(0,0,0,0.38)]"
+          : "border-[#dbe5ff] bg-white text-[#111113] shadow-[0_18px_55px_rgba(37,99,235,0.12)] dark:border-white/15 dark:bg-[#171922] dark:text-white dark:shadow-[0_18px_55px_rgba(0,0,0,0.36)]"
       }`}
     >
       <motion.div
@@ -258,17 +258,17 @@ function MobileContributionCard({
 
       <div className="relative p-5 pt-3">
         <div className="flex flex-wrap gap-2">
-          <span className={`${dark ? "bg-[#e6f4ea] text-[#137333] dark:bg-white/10 dark:text-white/78" : "bg-[#e6f4ea] text-[#137333] dark:bg-emerald-400/10 dark:text-emerald-300"} rounded-full px-3 py-1.5 text-[10px] font-semibold`}>
+          <span className={`${dark ? "bg-[#e6f4ea] text-[#137333] dark:bg-white/10 dark:text-white/85" : "bg-[#e6f4ea] text-[#137333] dark:bg-emerald-400/10 dark:text-emerald-300"} rounded-full px-3 py-1.5 text-[10px] font-semibold`}>
             Open source
           </span>
-          <span className={`${dark ? "bg-[#f1f3f4] text-[#5f6368] dark:bg-white/10 dark:text-white/62" : "bg-[#f1f3f4] text-[#5f6368] dark:bg-white/[0.08] dark:text-white/55"} rounded-full px-3 py-1.5 text-[10px] font-semibold`}>
+          <span className={`${dark ? "bg-[#f1f3f4] text-[#5f6368] dark:bg-white/10 dark:text-white/75" : "bg-[#f1f3f4] text-[#5f6368] dark:bg-white/[0.08] dark:text-white/70"} rounded-full px-3 py-1.5 text-[10px] font-semibold`}>
             Jun 2026
           </span>
         </div>
         <h3 className={`mt-5 text-[2rem] font-semibold leading-[1.03] tracking-[-0.055em] ${dark ? "text-[#111113] dark:text-white" : "text-[#111113] dark:text-white"}`}>
           {contribution.title}
         </h3>
-        <p className={`mt-4 text-[13px] leading-6 ${dark ? "text-[#656a78] dark:text-white/72" : "text-[#656a78] dark:text-white/60"}`}>
+        <p className={`mt-4 text-[13px] leading-6 ${dark ? "text-[#656a78] dark:text-white/80" : "text-[#656a78] dark:text-white/80"}`}>
           {contribution.description}
         </p>
         <div className="mt-5 flex flex-wrap gap-3">

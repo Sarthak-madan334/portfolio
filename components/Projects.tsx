@@ -61,7 +61,7 @@ function MobileProjects() {
         <div className="px-6">
           <div>
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#8c8c91] dark:text-white/45">
+              <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#8c8c91] dark:text-white/60">
                 03 · Selected work
               </p>
               <h2 className="mt-4 text-[2.45rem] font-semibold leading-[0.98] tracking-[-0.07em] text-black dark:text-white min-[390px]:text-[2.8rem]">
@@ -71,7 +71,7 @@ function MobileProjects() {
               </h2>
             </div>
           </div>
-          <p className="mt-5 max-w-[325px] text-[13px] leading-6 text-[#6f7075] dark:text-white/50">
+          <p className="mt-5 max-w-[325px] text-[13px] leading-6 text-[#6f7075] dark:text-white/70">
             End-to-end builds that cover product structure, interface craft,
             integrations, and deployment.
           </p>
@@ -141,10 +141,10 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
       animate={{ scale: active ? 1 : 0.965, opacity: active ? 1 : 0.82 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.42, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className={`relative min-h-[560px] w-[82vw] max-w-[320px] shrink-0 snap-start overflow-hidden rounded-[24px] border ${
+      className={`relative min-h-[560px] w-[82vw] max-w-[320px] shrink-0 snap-start overflow-hidden rounded-[24px] border dark:!opacity-100 ${
         dark
-          ? "border-[#e6e6ea] bg-white text-[#111113] shadow-[0_18px_55px_rgba(0,0,0,0.10)] dark:border-white/10 dark:bg-[#0d0d0f] dark:text-white dark:shadow-[0_22px_70px_rgba(0,0,0,0.30)]"
-          : "border-[#dfe4f4] bg-[#f3f6ff] text-[#111113] shadow-[0_18px_55px_rgba(75,91,140,0.13)] dark:border-white/10 dark:bg-[#15171c] dark:text-white dark:shadow-[0_18px_55px_rgba(0,0,0,0.3)]"
+          ? "border-[#e6e6ea] bg-white text-[#111113] shadow-[0_18px_55px_rgba(0,0,0,0.10)] dark:border-white/15 dark:bg-[#111217] dark:text-white dark:shadow-[0_22px_70px_rgba(0,0,0,0.38)]"
+          : "border-[#dfe4f4] bg-[#f3f6ff] text-[#111113] shadow-[0_18px_55px_rgba(75,91,140,0.13)] dark:border-white/15 dark:bg-[#171922] dark:text-white dark:shadow-[0_18px_55px_rgba(0,0,0,0.36)]"
       }`}
     >
       <motion.div
@@ -179,7 +179,7 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
         <p className={`mt-3 text-sm font-semibold ${dark ? "text-[#ff766b]" : "text-[#2f63ff]"}`}>
           {project.subtitle}
         </p>
-        <p className={`mt-4 text-[13px] leading-6 ${dark ? "text-[#555963] dark:text-white/82" : "text-[#656a78] dark:text-white/60"}`}>
+        <p className={`mt-4 text-[13px] leading-6 ${dark ? "text-[#555963] dark:text-white/80" : "text-[#656a78] dark:text-white/80"}`}>
           {project.description}
         </p>
 
@@ -188,7 +188,7 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
             <span
               key={tech}
               className={`rounded-full px-3 py-1.5 text-[10px] font-semibold ${
-                dark ? "bg-black/[0.055] text-[#4f5360] dark:bg-white/[0.11] dark:text-white/84" : "bg-black/[0.055] text-[#4f5360] dark:bg-white/[0.09] dark:text-white/65"
+                dark ? "bg-black/[0.055] text-[#4f5360] dark:bg-white/[0.11] dark:text-white/85" : "bg-black/[0.055] text-[#4f5360] dark:bg-white/[0.09] dark:text-white/75"
               }`}
             >
               {tech}
