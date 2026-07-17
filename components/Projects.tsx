@@ -64,7 +64,7 @@ function MobileProjects() {
               <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#8c8c91] dark:text-white/60">
                 03 · Selected work
               </p>
-              <h2 className="mt-4 text-[2.45rem] font-semibold leading-[0.98] tracking-[-0.07em] text-black dark:text-white min-[390px]:text-[2.8rem]">
+              <h2 className="mt-4 text-[2.35rem] font-semibold leading-[0.98] tracking-[-0.07em] text-black dark:text-white min-[390px]:text-[2.72rem]">
                 Projects, presented
                 <br />
                 as products.
@@ -173,7 +173,7 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
         <p className={`text-[10px] font-bold uppercase tracking-[0.13em] ${dark ? "text-[#ff766b]" : "text-[#7f8eff]"}`}>
           Project {project.index} · Live
         </p>
-        <h3 className={`mt-3 text-[2.35rem] font-semibold leading-none tracking-[-0.065em] ${dark ? "text-[#111113] dark:text-white" : "text-[#111113] dark:text-white"}`}>
+        <h3 className={`mt-3 text-[2rem] font-semibold leading-[1.03] tracking-[-0.055em] ${dark ? "text-[#111113] dark:text-white" : "text-[#111113] dark:text-white"}`}>
           {title}
         </h3>
         <p className={`mt-3 text-sm font-semibold ${dark ? "text-[#ff766b]" : "text-[#2f63ff]"}`}>
@@ -188,7 +188,7 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
             <span
               key={tech}
               className={`rounded-full px-3 py-1.5 text-[10px] font-semibold ${
-                dark ? "bg-black/[0.055] text-[#4f5360] dark:bg-white/[0.11] dark:text-white/85" : "bg-black/[0.055] text-[#4f5360] dark:bg-white/[0.09] dark:text-white/75"
+                dark ? "bg-black/[0.055] text-[#4f5360] dark:bg-white/[0.11] dark:text-white/75" : "bg-black/[0.055] text-[#4f5360] dark:bg-white/[0.09] dark:text-white/75"
               }`}
             >
               {tech}

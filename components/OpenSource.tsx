@@ -258,10 +258,10 @@ function MobileContributionCard({
 
       <div className="relative p-5 pt-3">
         <div className="flex flex-wrap gap-2">
-          <span className={`${dark ? "bg-[#e6f4ea] text-[#137333] dark:bg-white/10 dark:text-white/85" : "bg-[#e6f4ea] text-[#137333] dark:bg-emerald-400/10 dark:text-emerald-300"} rounded-full px-3 py-1.5 text-[10px] font-semibold`}>
+          <span className="rounded-full bg-[#e6f4ea] px-3 py-1.5 text-[10px] font-semibold text-[#137333] dark:bg-white/10 dark:text-white/75">
             Open source
           </span>
-          <span className={`${dark ? "bg-[#f1f3f4] text-[#5f6368] dark:bg-white/10 dark:text-white/75" : "bg-[#f1f3f4] text-[#5f6368] dark:bg-white/[0.08] dark:text-white/70"} rounded-full px-3 py-1.5 text-[10px] font-semibold`}>
+          <span className="rounded-full bg-[#f1f3f4] px-3 py-1.5 text-[10px] font-semibold text-[#5f6368] dark:bg-white/10 dark:text-white/75">
             Jun 2026
           </span>
         </div>
