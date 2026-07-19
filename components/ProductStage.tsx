@@ -5,7 +5,7 @@ import { AlertTriangle, ArrowUpRight, CheckCircle2, Sparkles } from "lucide-reac
 
 export function ProductStage() {
   return (
-    <motion.div initial={{ opacity: 0, scale: 0.94, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.24, ease: [0.22, 1, 0.36, 1] }} className="relative hidden min-h-[590px] lg:block">
+    <motion.div initial={false} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.24, ease: [0.22, 1, 0.36, 1] }} className="relative hidden min-h-[590px] lg:block">
       <div className="absolute inset-3 rounded-[48px] bg-gradient-to-br from-[#dbeafe] via-[#ede9fe] to-[#ffe4e6] shadow-[0_30px_100px_rgba(74,80,120,.18)]" />
       <div className="absolute inset-3 overflow-hidden rounded-[48px]">
         <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[#4285f4]/25 blur-3xl" />
