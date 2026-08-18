@@ -14,6 +14,5 @@ Highlights
 - Résumé and contact integration
 
 Portfolio: "sarthakmadan.vercel.app" (https://sarthakmadan.vercel.app/)
-GitHub: "Sarthak-madan334" (https://github.com/Sarthak-madan334)
 
 Made with ♥ by Sarthak Madan
