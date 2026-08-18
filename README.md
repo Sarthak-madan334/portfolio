@@ -1,16 +1,19 @@
-# Sarthak Madan — Portfolio
+Sarthak Madan — Portfolio
 
-A polished, responsive developer portfolio showcasing my projects, technical stack, open-source work, achievements, and experience. Built with a strong focus on visual hierarchy, fluid motion, accessibility, and recruiter-friendly presentation.
+A modern, responsive developer portfolio showcasing my projects, technical skills, open-source contributions, and achievements.
 
-## Built with
+Tech Stack
 
 Next.js · TypeScript · Tailwind CSS · Framer Motion · Lucide React
 
-## Highlights
+Highlights
 
-- Responsive, premium interface with subtle scroll animations
-- Categorized technical stack and project showcases
-- Integrated résumé and contact links
----
+- Responsive and accessible UI
+- Smooth animations and interactions
+- Project and technical skill showcases
+- Résumé and contact integration
 
-Made with ♥ by **Sarthak Madan**
+Portfolio: "sarthakmadan.vercel.app" (https://sarthakmadan.vercel.app/)
+GitHub: "Sarthak-madan334" (https://github.com/Sarthak-madan334)
+
+Made with ♥ by Sarthak Madan
