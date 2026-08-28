@@ -13,6 +13,3 @@ Highlights
 - Project and technical skill showcases
 - Résumé and contact integration
 
-Portfolio: "sarthakmadan.vercel.app" (https://sarthakmadan.vercel.app/)
-
-Made with ♥ by Sarthak Madan
