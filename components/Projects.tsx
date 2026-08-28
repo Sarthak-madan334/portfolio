@@ -207,13 +207,13 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
 
 function MobileDeadlockPreview() {
   return (
-    <div className="relative h-[190px] bg-[linear-gradient(150deg,#17181f_0%,#0d0d10_68%)]">
-      <div className="absolute inset-y-0 left-0 w-[46px] border-r border-white/8 bg-white/[0.025] p-2.5">
-        <span className="grid h-7 w-7 place-items-center rounded-xl bg-[#ff343d] text-[9px] font-black">D</span>
+    <div className="relative h-[190px] bg-white text-[#111113] dark:bg-[linear-gradient(150deg,#17181f_0%,#0d0d10_68%)] dark:text-white">
+      <div className="absolute inset-y-0 left-0 w-[46px] border-r border-black/[0.08] bg-[#f7f8fb] p-2.5 dark:border-white/8 dark:bg-white/[0.025]">
+        <span className="grid h-7 w-7 place-items-center rounded-xl bg-[#ff343d] text-[9px] font-black text-white">D</span>
         <div className="mt-4 space-y-2.5">
           {[0, 1, 2, 3, 4].map((item) => (
-            <span key={item} className="grid h-7 w-7 place-items-center rounded-lg bg-white/[0.08]">
-              <span className="h-2 w-2 rounded-sm border border-white/25" />
+            <span key={item} className="grid h-7 w-7 place-items-center rounded-lg bg-[#eceef4] dark:bg-white/[0.08]">
+              <span className="h-2 w-2 rounded-sm border border-black/25 dark:border-white/25" />
             </span>
           ))}
         </div>
@@ -221,28 +221,28 @@ function MobileDeadlockPreview() {
       <div className="ml-[46px] p-4">
         <div className="flex items-start justify-between">
           <div>
-            <p className="text-[7px] font-bold uppercase tracking-[0.12em] text-white/42">Failure intelligence dashboard</p>
-            <h4 className="mt-2 text-[12px] font-semibold tracking-[-0.03em] text-white">Your plan has 6 hidden risks.</h4>
+            <p className="text-[7px] font-bold uppercase tracking-[0.12em] text-[#6d717c] dark:text-white/42">Failure intelligence dashboard</p>
+            <h4 className="mt-2 text-[12px] font-semibold tracking-[-0.03em] text-[#111113] dark:text-white">Your plan has 6 hidden risks.</h4>
           </div>
-          <span className="grid h-7 w-7 place-items-center rounded-full bg-white/[0.06] text-[#ff7d78]">
+          <span className="grid h-7 w-7 place-items-center rounded-full bg-[#f0f1f5] text-[#ff3f48] dark:bg-white/[0.06] dark:text-[#ff7d78]">
             <Sparkles size={12} />
           </span>
         </div>
         <div className="mt-4 grid grid-cols-2 gap-3">
-          <div className="rounded-xl bg-white/[0.075] p-3">
-            <p className="text-[6px] font-semibold uppercase text-white/38">Readiness score</p>
+          <div className="rounded-xl bg-[#f4f5f8] p-3 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.035)] dark:bg-white/[0.075] dark:shadow-none">
+            <p className="text-[6px] font-semibold uppercase text-[#717682] dark:text-white/38">Readiness score</p>
             <p className="mt-2 text-2xl font-semibold">74</p>
-            <div className="mt-3 h-1.5 rounded-full bg-white/12">
+            <div className="mt-3 h-1.5 rounded-full bg-[#dfe2e8] dark:bg-white/12">
               <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-[#ff424a] to-[#ffb0b0]" />
             </div>
           </div>
-          <div className="rounded-xl bg-[#2a1f23]/85 p-3">
-            <p className="text-[6px] font-semibold uppercase text-[#ff6f69]">Primary risk</p>
-            <p className="mt-2 text-[10px] font-semibold text-white">Delayed validation loop</p>
-            <p className="mt-2 text-[7px] leading-3 text-white/48">Run customer testing before launch.</p>
+          <div className="rounded-xl bg-[#fff1f2] p-3 dark:bg-[#2a1f23]/85">
+            <p className="text-[6px] font-semibold uppercase text-[#e14950] dark:text-[#ff6f69]">Primary risk</p>
+            <p className="mt-2 text-[10px] font-semibold text-[#111113] dark:text-white">Delayed validation loop</p>
+            <p className="mt-2 text-[7px] leading-3 text-[#6e6063] dark:text-white/48">Run customer testing before launch.</p>
           </div>
         </div>
-        <div className="mt-4 rounded-xl border border-white/8 bg-black/10 p-3">
+        <div className="mt-4 rounded-xl border border-black/[0.08] bg-[#fbfbfd] p-3 dark:border-white/8 dark:bg-black/10">
           <div className="flex h-9 items-end gap-1.5">
             {[20, 22, 20, 35, 31, 46, 58, 68, 80, 91].map((height, i) => (
               <motion.span
