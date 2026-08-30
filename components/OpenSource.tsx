@@ -215,9 +215,9 @@ function MobileContributionCard({
   return (
     <motion.article
       data-mobile-open-source-card
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      animate={{ scale: active ? 1 : 0.965, opacity: active ? 1 : 0.82 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      animate={{ scaleX: active ? 1 : 0.965, opacity: active ? 1 : 0.82 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.42, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
       className={`relative min-h-[545px] w-[82vw] max-w-[320px] shrink-0 snap-start overflow-hidden rounded-[24px] border dark:!opacity-100 ${
