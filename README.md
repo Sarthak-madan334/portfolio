@@ -1,15 +1,15 @@
-Sarthak Madan — Portfolio
+# Sarthak Madan — Developer Portfolio
 
-A modern, responsive developer portfolio showcasing my projects, technical skills, open-source contributions, and achievements.
+A modern developer portfolio showcasing projects, technical skills, open-source contributions, and achievements.
 
-Tech Stack
+## Tech Stack
 
 Next.js · TypeScript · Tailwind CSS · Framer Motion · Lucide React
 
-Highlights
+## Features
 
-- Responsive and accessible UI
-- Smooth animations and interactions
-- Project and technical skill showcases
-- Résumé and contact integration
-
+* Responsive and accessible UI
+* Smooth animations and interactions
+* Project and skills showcase
+* Open-source contributions
+* Résumé and contact integration
