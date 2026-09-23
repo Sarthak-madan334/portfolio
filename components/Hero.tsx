@@ -16,7 +16,7 @@ export function Hero() {
           </motion.div>
           <motion.h1 initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.12, ease: [0.22, 1, 0.36, 1] }} className="mt-8 max-w-[780px] text-[clamp(3.4rem,5.25vw,5.5rem)] font-semibold leading-[0.92] tracking-[-0.07em] text-[#1d1d1f] dark:text-white">
             Full-stack products.
-            <span className="mt-2 block bg-gradient-to-r from-[#2563eb] via-[#7c3aed] to-[#e11d48] bg-clip-text text-transparent">Practical AI.<br />Beautifully built.</span>
+            <span className="mt-2 block text-[#2563eb]">Practical AI.<br />Beautifully built.</span>
           </motion.h1>
           <motion.p initial={false} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28 }} className="mt-7 max-w-xl text-base leading-7 text-[#6e6e73] dark:text-white/55 sm:text-lg sm:leading-8">
             I build fast, thoughtful web products using React, Next.js, and practical AI — focused on clean interfaces, real usability, and production-ready execution.
