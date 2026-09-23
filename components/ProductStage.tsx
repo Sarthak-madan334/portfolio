@@ -6,10 +6,10 @@ import { AlertTriangle, ArrowUpRight, CheckCircle2, Sparkles } from "lucide-reac
 export function ProductStage() {
   return (
     <motion.div initial={false} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.24, ease: [0.22, 1, 0.36, 1] }} className="relative hidden min-h-[590px] lg:block">
-      <div className="absolute inset-3 rounded-[48px] bg-gradient-to-br from-[#dbeafe] via-[#ede9fe] to-[#ffe4e6] shadow-[0_30px_100px_rgba(74,80,120,.18)] dark:bg-[#172554]/30 dark:bg-none dark:shadow-[0_30px_100px_rgba(37,52,110,.14)]" />
+      <div className="absolute inset-3 rounded-[48px] bg-gradient-to-br from-[#dbeafe] via-[#eef5ff] to-[#f8fafc] shadow-[0_30px_100px_rgba(74,80,120,.18)] dark:bg-[#172554]/30 dark:bg-none dark:shadow-[0_30px_100px_rgba(37,52,110,.14)]" />
       <div className="absolute inset-3 overflow-hidden rounded-[48px]">
-        <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[#4285f4]/25 blur-3xl dark:bg-[#334a9a]/10" />
-        <div className="absolute -bottom-24 -left-16 h-80 w-80 rounded-full bg-[#ea4335]/15 blur-3xl dark:bg-[#312e81]/10" />
+        <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[#9fc5f8]/20 blur-3xl dark:bg-[#334a9a]/10" />
+        <div className="absolute -bottom-24 -left-16 h-80 w-80 rounded-full bg-[#cbd5e1]/15 blur-3xl dark:bg-[#312e81]/10" />
       </div>
 
       <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }} className="absolute left-[9%] top-[11%] w-[82%] overflow-hidden rounded-[26px] border border-white/80 bg-[#111318] shadow-[0_30px_70px_rgba(24,28,40,.28)]">
