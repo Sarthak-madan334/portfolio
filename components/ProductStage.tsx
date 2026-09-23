@@ -6,10 +6,10 @@ import { AlertTriangle, ArrowUpRight, CheckCircle2, Sparkles } from "lucide-reac
 export function ProductStage() {
   return (
     <motion.div initial={false} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.24, ease: [0.22, 1, 0.36, 1] }} className="relative hidden min-h-[590px] lg:block">
-      <div className="absolute inset-3 rounded-[48px] bg-gradient-to-br from-[#dbeafe] via-[#ede9fe] to-[#ffe4e6] shadow-[0_30px_100px_rgba(74,80,120,.18)]" />
+      <div className="absolute inset-3 rounded-[48px] bg-gradient-to-br from-[#dbeafe] via-[#ede9fe] to-[#ffe4e6] shadow-[0_30px_100px_rgba(74,80,120,.18)] dark:bg-[#172554]/30 dark:bg-none dark:shadow-[0_30px_100px_rgba(37,52,110,.14)]" />
       <div className="absolute inset-3 overflow-hidden rounded-[48px]">
-        <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[#4285f4]/25 blur-3xl" />
-        <div className="absolute -bottom-24 -left-16 h-80 w-80 rounded-full bg-[#ea4335]/15 blur-3xl" />
+        <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[#4285f4]/25 blur-3xl dark:bg-[#334a9a]/10" />
+        <div className="absolute -bottom-24 -left-16 h-80 w-80 rounded-full bg-[#ea4335]/15 blur-3xl dark:bg-[#312e81]/10" />
       </div>
 
       <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }} className="absolute left-[9%] top-[11%] w-[82%] overflow-hidden rounded-[26px] border border-white/80 bg-[#111318] shadow-[0_30px_70px_rgba(24,28,40,.28)]">
@@ -29,8 +29,8 @@ export function ProductStage() {
         </div>
       </motion.div>
 
-      <motion.div animate={{ y: [0, 10, 0], rotate: [-2, 0, -2] }} transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut" }} className="absolute -right-1 bottom-[9%] w-48 rounded-3xl border border-black/[0.06] bg-white p-4 shadow-[0_22px_55px_rgba(48,53,70,.2)]">
-        <p className="text-[10px] font-semibold text-[#6e6e73]">Outcome forecast</p><p className="mt-2 text-3xl font-semibold tracking-[-0.05em] text-[#1d1d1f]">High clarity</p><div className="mt-4 flex h-12 items-end gap-1">{[34,52,42,66,58,76,88].map((h,i)=><span key={i} style={{height:`${h}%`}} className="flex-1 rounded-full bg-gradient-to-t from-[#2563eb] to-[#60a5fa]" />)}</div>
+      <motion.div animate={{ y: [0, 10, 0], rotate: [-2, 0, -2] }} transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut" }} className="absolute -right-1 bottom-[9%] w-48 rounded-3xl border border-black/[0.06] bg-white p-4 shadow-[0_22px_55px_rgba(48,53,70,.2)] dark:border-white/10 dark:bg-[#20242d] dark:shadow-[0_22px_55px_rgba(0,0,0,.28)]">
+        <p className="text-[10px] font-semibold text-[#6e6e73] dark:text-white/55">Outcome forecast</p><p className="mt-2 text-3xl font-semibold tracking-[-0.05em] text-[#1d1d1f] dark:text-white">High clarity</p><div className="mt-4 flex h-12 items-end gap-1">{[34,52,42,66,58,76,88].map((h,i)=><span key={i} style={{height:`${h}%`}} className="flex-1 rounded-full bg-gradient-to-t from-[#2563eb] to-[#60a5fa]" />)}</div>
       </motion.div>
     </motion.div>
   );
