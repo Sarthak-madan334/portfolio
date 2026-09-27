@@ -7,14 +7,21 @@ export const links = {
 
 export const projects = [
   {
-    index: "01", title: "DEADLOCK", subtitle: "AI-powered failure intelligence",
+    index: "01", title: "Grillr", subtitle: "AI-powered interview coach",
+    description: "A voice-first mock interview coach that asks adaptive follow-ups, analyzes speech, and turns each answer into clear, actionable feedback.",
+    highlights: ["Real-time voice interviews", "Adaptive follow-up questions", "Speech analysis & retry coaching"],
+    tech: ["Next.js", "TypeScript", "FastAPI", "WebSockets", "Supabase"],
+    live: "https://grillr-eight.vercel.app", github: "https://github.com/Sarthak-madan334/Grillr", accent: "violet",
+  },
+  {
+    index: "02", title: "DEADLOCK", subtitle: "AI-powered failure intelligence",
     description: "A multi-agent platform that pressure-tests goals, surfaces hidden risks, and turns possible failure into a concrete recovery strategy.",
     highlights: ["5 expert-agent workflows", "Risk simulation & debate", "Actionable recovery plans"],
     tech: ["Next.js", "TypeScript", "Tailwind", "DeepSeek R1", "OpenRouter"],
     live: "https://deadlock-alpha.vercel.app", github: "https://github.com/Sarthak-madan334/Deadlock", accent: "cyan",
   },
   {
-    index: "02", title: "NexStore", subtitle: "AI-powered e-commerce",
+    index: "03", title: "NexStore", subtitle: "AI-powered e-commerce",
     description: "A responsive shopping experience with product discovery, cart, wishlist, flash sales, and an AI assistant for useful recommendations.",
     highlights: ["AI shopping assistant", "Search, cart & wishlist", "Responsive storefront"],
     tech: ["React.js", "JavaScript", "Claude AI", "Vercel"],

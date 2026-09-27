@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, ChevronLeft, ChevronRight, Github, Heart, Search, ShoppingBag, Sparkles } from "lucide-react";
+import { ArrowUpRight, AudioLines, Check, ChevronLeft, ChevronRight, Github, Heart, Mic, Search, ShoppingBag, Sparkles } from "lucide-react";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { projects } from "@/lib/data";
@@ -12,20 +12,20 @@ export function Projects() {
   return (
     <section id="projects" className="section-pad bg-white transition-colors duration-500 dark:bg-[#0b0c0f]">
       <div className="site-shell hidden lg:block">
-        <SectionHeading number="03" eyebrow="Selected work" title="Projects, presented as products." description="Two end-to-end builds that show how I think across product structure, interface craft, integrations, and deployment." />
+        <SectionHeading number="03" eyebrow="Selected work" title="Projects, presented as products." description="End-to-end builds that show how I think across product structure, interface craft, integrations, and deployment." />
         <div className="mt-12 space-y-8">
-          {projects.map((project, index) => <Reveal key={project.title} delay={index * .08}>
-            <motion.article whileHover={{ y: -4 }} transition={{ duration: .3 }} className={`relative overflow-hidden rounded-[40px] ${index === 0 ? "bg-[#0b0b0f] text-white" : "bg-[#e8f0fe] text-[#1d1d1f] dark:bg-[#151925] dark:text-white"}`}>
-              {index === 0 && <><div className="absolute -right-24 -top-28 h-96 w-96 rounded-full bg-[#e50914]/30 blur-[100px]" /><div className="absolute bottom-0 left-[30%] h-64 w-64 rounded-full bg-[#7c3aed]/20 blur-[90px]" /></>}
+          {projects.map((project, index) => { const dark = project.title === "Grillr" || project.title === "DEADLOCK"; return <Reveal key={project.title} delay={index * .08}>
+            <motion.article whileHover={{ y: -4 }} transition={{ duration: .3 }} className={`relative overflow-hidden rounded-[40px] ${dark ? "bg-[#0b0b0f] text-white" : "bg-[#e8f0fe] text-[#1d1d1f] dark:bg-[#151925] dark:text-white"}`}>
+              {dark && <><div className={`absolute -right-24 -top-28 h-96 w-96 rounded-full blur-[100px] ${project.title === "Grillr" ? "bg-[#7c3aed]/25" : "bg-[#e50914]/30"}`} /><div className="absolute bottom-0 left-[30%] h-64 w-64 rounded-full bg-[#7c3aed]/20 blur-[90px]" /></>}
               <div className="relative grid min-h-[620px] lg:grid-cols-[0.82fr_1.18fr]">
                 <div className="flex flex-col justify-between p-8 sm:p-12 lg:p-14">
-                  <div><span className={`text-xs font-semibold ${index === 0 ? "text-white/45" : "text-[#5f6368] dark:text-white/45"}`}>PROJECT {project.index} · LIVE</span><h3 className="mt-8 text-5xl font-semibold tracking-[-0.065em] sm:text-7xl">{project.title}</h3><p className={`mt-4 text-sm font-semibold ${index === 0 ? "text-[#ff6b73]" : "text-[#1967d2] dark:text-[#78a6ff]"}`}>{project.subtitle}</p><p className={`mt-8 max-w-lg text-base leading-8 ${index === 0 ? "text-white/60" : "text-[#5f6368] dark:text-white/55"}`}>{project.description}</p></div>
-                  <div className="mt-10"><div className="flex flex-wrap gap-2">{project.tech.map((tech)=><span key={tech} className={`rounded-full px-3 py-1.5 text-[10px] font-semibold ${index === 0 ? "bg-white/10 text-white/65" : "bg-white/70 text-[#4b5563] dark:bg-white/10 dark:text-white/65"}`}>{tech}</span>)}</div><div className="mt-8 flex gap-3"><ProjectLink href={project.live} label="View live" primary dark={index===0} icon={<ArrowUpRight size={15} />} /><ProjectLink href={project.github} label="GitHub" dark={index===0} icon={<Github size={15} />} /></div></div>
+                  <div><span className={`text-xs font-semibold ${dark ? "text-white/45" : "text-[#5f6368] dark:text-white/45"}`}>PROJECT {project.index} · LIVE</span><h3 className="mt-8 text-5xl font-semibold tracking-[-0.065em] sm:text-7xl">{project.title}</h3><p className={`mt-4 text-sm font-semibold ${dark ? (project.title === "Grillr" ? "text-[#b7a2ff]" : "text-[#ff6b73]") : "text-[#1967d2] dark:text-[#78a6ff]"}`}>{project.subtitle}</p><p className={`mt-8 max-w-lg text-base leading-8 ${dark ? "text-white/60" : "text-[#5f6368] dark:text-white/55"}`}>{project.description}</p></div>
+                  <div className="mt-10"><div className="flex flex-wrap gap-2">{project.tech.map((tech)=><span key={tech} className={`rounded-full px-3 py-1.5 text-[10px] font-semibold ${dark ? "bg-white/10 text-white/65" : "bg-white/70 text-[#4b5563] dark:bg-white/10 dark:text-white/65"}`}>{tech}</span>)}</div><div className="mt-8 flex gap-3"><ProjectLink href={project.live} label="View live" primary dark={dark} icon={<ArrowUpRight size={15} />} /><ProjectLink href={project.github} label="GitHub" dark={dark} icon={<Github size={15} />} /></div></div>
                 </div>
-                <div className="relative min-h-[460px] overflow-hidden p-6 lg:min-h-full lg:p-10">{index === 0 ? <DeadlockVisual /> : <StoreVisual />}</div>
+                <div className="relative min-h-[460px] overflow-hidden p-6 lg:min-h-full lg:p-10">{project.title === "Grillr" ? <GrillrVisual /> : project.title === "DEADLOCK" ? <DeadlockVisual /> : <StoreVisual />}</div>
               </div>
             </motion.article>
-          </Reveal>)}
+          </Reveal>; })}
         </div>
       </div>
       <MobileProjects />
@@ -130,7 +130,7 @@ function MobileProjects() {
 }
 
 function MobileProjectCard({ project, index, active }: { project: (typeof projects)[number]; index: number; active: boolean }) {
-  const dark = index === 0;
+  const dark = project.title === "Grillr" || project.title === "DEADLOCK";
   const title = project.title === "DEADLOCK" ? "Deadlock" : project.title;
 
   return (
@@ -165,18 +165,18 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
 
       <div className="relative p-3 pb-0">
         <div className={`overflow-hidden rounded-[17px] border ${dark ? "border-white/12 bg-[#121318]" : "border-white/80 bg-white dark:border-white/10 dark:bg-[#111318]"}`}>
-          {dark ? <MobileDeadlockPreview /> : <MobileStorePreview />}
+          {project.title === "Grillr" ? <MobileGrillrPreview /> : project.title === "DEADLOCK" ? <MobileDeadlockPreview /> : <MobileStorePreview />}
         </div>
       </div>
 
       <div className="relative p-5 pt-6">
-        <p className={`text-[10px] font-bold uppercase tracking-[0.13em] ${dark ? "text-[#ff766b]" : "text-[#7f8eff]"}`}>
+        <p className={`text-[10px] font-bold uppercase tracking-[0.13em] ${project.title === "Grillr" ? "text-violet-600 dark:text-violet-300" : dark ? "text-[#ff766b]" : "text-[#7f8eff]"}`}>
           Project {project.index} · Live
         </p>
         <h3 className={`mt-3 text-[2rem] font-semibold leading-[1.03] tracking-[-0.055em] ${dark ? "text-[#111113] dark:text-white" : "text-[#111113] dark:text-white"}`}>
           {title}
         </h3>
-        <p className={`mt-3 text-sm font-semibold ${dark ? "text-[#ff766b]" : "text-[#2f63ff]"}`}>
+        <p className={`mt-3 text-sm font-semibold ${project.title === "Grillr" ? "text-violet-700 dark:text-violet-300" : dark ? "text-[#ff766b]" : "text-[#2f63ff]"}`}>
           {project.subtitle}
         </p>
         <p className={`mt-4 text-[13px] leading-6 ${dark ? "text-[#555963] dark:text-white/80" : "text-[#656a78] dark:text-white/80"}`}>
@@ -256,6 +256,59 @@ function MobileDeadlockPreview() {
             ))}
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function MobileGrillrPreview() {
+  return (
+    <div className="relative h-[190px] overflow-hidden bg-[radial-gradient(circle_at_82%_8%,rgba(124,58,237,.2),transparent_38%),linear-gradient(145deg,#191820,#101014_70%)] p-3 text-white">
+      <div className="flex items-center justify-between rounded-xl border border-white/[0.08] bg-white/[0.045] px-3 py-2">
+        <span className="flex items-center gap-2 text-[9px] font-semibold tracking-wide"><span className="grid h-5 w-5 place-items-center rounded-md bg-violet-400/20 text-violet-200"><AudioLines size={12}/></span>GRILLR <span className="text-white/35">/ MOCK INTERVIEW</span></span>
+        <span className="flex items-center gap-1.5 text-[7px] font-medium text-emerald-300"><span className="h-1.5 w-1.5 rounded-full bg-emerald-300"/> SESSION LIVE</span>
+      </div>
+      <div className="mt-3 grid grid-cols-[1fr_82px] gap-2">
+        <div className="rounded-xl border border-white/[0.08] bg-black/25 p-3">
+          <p className="text-[7px] font-semibold uppercase tracking-[.14em] text-violet-200/80">Behavioral · Question 04</p>
+          <p className="mt-2 text-[10px] font-medium leading-4 text-white/90">Tell me about a time you solved a difficult problem.</p>
+          <div className="mt-3 flex h-5 items-center gap-[3px]">{[6,12,8,16,10,18,8,13,6,17,10,14,7,19,9,13,6,16,10,7,14,8].map((h,i)=><span key={i} className="w-1 rounded-full bg-violet-300/80" style={{height:h}} />)}</div>
+        </div>
+        <div className="flex flex-col items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.045]">
+          <span className="grid h-8 w-8 place-items-center rounded-full bg-violet-400/15 text-violet-200"><Mic size={14}/></span>
+          <span className="mt-2 text-[7px] text-white/55">Your answer</span>
+          <span className="mt-1 text-[9px] font-semibold tabular-nums">01:24</span>
+        </div>
+      </div>
+      <div className="mt-2 flex items-center gap-2 rounded-lg border border-white/[0.07] bg-white/[0.035] px-2.5 py-2 text-[8px] text-white/65"><Check size={11} className="text-emerald-300"/> Clear structure <span className="ml-auto text-violet-200">Follow-up ready</span></div>
+    </div>
+  );
+}
+
+function GrillrVisual() {
+  return (
+    <div className="relative flex h-full min-h-[460px] items-center justify-center">
+      <div className="absolute left-[12%] top-[12%] h-64 w-64 rounded-full bg-violet-500/10 blur-[90px]" />
+      <div className="relative w-full max-w-[680px] overflow-hidden rounded-[28px] border border-white/[0.11] bg-[#111116]/95 p-4 shadow-[0_35px_100px_rgba(0,0,0,.48)] sm:p-6">
+        <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
+          <div className="flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-xl bg-violet-400/15 text-violet-200"><AudioLines size={18}/></span><div><p className="text-sm font-semibold">Grillr</p><p className="mt-0.5 text-[10px] text-white/40">Interview practice</p></div></div>
+          <span className="rounded-full border border-emerald-300/15 bg-emerald-300/[0.07] px-3 py-1.5 text-[9px] font-semibold tracking-wide text-emerald-200">SESSION LIVE</span>
+        </div>
+        <div className="grid gap-4 py-5 sm:grid-cols-[1fr_190px]">
+          <div className="rounded-2xl border border-white/[0.08] bg-white/[0.035] p-5">
+            <p className="text-[9px] font-semibold uppercase tracking-[.15em] text-violet-200/80">Behavioral interview <span className="px-1 text-white/20">·</span> 04 / 08</p>
+            <h4 className="mt-4 max-w-md text-xl font-medium leading-snug tracking-[-.035em] text-white/90">Tell me about a time you solved a difficult problem.</h4>
+            <div className="mt-7 flex h-10 items-center gap-1">{[10,18,12,24,15,32,18,25,11,29,18,35,20,26,12,31,18,24,13,35,20,28,14,24,10,32,16,25,12,19,9,27,16,31,13,22].map((h,i)=><span key={i} className="w-[4px] rounded-full bg-violet-300/75" style={{height:h}} />)}</div>
+            <div className="mt-5 flex items-center justify-between border-t border-white/[0.07] pt-4"><span className="flex items-center gap-2 text-[11px] text-white/55"><Mic size={14} className="text-violet-200"/> Listening to your answer</span><span className="text-xs tabular-nums text-white/45">01:24</span></div>
+          </div>
+          <div className="flex flex-col rounded-2xl border border-white/[0.08] bg-white/[0.035] p-4">
+            <p className="text-[9px] font-semibold uppercase tracking-[.14em] text-white/40">Live analysis</p>
+            <div className="mt-4 flex items-end gap-2"><span className="text-4xl font-semibold tracking-[-.06em]">86</span><span className="pb-1 text-[10px] text-white/40">/ 100</span></div>
+            <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/[0.08]"><div className="h-full w-[86%] rounded-full bg-violet-300" /></div>
+            <div className="mt-5 space-y-3 text-[10px]"><div className="flex items-center gap-2 text-white/65"><Check size={12} className="text-emerald-300"/> Strong structure</div><div className="flex items-center gap-2 text-white/65"><Check size={12} className="text-emerald-300"/> Clear delivery</div><div className="mt-4 rounded-xl bg-violet-300/[0.08] p-3 leading-4 text-violet-100/75">A follow-up question is ready when you finish.</div></div>
+          </div>
+        </div>
+        <div className="flex items-center justify-between rounded-xl border border-white/[0.07] bg-black/20 px-4 py-3"><span className="text-[10px] text-white/45">Answer <span className="text-white/70">→</span> Analyze <span className="text-white/70">→</span> Improve</span><span className="flex items-center gap-1.5 text-[10px] text-white/45"><span className="h-1.5 w-1.5 rounded-full bg-violet-300"/> AI coach</span></div>
       </div>
     </div>
   );
