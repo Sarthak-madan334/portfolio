@@ -1,13 +1,13 @@
-type Props = { number: string; eyebrow: string; title: string; description?: string };
+type Props = { number: string; eyebrow: string; title: string; description?: string; descriptionClassName?: string };
 
-export function SectionHeading({ number, eyebrow, title, description }: Props) {
+export function SectionHeading({ number, eyebrow, title, description, descriptionClassName = "text-muted dark:text-white/50" }: Props) {
   return (
     <div className="mb-12 grid gap-5 md:grid-cols-[1fr_0.8fr] md:items-end">
       <div>
         <p className="mb-5 flex items-center gap-3 text-sm font-medium tracking-[-0.01em] text-[#77777d] dark:text-white/50"><span className="grid h-7 min-w-7 place-items-center rounded-full bg-[#ececf0] px-2 text-[10px] font-bold text-[#55555b] dark:bg-white/[0.08] dark:text-white/60">{number}</span><span>{eyebrow}</span></p>
         <h2 className="max-w-3xl text-3xl font-semibold leading-[1.04] tracking-[-0.05em] text-[#1d1d1f] dark:text-white sm:text-5xl">{title}</h2>
       </div>
-      {description && <p className="max-w-xl text-sm leading-7 text-muted dark:text-white/50 md:justify-self-end md:text-base">{description}</p>}
+      {description && <p className={`max-w-xl text-sm leading-7 md:justify-self-end md:text-base ${descriptionClassName}`}>{description}</p>}
     </div>
   );
 }

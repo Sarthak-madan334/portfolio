@@ -52,6 +52,7 @@ export function TechnicalStack() {
           eyebrow="Technical stack"
           title="One toolkit. Every layer."
           description="The technologies I use across product engineering—visible at a glance, from interface to infrastructure."
+          descriptionClassName="text-[#55565d] dark:text-white/55"
         />
 
         <div className="mt-8 grid grid-cols-2 gap-x-5 md:gap-x-8 lg:grid-cols-12">
@@ -96,14 +97,13 @@ export function TechnicalStack() {
                 <div className="mt-2.5 flex flex-wrap items-center gap-x-2 gap-y-1.5">
                   {group.items.map((item, itemIndex) => (
                     <span key={item.name} className="inline-flex items-center gap-2">
-                      <motion.span
-                        whileHover={{ y: -2, color: "#111318" }}
+                      <span
                         title={item.use}
                         aria-label={`${item.name}: ${item.use}`}
-                        className="cursor-default text-[11px] font-medium text-[#68686e] dark:text-white/50 sm:text-xs"
+                        className="cursor-default text-[11px] font-medium text-[#55565d] dark:text-white/55 sm:text-xs"
                       >
                         {item.name}
-                      </motion.span>
+                      </span>
                       {itemIndex < group.items.length - 1 && (
                         <motion.span
                           aria-hidden="true"
