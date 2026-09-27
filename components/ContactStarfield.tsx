@@ -1,0 +1,141 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+
+type Star = {
+  x: number;
+  y: number;
+  size: number;
+  alpha: number;
+  hue: number;
+};
+
+export function ContactStarfield() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const section = canvas?.parentElement;
+    const context = canvas?.getContext("2d");
+    if (!canvas || !section || !context) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let width = 0;
+    let height = 0;
+    let pixelRatio = 1;
+    let frame = 0;
+    let pointer = { x: 0.5, y: 0.5 };
+    let target = pointer;
+    const starCount = window.innerWidth < 640 ? 900 : 1900;
+    const stars: Star[] = Array.from({ length: starCount }, () => {
+      // Most points gather into a loose, vertically stretched orbital cloud,
+      // with the rest spread across the whole section like distant stars.
+      const clustered = Math.random() < 0.68;
+      const angle = Math.random() * Math.PI * 2;
+      const radius = 0.22 + Math.random() * 0.83;
+      return {
+        x: clustered ? 0.5 + Math.cos(angle) * radius * 0.49 : Math.random(),
+        y: clustered ? 0.5 + Math.sin(angle) * radius * 0.53 : Math.random(),
+        size: Math.random() * 1.05 + 0.2,
+        alpha: Math.random() * 0.58 + 0.18,
+        hue: Math.random() > 0.93 ? 42 : Math.random() > 0.62 ? 190 : 210,
+      };
+    });
+
+    const resize = () => {
+      const bounds = section.getBoundingClientRect();
+      width = bounds.width;
+      height = bounds.height;
+      pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * pixelRatio);
+      canvas.height = Math.round(height * pixelRatio);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      draw();
+    };
+
+    const draw = () => {
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      context.clearRect(0, 0, width, height);
+
+      const pointerX = pointer.x * width;
+      const pointerY = pointer.y * height;
+      const influenceRadius = Math.min(150, Math.max(88, Math.min(width, height) * 0.23));
+      const halo = context.createRadialGradient(pointerX, pointerY, 0, pointerX, pointerY, influenceRadius);
+      halo.addColorStop(0, "rgba(10, 93, 105, 0.11)");
+      halo.addColorStop(0.68, "rgba(3, 39, 48, 0.045)");
+      halo.addColorStop(1, "rgba(3, 8, 11, 0)");
+      context.fillStyle = halo;
+      context.fillRect(0, 0, width, height);
+
+      for (const star of stars) {
+        const baseX = star.x * width;
+        const baseY = star.y * height;
+        const dx = baseX - pointerX;
+        const dy = baseY - pointerY;
+        const distance = Math.hypot(dx, dy);
+        const proximity = Math.max(0, 1 - distance / influenceRadius);
+        const push = proximity * proximity * 16;
+        const direction = distance || 1;
+        const x = baseX + (dx / direction) * push;
+        const y = baseY + (dy / direction) * push;
+        context.beginPath();
+        context.arc(x, y, star.size, 0, Math.PI * 2);
+        context.fillStyle = `hsla(${star.hue}, 88%, 78%, ${star.alpha})`;
+        context.fill();
+      }
+    };
+
+    const move = (event: PointerEvent) => {
+      const bounds = section.getBoundingClientRect();
+      target = {
+        x: Math.min(1, Math.max(0, (event.clientX - bounds.left) / bounds.width)),
+        y: Math.min(1, Math.max(0, (event.clientY - bounds.top) / bounds.height)),
+      };
+
+      if (reducedMotion) {
+        pointer = target;
+        draw();
+        return;
+      }
+
+      if (!frame) frame = window.requestAnimationFrame(animatePointer);
+    };
+
+    const animatePointer = () => {
+      frame = 0;
+      pointer = {
+        x: pointer.x + (target.x - pointer.x) * 0.14,
+        y: pointer.y + (target.y - pointer.y) * 0.14,
+      };
+      draw();
+      if (Math.abs(target.x - pointer.x) + Math.abs(target.y - pointer.y) > 0.001) {
+        frame = window.requestAnimationFrame(animatePointer);
+      }
+    };
+
+    const leave = () => {
+      target = { x: 0.5, y: 0.5 };
+      if (reducedMotion) {
+        pointer = target;
+        draw();
+      } else if (!frame) {
+        frame = window.requestAnimationFrame(animatePointer);
+      }
+    };
+    const observer = new ResizeObserver(resize);
+    observer.observe(section);
+    section.addEventListener("pointermove", move, { passive: true });
+    section.addEventListener("pointerleave", leave);
+    resize();
+
+    return () => {
+      observer.disconnect();
+      section.removeEventListener("pointermove", move);
+      section.removeEventListener("pointerleave", leave);
+      window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} aria-hidden="true" className="pointer-events-none absolute inset-0 z-0" />;
+}
