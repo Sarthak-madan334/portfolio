@@ -8,6 +8,7 @@ type Star = {
   size: number;
   alpha: number;
   hue: number;
+  highlight: boolean;
   moves: boolean;
   offsetX: number;
   offsetY: number;
@@ -32,6 +33,7 @@ export function ContactStarfield() {
     let frame = 0;
     let pointer = { x: 0.5, y: 0.5 };
     let target = pointer;
+    let lightMode = !document.documentElement.classList.contains("dark");
     const starCount = window.innerWidth < 640 ? 1700 : 3600;
     const startTime = performance.now();
     const stars: Star[] = Array.from({ length: starCount }, () => {
@@ -46,6 +48,7 @@ export function ContactStarfield() {
         size: Math.random() * 1.05 + 0.2,
         alpha: Math.random() * 0.58 + 0.18,
         hue: Math.random() > 0.93 ? 42 : Math.random() > 0.62 ? 190 : 210,
+        highlight: Math.random() < 0.1,
         moves: Math.random() < 0.88,
         offsetX: 0,
         offsetY: 0,
@@ -75,13 +78,15 @@ export function ContactStarfield() {
       const pointerY = pointer.y * height;
       const influenceRadius = Math.min(150, Math.max(88, Math.min(width, height) * 0.23));
       const halo = context.createRadialGradient(pointerX, pointerY, 0, pointerX, pointerY, influenceRadius);
-      halo.addColorStop(0, "rgba(10, 93, 105, 0.11)");
-      halo.addColorStop(0.68, "rgba(3, 39, 48, 0.045)");
-      halo.addColorStop(1, "rgba(3, 8, 11, 0)");
+      halo.addColorStop(0, lightMode ? "rgba(54, 104, 184, 0.13)" : "rgba(10, 93, 105, 0.11)");
+      halo.addColorStop(0.68, lightMode ? "rgba(107, 119, 171, 0.045)" : "rgba(3, 39, 48, 0.045)");
+      halo.addColorStop(1, lightMode ? "rgba(231, 235, 242, 0)" : "rgba(3, 8, 11, 0)");
       context.fillStyle = halo;
       context.fillRect(0, 0, width, height);
 
-      for (const star of stars) {
+      const renderedStarCount = stars.length;
+      for (let index = 0; index < renderedStarCount; index += 1) {
+        const star = stars[index];
         const baseX = star.x * width;
         const baseY = star.y * height;
         const dx = baseX - pointerX;
@@ -92,10 +97,15 @@ export function ContactStarfield() {
         const direction = distance || 1;
         const x = baseX + star.offsetX + (dx / direction) * push;
         const y = baseY + star.offsetY + (dy / direction) * push;
+
         context.beginPath();
-        context.arc(x, y, star.size, 0, Math.PI * 2);
-        context.fillStyle = `hsla(${star.hue}, 88%, 78%, ${star.alpha})`;
+        context.arc(x, y, star.size * (lightMode ? (star.highlight ? 1.55 : 1.12) : 1), 0, Math.PI * 2);
+        const lightColor = `hsla(${star.hue === 42 ? 39 : star.hue === 190 ? 190 : 212}, ${star.hue === 42 ? 72 : 70}%, ${star.hue === 42 ? 51 : star.hue === 190 ? 42 : 48}%, ${star.alpha * (star.highlight ? 0.86 : 0.62)})`;
+        context.fillStyle = lightMode ? lightColor : `hsla(${star.hue}, 88%, 78%, ${star.alpha})`;
+        context.shadowColor = lightMode && star.highlight ? lightColor : "transparent";
+        context.shadowBlur = lightMode && star.highlight ? 5 : 0;
         context.fill();
+        context.shadowBlur = 0;
       }
     };
 
@@ -158,6 +168,14 @@ export function ContactStarfield() {
         frame = window.requestAnimationFrame(animate);
       }
     };
+    const themeObserver = new MutationObserver(() => {
+      const nextLightMode = !document.documentElement.classList.contains("dark");
+      if (nextLightMode !== lightMode) {
+        lightMode = nextLightMode;
+        draw();
+      }
+    });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     const observer = new ResizeObserver(resize);
     observer.observe(section);
     section.addEventListener("pointermove", move, { passive: true });
@@ -168,6 +186,7 @@ export function ContactStarfield() {
 
     return () => {
       observer.disconnect();
+      themeObserver.disconnect();
       section.removeEventListener("pointermove", move);
       section.removeEventListener("pointerleave", leave);
       document.removeEventListener("visibilitychange", visibility);
