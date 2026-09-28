@@ -320,7 +320,6 @@ function MigrationVisual() {
             <p className="text-[9px] font-semibold uppercase tracking-[.13em] text-[#828898] dark:text-white/40">Rehearsal scope</p>
             <div className="mt-5 flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-xl bg-blue-600/[0.07] text-blue-700 dark:bg-blue-300/10 dark:text-blue-200"><GitBranch size={17}/></span><div><p className="text-xs font-semibold text-[#252936] dark:text-white/85">Schema change</p><p className="mt-1 text-[9px] text-[#7b8190] dark:text-white/40">Isolated test database</p></div></div>
             <div className="mt-5 border-t border-black/[0.06] pt-4 dark:border-white/[0.08]"><p className="text-[9px] font-medium text-[#7b8190] dark:text-white/45">Checks in this run</p><div className="mt-3 space-y-3 text-[10px] font-medium text-[#505664] dark:text-white/65"><div className="flex items-center gap-2"><Check size={12} className="text-emerald-600 dark:text-emerald-300"/> Migration applied</div><div className="flex items-center gap-2"><Check size={12} className="text-emerald-600 dark:text-emerald-300"/> Queries compared</div><div className="flex items-center gap-2"><Check size={12} className="text-emerald-600 dark:text-emerald-300"/> Results recorded</div></div></div>
-            <div className="mt-auto pt-5 text-[9px] text-[#8a90a0] dark:text-white/35">Illustrative Phase 0 workflow</div>
           </div>
         </div>
       </div>
