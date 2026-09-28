@@ -17,7 +17,9 @@ type Star = {
   nextDriftAt: number;
 };
 
-export function ContactStarfield() {
+type ParticleMotion = "ambient" | "orbit" | "sway";
+
+export function ContactStarfield({ motion = "ambient", particleCount }: { motion?: ParticleMotion; particleCount?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -34,7 +36,7 @@ export function ContactStarfield() {
     let pointer = { x: 0.5, y: 0.5 };
     let target = pointer;
     let lightMode = !document.documentElement.classList.contains("dark");
-    const starCount = window.innerWidth < 640 ? 1700 : 3600;
+    const starCount = particleCount ?? (window.innerWidth < 640 ? 1700 : 3600);
     const startTime = performance.now();
     const stars: Star[] = Array.from({ length: starCount }, () => {
       // Most points gather into a loose, vertically stretched orbital cloud,
@@ -76,6 +78,13 @@ export function ContactStarfield() {
 
       const pointerX = pointer.x * width;
       const pointerY = pointer.y * height;
+      const time = performance.now();
+      const angle = motion === "orbit" && !reducedMotion ? ((time % 120000) / 120000) * Math.PI * 2 : 0;
+      const cosine = Math.cos(angle);
+      const sine = Math.sin(angle);
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const driftX = motion === "sway" && !reducedMotion ? Math.sin(time / 6500) * 18 : 0;
       const influenceRadius = Math.min(150, Math.max(88, Math.min(width, height) * 0.23));
       const halo = context.createRadialGradient(pointerX, pointerY, 0, pointerX, pointerY, influenceRadius);
       halo.addColorStop(0, lightMode ? "rgba(54, 104, 184, 0.13)" : "rgba(10, 93, 105, 0.11)");
@@ -87,16 +96,20 @@ export function ContactStarfield() {
       const renderedStarCount = stars.length;
       for (let index = 0; index < renderedStarCount; index += 1) {
         const star = stars[index];
-        const baseX = star.x * width;
-        const baseY = star.y * height;
+        const sourceX = star.x * width + star.offsetX;
+        const sourceY = star.y * height + star.offsetY;
+        const relativeX = sourceX - centerX;
+        const relativeY = sourceY - centerY;
+        const baseX = centerX + relativeX * cosine - relativeY * sine + driftX;
+        const baseY = centerY + relativeX * sine + relativeY * cosine;
         const dx = baseX - pointerX;
         const dy = baseY - pointerY;
         const distance = Math.hypot(dx, dy);
         const proximity = Math.max(0, 1 - distance / influenceRadius);
         const push = proximity * proximity * 16;
         const direction = distance || 1;
-        const x = baseX + star.offsetX + (dx / direction) * push;
-        const y = baseY + star.offsetY + (dy / direction) * push;
+        const x = baseX + (dx / direction) * push;
+        const y = baseY + (dy / direction) * push;
 
         context.beginPath();
         context.arc(x, y, star.size * (lightMode ? (star.highlight ? 1.55 : 1.12) : 1), 0, Math.PI * 2);
@@ -136,15 +149,17 @@ export function ContactStarfield() {
       };
 
       if (time - lastDrawAt >= 32) {
-        for (const star of stars) {
-          if (!star.moves) continue;
-          if (time >= star.nextDriftAt) {
-            star.targetOffsetX = (Math.random() - 0.5) * 28;
-            star.targetOffsetY = (Math.random() - 0.5) * 28;
-            star.nextDriftAt = time + 1200 + Math.random() * 3000;
+        if (motion === "ambient") {
+          for (const star of stars) {
+            if (!star.moves) continue;
+            if (time >= star.nextDriftAt) {
+              star.targetOffsetX = (Math.random() - 0.5) * 28;
+              star.targetOffsetY = (Math.random() - 0.5) * 28;
+              star.nextDriftAt = time + 1200 + Math.random() * 3000;
+            }
+            star.offsetX += (star.targetOffsetX - star.offsetX) * 0.018;
+            star.offsetY += (star.targetOffsetY - star.offsetY) * 0.018;
           }
-          star.offsetX += (star.targetOffsetX - star.offsetX) * 0.018;
-          star.offsetY += (star.targetOffsetY - star.offsetY) * 0.018;
         }
         draw();
         lastDrawAt = time;
@@ -192,7 +207,7 @@ export function ContactStarfield() {
       document.removeEventListener("visibilitychange", visibility);
       window.cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [motion, particleCount]);
 
   return <canvas ref={canvasRef} aria-hidden="true" className="pointer-events-none absolute inset-0 z-0" />;
 }

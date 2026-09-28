@@ -7,7 +7,7 @@ export function Contact() {
   return (
     <section id="contact" className="relative overflow-hidden bg-[#e7ebf2] py-24 text-[#1d1d1f] dark:bg-[#04090b] dark:text-white sm:py-36">
       <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_16%_22%,rgba(255,255,255,0.86),transparent_38%),radial-gradient(ellipse_at_82%_78%,rgba(183,199,230,0.58),transparent_45%),linear-gradient(135deg,#e9edf4_0%,#e3e8f0_54%,#edf0f5_100%)] dark:hidden" />
-      <ContactStarfield />
+      <ContactStarfield motion="sway" />
       <div className="pointer-events-none absolute -left-24 top-0 z-[1] h-96 w-96 rounded-full bg-blue-500/[0.07] blur-[120px] dark:bg-cyan-400/[0.05]" /><div className="pointer-events-none absolute -right-20 bottom-0 z-[1] h-96 w-96 rounded-full bg-violet-500/[0.05] blur-[120px] dark:bg-emerald-400/[0.04]" />
       <div className="pointer-events-none absolute left-8 top-12 z-[1] hidden rotate-[-5deg] font-mono text-[10px] leading-6 text-black/[0.045] dark:text-white/[0.055] lg:block">{`if (idea) {`}<br />&nbsp;&nbsp;{`return buildTogether();`}<br />{`}`}</div>
       <div className="pointer-events-none absolute bottom-16 right-10 z-[1] hidden rotate-3 font-mono text-[10px] leading-6 text-black/[0.04] dark:text-white/[0.05] lg:block">{`// next chapter`}<br />{`console.log("hello");`}</div>
