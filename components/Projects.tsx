@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, AudioLines, Check, ChevronLeft, ChevronRight, Github, Heart, Mic, Search, ShoppingBag, Sparkles } from "lucide-react";
+import { ArrowUpRight, AudioLines, Check, ChevronLeft, ChevronRight, Code2, Database, GitBranch, Github, Heart, Mic, Search, ShoppingBag, Sparkles } from "lucide-react";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { projects } from "@/lib/data";
@@ -19,10 +19,10 @@ export function Projects() {
               {dark && <><div className={`absolute -right-24 -top-28 h-96 w-96 rounded-full blur-[100px] ${project.title === "Grillr" ? "bg-[#7c3aed]/25" : "bg-[#e50914]/30"}`} /><div className="absolute bottom-0 left-[30%] h-64 w-64 rounded-full bg-[#7c3aed]/20 blur-[90px]" /></>}
               <div className="relative grid min-h-[620px] lg:grid-cols-[0.82fr_1.18fr]">
                 <div className="flex flex-col justify-between p-8 sm:p-12 lg:p-14">
-                  <div><span className={`text-xs font-semibold ${dark ? "text-white/45" : "text-[#5f6368] dark:text-white/45"}`}>PROJECT {project.index} · LIVE</span><h3 className="mt-8 text-5xl font-semibold tracking-[-0.065em] sm:text-7xl">{project.title}</h3><p className={`mt-4 text-sm font-semibold ${dark ? (project.title === "Grillr" ? "text-[#b7a2ff]" : "text-[#ff6b73]") : "text-[#1967d2] dark:text-[#78a6ff]"}`}>{project.subtitle}</p><p className={`mt-8 max-w-lg text-base leading-8 ${dark ? "text-white/60" : "text-[#5f6368] dark:text-white/55"}`}>{project.description}</p></div>
-                  <div className="mt-10"><div className="flex flex-wrap gap-2">{project.tech.map((tech)=><span key={tech} className={`rounded-full px-3 py-1.5 text-[10px] font-semibold ${dark ? "bg-white/10 text-white/65" : "bg-white/70 text-[#4b5563] dark:bg-white/10 dark:text-white/65"}`}>{tech}</span>)}</div><div className="mt-8 flex gap-3"><ProjectLink href={project.live} label="View live" primary dark={dark} icon={<ArrowUpRight size={15} />} /><ProjectLink href={project.github} label="GitHub" dark={dark} icon={<Github size={15} />} /></div></div>
+                  <div><span className={`text-xs font-semibold ${dark ? "text-white/45" : "text-[#5f6368] dark:text-white/45"}`}>PROJECT {project.index} · {project.live ? "LIVE" : project.status?.toUpperCase()}</span><h3 className="mt-8 text-5xl font-semibold tracking-[-0.065em] sm:text-7xl">{project.title}</h3><p className={`mt-4 text-sm font-semibold ${dark ? (project.title === "Grillr" ? "text-[#b7a2ff]" : "text-[#ff6b73]") : "text-[#1967d2] dark:text-[#78a6ff]"}`}>{project.subtitle}</p><p className={`mt-8 max-w-lg text-base leading-8 ${dark ? "text-white/60" : "text-[#5f6368] dark:text-white/55"}`}>{project.description}</p></div>
+                  <div className="mt-10"><div className="flex flex-wrap gap-2">{project.tech.map((tech)=><span key={tech} className={`rounded-full px-3 py-1.5 text-[10px] font-semibold ${dark ? "bg-white/10 text-white/65" : "bg-white/70 text-[#4b5563] dark:bg-white/10 dark:text-white/65"}`}>{tech}</span>)}</div><div className="mt-8 flex flex-wrap items-center gap-3">{project.live ? <ProjectLink href={project.live} label="View live" primary dark={dark} icon={<ArrowUpRight size={15} />} /> : <ProjectStatus label={project.status ?? "In development"} dark={dark} />}<ProjectLink href={project.github} label="GitHub" dark={dark} icon={<Github size={15} />} /></div></div>
                 </div>
-                <div className="relative min-h-[460px] overflow-hidden p-6 lg:min-h-full lg:p-10">{project.title === "Grillr" ? <GrillrVisual /> : project.title === "DEADLOCK" ? <DeadlockVisual /> : <StoreVisual />}</div>
+                <div className="relative min-h-[460px] overflow-hidden p-6 lg:min-h-full lg:p-10">{project.title === "Grillr" ? <GrillrVisual /> : project.title === "MigrationY" ? <MigrationVisual /> : project.title === "DEADLOCK" ? <DeadlockVisual /> : <StoreVisual />}</div>
               </div>
             </motion.article>
           </Reveal>; })}
@@ -165,13 +165,13 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
 
       <div className="relative p-3 pb-0">
         <div className={`overflow-hidden rounded-[17px] border ${dark ? "border-white/12 bg-[#121318]" : "border-white/80 bg-white dark:border-white/10 dark:bg-[#111318]"}`}>
-          {project.title === "Grillr" ? <MobileGrillrPreview /> : project.title === "DEADLOCK" ? <MobileDeadlockPreview /> : <MobileStorePreview />}
+          {project.title === "Grillr" ? <MobileGrillrPreview /> : project.title === "MigrationY" ? <MobileMigrationPreview /> : project.title === "DEADLOCK" ? <MobileDeadlockPreview /> : <MobileStorePreview />}
         </div>
       </div>
 
       <div className="relative p-5 pt-6">
         <p className={`text-[10px] font-bold uppercase tracking-[0.13em] ${project.title === "Grillr" ? "text-violet-600 dark:text-violet-300" : dark ? "text-[#ff766b]" : "text-[#7f8eff]"}`}>
-          Project {project.index} · Live
+          Project {project.index} · {project.live ? "Live" : project.status}
         </p>
         <h3 className={`mt-3 text-[2rem] font-semibold leading-[1.03] tracking-[-0.055em] ${dark ? "text-[#111113] dark:text-white" : "text-[#111113] dark:text-white"}`}>
           {title}
@@ -197,11 +197,27 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
         </div>
 
         <div className="mt-5 flex flex-wrap gap-3">
-          <MobileProjectLink href={project.live} label="View live" primary dark={dark} icon={<ArrowUpRight size={15} />} />
+          {project.live ? <MobileProjectLink href={project.live} label="View live" primary dark={dark} icon={<ArrowUpRight size={15} />} /> : <ProjectStatus label={project.status ?? "In development"} dark={dark} />}
           <MobileProjectLink href={project.github} label="GitHub" dark={dark} icon={<Github size={15} />} />
         </div>
       </div>
     </motion.article>
+  );
+}
+
+function MobileMigrationPreview() {
+  return (
+    <div className="relative h-[190px] overflow-hidden bg-[#f3f6fc] p-3 text-[#171a22] dark:bg-[#151922] dark:text-white">
+      <div className="flex items-center justify-between border-b border-black/[0.07] pb-2 dark:border-white/[0.08]">
+        <span className="flex items-center gap-1.5 text-[9px] font-semibold"><Database size={12} className="text-blue-600 dark:text-blue-300"/> MIGRATION REHEARSAL</span>
+        <span className="rounded-full bg-blue-600/[0.08] px-2 py-1 text-[7px] font-semibold text-blue-700 dark:bg-blue-300/10 dark:text-blue-200">SAMPLE RUN</span>
+      </div>
+      <div className="mt-3 rounded-xl border border-black/[0.07] bg-white p-3 dark:border-white/[0.08] dark:bg-white/[0.035]">
+        <div className="flex items-center justify-between"><div><p className="text-[7px] font-medium uppercase tracking-[.12em] text-[#7b8190] dark:text-white/45">Migration</p><p className="mt-1 text-[10px] font-semibold">add_customer_index.sql</p></div><span className="flex items-center gap-1 text-[7px] font-semibold text-emerald-700 dark:text-emerald-300"><Check size={9}/> Rehearsed</span></div>
+        <div className="mt-3 grid grid-cols-3 gap-1.5">{[["01","Seed data"],["02","Apply change"],["03","Compare queries"]].map(([step,label])=><div key={step} className="rounded-lg bg-[#f3f6fc] p-2 dark:bg-white/[0.045]"><p className="text-[6px] font-bold text-blue-600 dark:text-blue-300">{step}</p><p className="mt-1 text-[7px] font-medium text-[#555b67] dark:text-white/65">{label}</p></div>)}</div>
+      </div>
+      <div className="mt-2 flex items-center justify-between px-1 text-[7px] text-[#737987] dark:text-white/50"><span>Before / after query check</span><span className="flex items-center gap-1"><GitBranch size={9}/> Phase 0</span></div>
+    </div>
   );
 }
 
@@ -285,6 +301,33 @@ function MobileGrillrPreview() {
   );
 }
 
+function MigrationVisual() {
+  return (
+    <div className="relative flex h-full min-h-[460px] items-center justify-center">
+      <div className="absolute right-[8%] top-[12%] h-72 w-72 rounded-full bg-blue-400/10 blur-[100px]" />
+      <div className="relative w-full max-w-[700px] overflow-hidden rounded-[28px] border border-white/80 bg-white/90 shadow-[0_28px_80px_rgba(53,69,105,.16)] dark:border-white/10 dark:bg-[#11141b] dark:shadow-[0_28px_80px_rgba(0,0,0,.35)]">
+        <div className="flex items-center justify-between border-b border-black/[0.07] px-5 py-4 dark:border-white/[0.08]">
+          <div className="flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-xl bg-blue-600/[0.08] text-blue-700 dark:bg-blue-300/10 dark:text-blue-200"><Database size={17}/></span><div><p className="text-xs font-semibold text-[#1d2028] dark:text-white">Migration Rehearsal</p><p className="mt-0.5 text-[9px] text-[#7b8190] dark:text-white/40">Database change analysis</p></div></div>
+          <span className="rounded-full border border-blue-600/10 bg-blue-600/[0.045] px-3 py-1.5 text-[8px] font-semibold tracking-wide text-blue-700 dark:border-blue-300/15 dark:bg-blue-300/[0.08] dark:text-blue-200">SAMPLE RUN</span>
+        </div>
+        <div className="grid gap-4 p-5 sm:grid-cols-[1fr_190px]">
+          <div className="rounded-2xl border border-black/[0.07] bg-[#f8f9fc] p-5 dark:border-white/[0.08] dark:bg-white/[0.025]">
+            <div className="flex items-start justify-between"><div><p className="text-[9px] font-semibold uppercase tracking-[.14em] text-[#828898] dark:text-white/40">Migration file</p><p className="mt-2 font-mono text-xs font-semibold text-[#252936] dark:text-white/85">add_customer_index.sql</p></div><span className="grid h-8 w-8 place-items-center rounded-full bg-emerald-500/[0.09] text-emerald-700 dark:bg-emerald-300/10 dark:text-emerald-300"><Check size={15}/></span></div>
+            <div className="mt-6 space-y-3">{[["01","Seed representative data"],["02","Apply schema migration"],["03","Compare query behavior"]].map(([step,label],index)=><div key={step} className="flex items-center gap-3"><span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-blue-600/[0.07] font-mono text-[9px] font-semibold text-blue-700 dark:bg-blue-300/10 dark:text-blue-200">{step}</span><span className="text-[11px] font-medium text-[#525866] dark:text-white/65">{label}</span><span className={`ml-auto h-1.5 w-1.5 rounded-full ${index < 3 ? "bg-emerald-500" : "bg-gray-300"}`} /></div>)}</div>
+            <div className="mt-6 rounded-xl border border-black/[0.06] bg-white px-4 py-3 dark:border-white/[0.07] dark:bg-white/[0.025]"><div className="flex items-center justify-between text-[9px] font-medium text-[#707787] dark:text-white/45"><span>Query plan comparison</span><span>Before <span className="px-1 text-blue-500">→</span> After</span></div><div className="mt-3 flex h-8 items-end gap-1">{[10,14,12,20,16,24,18,28,22,30,26,34,27,32,24,36,30,38,31,35,28,39,32,37].map((height,index)=><span key={index} className={`flex-1 rounded-t-sm ${index < 12 ? "bg-blue-500/30" : "bg-blue-600/65 dark:bg-blue-300/60"}`} style={{height}} />)}</div></div>
+          </div>
+          <div className="flex flex-col rounded-2xl border border-black/[0.07] bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.025]">
+            <p className="text-[9px] font-semibold uppercase tracking-[.13em] text-[#828898] dark:text-white/40">Rehearsal scope</p>
+            <div className="mt-5 flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-xl bg-blue-600/[0.07] text-blue-700 dark:bg-blue-300/10 dark:text-blue-200"><GitBranch size={17}/></span><div><p className="text-xs font-semibold text-[#252936] dark:text-white/85">Schema change</p><p className="mt-1 text-[9px] text-[#7b8190] dark:text-white/40">Isolated test database</p></div></div>
+            <div className="mt-5 border-t border-black/[0.06] pt-4 dark:border-white/[0.08]"><p className="text-[9px] font-medium text-[#7b8190] dark:text-white/45">Checks in this run</p><div className="mt-3 space-y-3 text-[10px] font-medium text-[#505664] dark:text-white/65"><div className="flex items-center gap-2"><Check size={12} className="text-emerald-600 dark:text-emerald-300"/> Migration applied</div><div className="flex items-center gap-2"><Check size={12} className="text-emerald-600 dark:text-emerald-300"/> Queries compared</div><div className="flex items-center gap-2"><Check size={12} className="text-emerald-600 dark:text-emerald-300"/> Results recorded</div></div></div>
+            <div className="mt-auto pt-5 text-[9px] text-[#8a90a0] dark:text-white/35">Illustrative Phase 0 workflow</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function GrillrVisual() {
   return (
     <div className="relative flex h-full min-h-[460px] items-center justify-center">
@@ -357,6 +400,14 @@ function MobileStorePreview() {
         </div>
       </div>
     </div>
+  );
+}
+
+function ProjectStatus({ label, dark = false }: { label: string; dark?: boolean }) {
+  return (
+    <span className={`inline-flex min-h-10 items-center gap-2 rounded-full border px-4 py-2.5 text-xs font-semibold ${dark ? "border-white/15 bg-white/[0.05] text-white/60" : "border-black/10 bg-white/65 text-[#5f6368] dark:border-white/15 dark:bg-white/[0.04] dark:text-white/60"}`}>
+      <Code2 size={14} /> {label}
+    </span>
   );
 }
 

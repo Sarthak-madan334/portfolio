@@ -11,21 +11,28 @@ export const projects = [
     description: "A voice-first mock interview coach that asks adaptive follow-ups, analyzes speech, and turns each answer into clear, actionable feedback.",
     highlights: ["Real-time voice interviews", "Adaptive follow-up questions", "Speech analysis & retry coaching"],
     tech: ["Next.js", "TypeScript", "FastAPI", "WebSockets", "Supabase"],
-    live: "https://grillr-eight.vercel.app", github: "https://github.com/Sarthak-madan334/Grillr", accent: "violet",
+    live: "https://grillr-eight.vercel.app", status: null, github: "https://github.com/Sarthak-madan334/Grillr", accent: "violet",
   },
   {
-    index: "02", title: "DEADLOCK", subtitle: "AI-powered failure intelligence",
+    index: "02", title: "MigrationY", subtitle: "Database migration rehearsal",
+    description: "Rehearse database migrations against seeded PostgreSQL data, then compare representative queries before and after to spot regressions early.",
+    highlights: ["Migration rehearsal workflow", "Seeded PostgreSQL test data", "Before-and-after query checks"],
+    tech: ["Next.js", "TypeScript", "Python", "FastAPI", "PostgreSQL", "Docker"],
+    live: null, status: "In development", github: "https://github.com/Sarthak-madan334/MigrationY", accent: "blue",
+  },
+  {
+    index: "03", title: "DEADLOCK", subtitle: "AI-powered failure intelligence",
     description: "A multi-agent platform that pressure-tests goals, surfaces hidden risks, and turns possible failure into a concrete recovery strategy.",
     highlights: ["5 expert-agent workflows", "Risk simulation & debate", "Actionable recovery plans"],
     tech: ["Next.js", "TypeScript", "Tailwind", "DeepSeek R1", "OpenRouter"],
-    live: "https://deadlock-alpha.vercel.app", github: "https://github.com/Sarthak-madan334/Deadlock", accent: "cyan",
+    live: "https://deadlock-alpha.vercel.app", status: null, github: "https://github.com/Sarthak-madan334/Deadlock", accent: "cyan",
   },
   {
-    index: "03", title: "NexStore", subtitle: "AI-powered e-commerce",
+    index: "04", title: "NexStore", subtitle: "AI-powered e-commerce",
     description: "A responsive shopping experience with product discovery, cart, wishlist, flash sales, and an AI assistant for useful recommendations.",
     highlights: ["AI shopping assistant", "Search, cart & wishlist", "Responsive storefront"],
     tech: ["React.js", "JavaScript", "Claude AI", "Vercel"],
-    live: "https://nexstore-dusky.vercel.app/", github: "https://github.com/Sarthak-madan334/nexstore", accent: "acid",
+    live: "https://nexstore-dusky.vercel.app/", status: null, github: "https://github.com/Sarthak-madan334/nexstore", accent: "acid",
   },
 ] as const;
 
