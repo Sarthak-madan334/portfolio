@@ -69,7 +69,7 @@ export function About() {
                 <CodeLine number="5"><span className="text-[#4C8DFF]">.ship</span><span className="text-white">()</span></CodeLine>
               </div>
             </div>
-            <div className="absolute -bottom-4 -right-4 flex items-center gap-2.5 rounded-[18px] border border-white/12 bg-[#171719]/90 px-5 py-3 text-sm font-medium leading-[1.15] text-white shadow-[0_10px_28px_rgba(0,0,0,.28)] backdrop-blur-2xl sm:-bottom-5 sm:-right-5 sm:px-5 sm:py-3.5 sm:text-base">
+            <div className="absolute -bottom-4 -right-4 flex items-center gap-2.5 rounded-[18px] border border-white/15 bg-white/[0.07] px-5 py-3 text-sm font-medium leading-[1.15] text-white shadow-[inset_0_1px_0_rgba(255,255,255,.12),0_10px_28px_rgba(0,0,0,.24)] backdrop-blur-xl sm:-bottom-5 sm:-right-5 sm:px-5 sm:py-3.5 sm:text-base">
               <span className="h-3 w-3 rounded-full bg-[#4C8DFF]" /><span>Building<br />in public.</span>
             </div>
           </div>
