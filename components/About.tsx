@@ -1,15 +1,14 @@
 import { ArrowUpRight, Box, Copy, Github, GraduationCap, Linkedin, Mail, Users, Zap } from "lucide-react";
 import type { ReactNode } from "react";
 import { Reveal } from "./Reveal";
-import { SectionHeading } from "./SectionHeading";
 import { AboutDotField } from "./AboutDotField";
 import { links } from "@/lib/data";
 
 const highlights = [
-  { icon: GraduationCap, title: "1st Year", text: <>Computer Science<br />at SRM University.</>, color: "bg-blue-500/10 text-blue-600 dark:bg-blue-400/15 dark:text-blue-300" },
-  { icon: Box, title: "Building", text: <>Full-stack products<br />and real projects.</>, color: "bg-emerald-500/10 text-emerald-600 dark:bg-emerald-400/15 dark:text-emerald-300" },
-  { icon: Zap, title: "Learning", text: <>DSA, systems &amp; modern<br />web engineering.</>, color: "bg-violet-500/10 text-violet-600 dark:bg-violet-400/15 dark:text-violet-300" },
-  { icon: Users, title: "Sharing", text: <>My journey<br />in public.</>, color: "bg-rose-500/10 text-rose-600 dark:bg-rose-400/15 dark:text-rose-300" },
+  { icon: GraduationCap, title: "1st Year", text: <>Computer Science<br />at SRM University.</>, color: "border-blue-400/30 bg-blue-500/15 text-blue-600 dark:border-blue-300/25 dark:bg-blue-400/20 dark:text-blue-300" },
+  { icon: Box, title: "Building", text: <>Full-stack products<br />and real projects.</>, color: "border-emerald-400/30 bg-emerald-500/15 text-emerald-600 dark:border-emerald-300/25 dark:bg-emerald-400/20 dark:text-emerald-300" },
+  { icon: Zap, title: "Learning", text: <>DSA, systems &amp; modern<br />web engineering.</>, color: "border-violet-400/30 bg-violet-500/15 text-violet-600 dark:border-violet-300/25 dark:bg-violet-400/20 dark:text-violet-300" },
+  { icon: Users, title: "Sharing", text: <>My journey<br />in public.</>, color: "border-rose-400/30 bg-rose-500/15 text-rose-600 dark:border-rose-300/25 dark:bg-rose-400/20 dark:text-rose-300" },
 ];
 
 const socialLinks = [
@@ -22,9 +21,15 @@ export function About() {
   return (
     <section id="about" className="section-pad relative overflow-hidden bg-white transition-colors duration-500 dark:bg-[#0b0c0f]">
       <div className="site-shell">
-        <SectionHeading number="01" eyebrow="About" title="Still learning. Already shipping." description="I’m a first-year Computer Science student at SRM University, developing strong foundations while shipping full-stack products in public." />
+        <div className="mb-12 grid gap-5 md:grid-cols-[1fr_0.8fr] md:items-start">
+          <div>
+            <p className="mb-5 flex items-center gap-3 text-sm font-medium tracking-[-0.01em] text-[#77777d] dark:text-white/50"><span className="grid h-7 min-w-7 place-items-center rounded-full bg-[#ececf0] px-2 text-[10px] font-bold text-[#55555b] dark:bg-white/[0.08] dark:text-white/60">01</span><span>About</span></p>
+            <h2 className="max-w-3xl text-3xl font-semibold leading-[1.04] tracking-[-0.05em] text-[#1d1d1f] dark:text-white sm:text-5xl">Still learning. Already shipping.</h2>
+          </div>
+          <p className="max-w-xl text-sm leading-7 text-[#6e6e73] dark:text-[#a8a8b2] md:mt-12 md:justify-self-end md:text-base">I’m a first-year Computer Science student at SRM University, developing strong foundations while shipping full-stack products in public.</p>
+        </div>
 
-        <Reveal className="relative isolate px-6 pb-7 pt-14 text-white sm:px-9 sm:pb-9 sm:pt-16 lg:min-h-[430px] lg:px-14 lg:pb-10 lg:pt-16">
+        <Reveal className="relative isolate pl-12 pr-0 pb-7 pt-14 text-white sm:pl-[60px] sm:pr-3 sm:pb-9 sm:pt-16 lg:min-h-[430px] lg:pl-[84px] lg:pr-7 lg:pb-10 lg:pt-16">
           <svg aria-hidden="true" viewBox="0 0 1200 500" preserveAspectRatio="none" className="pointer-events-none absolute inset-[-2.5%] z-0 h-[105%] w-[105%] overflow-visible">
             <defs>
               <linearGradient id="about-liquid-fill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#152337" /><stop offset=".48" stopColor="#101720" /><stop offset="1" stopColor="#10201f" /></linearGradient>
@@ -48,8 +53,8 @@ export function About() {
               Student <span className="text-white/35">•</span> Builder <span className="text-white/35">•</span> Always learning
             </div>
 
-            <h3 className="mt-5 max-w-[650px] text-[clamp(1.75rem,3.55vw,3.15rem)] font-medium leading-[1.08] tracking-[-0.05em] sm:mt-6">
-              I enjoy turning <span className="text-[#7ec9e8]">complicated problems</span> into products that feel <span className="text-[#74d8bf]">simple, fast, and genuinely useful.</span>
+            <h3 className="mt-5 max-w-[650px] text-[clamp(1.75rem,3.55vw,3.15rem)] font-medium leading-[1.08] tracking-[-0.04em] sm:mt-6">
+              I enjoy turning <span className="bg-gradient-to-r from-sky-300 via-cyan-300 to-emerald-300 bg-clip-text text-transparent">complicated problems</span> into products that feel <span className="bg-gradient-to-r from-sky-300 via-cyan-300 to-emerald-300 bg-clip-text text-transparent">simple, fast, and genuinely useful.</span>
             </h3>
 
             <p className="mt-6 max-w-2xl border-t border-white/12 pt-4 text-[13px] leading-6 text-slate-200/75 sm:mt-7 sm:pt-5 sm:text-sm sm:leading-6">
@@ -57,19 +62,19 @@ export function About() {
             </p>
 
             <div className="mt-5 flex flex-wrap items-center gap-2.5">
-              <a href="#contact" className="focus-ring inline-flex min-h-10 items-center gap-2.5 rounded-full bg-white px-5 text-[13px] font-semibold text-[#11151b] transition hover:bg-sky-50">Let’s connect <ArrowUpRight size={15} /></a>
-              {socialLinks.map(({ href, label, icon: Icon }) => <a key={label} href={href} target={href.startsWith("mailto:") ? undefined : "_blank"} rel={href.startsWith("mailto:") ? undefined : "noreferrer"} aria-label={label} className="focus-ring grid h-10 w-10 place-items-center rounded-xl border border-white/12 bg-white/[0.055] text-white/85 shadow-[inset_0_1px_0_rgba(255,255,255,.06)] backdrop-blur-lg transition hover:border-white/25 hover:bg-white/[0.1]"><Icon size={17} /></a>)}
+              <a href="#contact" className="focus-ring inline-flex min-h-10 items-center gap-2.5 rounded-full bg-gradient-to-r from-[#60bce8] to-[#65d2b4] px-5 text-[13px] font-semibold text-[#101820] shadow-[0_5px_18px_rgba(74,190,193,.18)] transition hover:from-[#78cbee] hover:to-[#77dfc4]">Let’s connect <ArrowUpRight size={15} /></a>
+              {socialLinks.map(({ href, label, icon: Icon }) => <a key={label} href={href} target={href.startsWith("mailto:") ? undefined : "_blank"} rel={href.startsWith("mailto:") ? undefined : "noreferrer"} aria-label={label} className="focus-ring grid h-10 w-10 place-items-center rounded-xl border border-white/12 bg-white/[0.055] text-white/85 shadow-[inset_0_1px_0_rgba(255,255,255,.06)] backdrop-blur-lg transition hover:border-white/25 hover:bg-white/[0.1] hover:text-white focus-visible:bg-white/[0.13] focus-visible:text-white"><Icon size={17} /></a>)}
             </div>
           </div>
 
-          <div aria-hidden="true" className="relative z-10 mt-8 lg:absolute lg:right-[8%] lg:top-1/2 lg:mt-0 lg:w-[32%] lg:-translate-y-1/2">
-            <div className="absolute -inset-4 rounded-[28px] bg-sky-400/[0.045] blur-2xl" />
-            <div className="relative overflow-hidden rounded-[22px] border border-white/12 bg-[#0e141c]/90 p-3 shadow-[0_18px_45px_rgba(0,0,0,.3)] backdrop-blur-xl sm:p-4">
-              <div className="flex items-center justify-between border-b border-white/[0.08] px-1 pb-3">
-                <div className="flex gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-[#e9827f]" /><span className="h-2.5 w-2.5 rounded-full bg-[#e9bd70]" /><span className="h-2.5 w-2.5 rounded-full bg-[#70c99a]" /></div>
-                <Copy size={15} className="text-slate-400" />
+          <div aria-hidden="true" className="relative z-10 mt-8 lg:absolute lg:right-[8%] lg:top-1/2 lg:mt-0 lg:w-[36%] lg:-translate-y-1/2">
+            <div className="absolute -inset-6 rounded-[34px] bg-cyan-400/[0.12] blur-2xl" />
+            <div className="relative overflow-hidden rounded-[25px] border border-[#75d7ee]/60 bg-gradient-to-br from-[#17232f]/95 via-[#101922]/95 to-[#0c151c]/95 p-5 shadow-[0_0_0_1px_rgba(83,190,216,.24),0_0_32px_rgba(50,166,201,.26),0_24px_52px_rgba(0,0,0,.36)] backdrop-blur-xl sm:rounded-[28px] sm:p-6 -rotate-[2.5deg] sm:-rotate-[3deg]">
+              <div className="flex items-center justify-between border-b border-white/[0.09] px-1 pb-6">
+                <div className="flex gap-2"><span className="h-3.5 w-3.5 rounded-full bg-[#f16f70] shadow-[0_0_10px_rgba(241,111,112,.2)] sm:h-4 sm:w-4" /><span className="h-3.5 w-3.5 rounded-full bg-[#f0bd61] shadow-[0_0_10px_rgba(240,189,97,.18)] sm:h-4 sm:w-4" /><span className="h-3.5 w-3.5 rounded-full bg-[#34cf91] shadow-[0_0_10px_rgba(52,207,145,.2)] sm:h-4 sm:w-4" /></div>
+                <Copy size={19} className="text-slate-300 sm:h-5 sm:w-5" />
               </div>
-              <div className="mt-2.5 rounded-[15px] bg-[#090e14]/80 px-3 py-3 font-mono text-[10px] leading-[1.9] text-slate-300 sm:px-3.5 sm:py-4 sm:text-xs">
+              <div className="mt-5 rounded-[19px] bg-[#090e14]/90 px-4 py-10 font-mono text-[15px] leading-[2.1] text-slate-300 shadow-[inset_0_1px_0_rgba(255,255,255,.035)] sm:px-5 sm:py-11 sm:text-base">
                 <CodeLine number="1"><span className="text-cyan-300">ideas</span><span className="text-white">(</span></CodeLine>
                 <CodeLine number="2"><span className="pl-3 text-slate-300">complicated_problems</span></CodeLine>
                 <CodeLine number="3"><span className="text-white">)</span></CodeLine>
@@ -77,15 +82,15 @@ export function About() {
                 <CodeLine number="5"><span className="text-emerald-300">.ship</span><span className="text-white">()</span></CodeLine>
               </div>
             </div>
-            <div className="absolute -bottom-4 right-0 flex items-center gap-2.5 rounded-xl border border-white/12 bg-[#141e22]/95 px-3 py-2.5 text-xs font-medium leading-4 text-white shadow-[0_10px_25px_rgba(0,0,0,.24)] backdrop-blur-xl sm:-right-5 sm:px-3.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,.65)]" /><span>Building<br />in public.</span>
+            <div className="absolute -bottom-4 -right-4 flex items-center gap-4 rounded-[22px] border border-emerald-200/45 bg-[#102625]/95 px-9 py-6 text-xl font-medium leading-[1.15] text-white shadow-[0_16px_36px_rgba(0,0,0,.4),0_0_28px_rgba(45,220,190,.2)] backdrop-blur-xl sm:-bottom-6 sm:-right-6 sm:px-9 sm:py-7 sm:text-2xl">
+              <span className="h-4 w-4 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,.8)]" /><span>Building<br />in public.</span>
             </div>
           </div>
         </Reveal>
 
         <div className="mt-6 grid grid-cols-2 md:grid-cols-4">
           {highlights.map(({ icon: Icon, title, text, color }, index) => <div key={title} className={`relative px-4 py-4 sm:px-6 sm:py-5 lg:px-7 ${index % 2 === 1 ? "border-l border-[#e1e4eb] dark:border-white/10 md:border-l-0" : ""} ${index > 1 ? "border-t border-[#e1e4eb] dark:border-white/10 md:border-t-0" : ""} ${index > 0 ? "md:border-l md:border-[#e1e4eb] md:dark:border-white/10" : ""}`}>
-            <span className={`grid h-11 w-11 place-items-center rounded-2xl ${color}`}><Icon size={23} strokeWidth={2} /></span>
+            <span className={`grid h-11 w-11 place-items-center rounded-2xl border ${color}`}><Icon size={23} strokeWidth={2} /></span>
             <h4 className="mt-3 text-lg font-semibold tracking-[-0.035em] text-[#11131a] dark:text-white sm:text-xl">{title}</h4>
             <p className="mt-1 text-[13px] leading-5 text-[#5e6677] dark:text-white/60 sm:text-sm sm:leading-5">{text}</p>
           </div>)}
