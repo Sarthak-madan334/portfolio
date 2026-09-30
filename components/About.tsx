@@ -47,7 +47,7 @@ export function About() {
           </svg>
           <ContactStarfield motion="sway" density={0.7} opacity={0.65} palette="about" />
 
-          <div className="relative z-10 lg:max-w-[54%]">
+          <div className="relative z-10 lg:max-w-[54%] lg:-translate-y-5">
             <div className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.045] px-3.5 py-2 text-xs font-medium text-white/85 shadow-[inset_0_1px_0_rgba(255,255,255,.06)] backdrop-blur-xl sm:text-[13px]">
               <span className="relative grid h-2.5 w-2.5 place-items-center"><span className="absolute h-2.5 w-2.5 animate-ping rounded-full bg-emerald-400/35" /><span className="relative h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_9px_rgba(52,211,153,.65)]" /></span>
               Student <span className="text-white/35">•</span> Builder <span className="text-white/35">•</span> Always learning
