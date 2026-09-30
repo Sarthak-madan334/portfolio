@@ -74,7 +74,7 @@ export function About() {
                 <div className="flex gap-2"><span className="h-3.5 w-3.5 rounded-full bg-[#f16f70] shadow-[0_0_10px_rgba(241,111,112,.2)] sm:h-4 sm:w-4" /><span className="h-3.5 w-3.5 rounded-full bg-[#f0bd61] shadow-[0_0_10px_rgba(240,189,97,.18)] sm:h-4 sm:w-4" /><span className="h-3.5 w-3.5 rounded-full bg-[#34cf91] shadow-[0_0_10px_rgba(52,207,145,.2)] sm:h-4 sm:w-4" /></div>
                 <Copy size={19} className="text-slate-300 sm:h-5 sm:w-5" />
               </div>
-              <div className="mt-4 rounded-[19px] bg-[#090e14]/90 px-3.5 py-8 font-mono text-[14px] leading-[2.05] text-slate-300 shadow-[inset_0_1px_0_rgba(255,255,255,.035)] sm:px-4 sm:py-9 sm:text-[15px]">
+              <div className="mt-4 rounded-[19px] bg-[#111820]/90 px-3.5 py-8 font-mono text-[14px] leading-[2.05] text-slate-300 shadow-[inset_0_1px_0_rgba(255,255,255,.035)] sm:px-4 sm:py-9 sm:text-[15px]">
                 <CodeLine number="1"><span className="text-cyan-300">ideas</span><span className="text-white">(</span></CodeLine>
                 <CodeLine number="2"><span className="pl-3 text-slate-300">complicated_problems</span></CodeLine>
                 <CodeLine number="3"><span className="text-white">)</span></CodeLine>
