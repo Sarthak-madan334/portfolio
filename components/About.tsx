@@ -5,10 +5,10 @@ import { ContactStarfield } from "./ContactStarfield";
 import { links } from "@/lib/data";
 
 const highlights = [
-  { icon: GraduationCap, title: "1st Year", text: <>Computer Science<br />at SRM University.</>, color: "border-blue-400/30 bg-blue-500/15 text-blue-600 dark:border-blue-300/25 dark:bg-blue-400/20 dark:text-blue-300" },
-  { icon: Box, title: "Building", text: <>Full-stack products<br />and real projects.</>, color: "border-emerald-400/30 bg-emerald-500/15 text-emerald-600 dark:border-emerald-300/25 dark:bg-emerald-400/20 dark:text-emerald-300" },
-  { icon: Zap, title: "Learning", text: <>DSA, systems &amp; modern<br />web engineering.</>, color: "border-violet-400/30 bg-violet-500/15 text-violet-600 dark:border-violet-300/25 dark:bg-violet-400/20 dark:text-violet-300" },
-  { icon: Users, title: "Sharing", text: <>My journey<br />in public.</>, color: "border-rose-400/30 bg-rose-500/15 text-rose-600 dark:border-rose-300/25 dark:bg-rose-400/20 dark:text-rose-300" },
+  { icon: GraduationCap, title: "1st Year", text: <>Computer Science<br />at SRM University.</>, color: "border-[#4C8DFF]/25 bg-[#4C8DFF]/10 text-[#4C8DFF] dark:border-[#4C8DFF]/30 dark:bg-[#4C8DFF]/15 dark:text-[#4C8DFF]" },
+  { icon: Box, title: "Building", text: <>Full-stack products<br />and real projects.</>, color: "border-[#4C8DFF]/25 bg-[#4C8DFF]/10 text-[#4C8DFF] dark:border-[#4C8DFF]/30 dark:bg-[#4C8DFF]/15 dark:text-[#4C8DFF]" },
+  { icon: Zap, title: "Learning", text: <>DSA, systems &amp; modern<br />web engineering.</>, color: "border-[#4C8DFF]/25 bg-[#4C8DFF]/10 text-[#4C8DFF] dark:border-[#4C8DFF]/30 dark:bg-[#4C8DFF]/15 dark:text-[#4C8DFF]" },
+  { icon: Users, title: "Sharing", text: <>My journey<br />in public.</>, color: "border-[#4C8DFF]/25 bg-[#4C8DFF]/10 text-[#4C8DFF] dark:border-[#4C8DFF]/30 dark:bg-[#4C8DFF]/15 dark:text-[#4C8DFF]" },
 ];
 
 const socialLinks = [
@@ -19,7 +19,7 @@ const socialLinks = [
 
 export function About() {
   return (
-    <section id="about" className="section-pad relative overflow-hidden bg-white transition-colors duration-500 dark:bg-[#0b0c0f]">
+    <section id="about" className="section-pad relative overflow-hidden bg-white transition-colors duration-500 dark:bg-[#0B0B0D]">
       <div className="site-shell">
         <div className="mb-12 grid gap-5 md:grid-cols-[1fr_0.8fr] md:items-start">
           <div>
@@ -31,30 +31,18 @@ export function About() {
 
         <Reveal className="relative isolate pl-12 pr-0 pb-7 pt-14 text-white sm:pl-[60px] sm:pr-3 sm:pb-9 sm:pt-16 lg:min-h-[430px] lg:pl-[84px] lg:pr-7 lg:pb-10 lg:pt-16">
           <svg aria-hidden="true" viewBox="0 0 1200 500" preserveAspectRatio="none" className="pointer-events-none absolute inset-[-2.5%] z-0 h-[105%] w-[105%] overflow-visible">
-            <defs>
-              <linearGradient id="about-liquid-fill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#152337" /><stop offset=".48" stopColor="#101720" /><stop offset="1" stopColor="#10201f" /></linearGradient>
-              <linearGradient id="about-liquid-edge" x1="0" y1="0" x2="1" y2=".45"><stop offset="0" stopColor="#8dc9ff" stopOpacity=".6" /><stop offset=".52" stopColor="#5a8cae" stopOpacity=".14" /><stop offset="1" stopColor="#75e2d0" stopOpacity=".54" /></linearGradient>
-              <radialGradient id="about-liquid-blue"><stop stopColor="#3983c4" stopOpacity=".18" /><stop offset="1" stopColor="#3983c4" stopOpacity="0" /></radialGradient>
-              <radialGradient id="about-liquid-teal"><stop stopColor="#36bb9e" stopOpacity=".14" /><stop offset="1" stopColor="#36bb9e" stopOpacity="0" /></radialGradient>
-              <filter id="about-liquid-glow" x="-12%" y="-18%" width="124%" height="136%"><feGaussianBlur stdDeviation="12" /></filter>
-            </defs>
-            <path d="M 82 42 C 139 8 210 32 298 36 C 390 41 463 19 553 28 C 648 38 719 54 810 57 C 905 37 971 16 1048 43 C 1115 66 1131 109 1139 167 C 1148 226 1168 267 1151 329 C 1137 382 1116 423 1062 438 C 1007 454 941 425 859 431 C 761 438 706 464 616 462 C 526 440 469 478 376 457 C 283 437 218 482 141 457 C 69 470 59 460 51 390 C 43 300 28 230 39 157 C 48 87 39 58 82 42 Z" fill="none" stroke="#62bdf3" strokeOpacity=".16" strokeWidth="12" filter="url(#about-liquid-glow)" />
-            <path d="M 82 42 C 139 8 210 32 298 36 C 390 41 463 19 553 28 C 648 38 719 54 810 57 C 905 37 971 16 1048 43 C 1115 66 1131 109 1139 167 C 1148 226 1168 267 1151 329 C 1137 382 1116 423 1062 438 C 1007 454 941 425 859 431 C 761 438 706 464 616 462 C 526 440 469 478 376 457 C 283 437 218 482 141 457 C 69 470 59 460 51 390 C 43 300 28 230 39 157 C 48 87 39 58 82 42 Z" fill="url(#about-liquid-fill)" stroke="url(#about-liquid-edge)" strokeWidth="1.8" />
-            <ellipse cx="180" cy="110" rx="330" ry="220" fill="url(#about-liquid-blue)" opacity=".58" />
-            <ellipse cx="1080" cy="410" rx="280" ry="240" fill="url(#about-liquid-teal)" opacity=".54" />
-            <path d="M 650 390 C 800 380 838 233 974 174 C 1040 145 1097 151 1142 188" fill="none" stroke="#63c6ec" strokeOpacity=".28" strokeWidth="1.4" />
-            <path d="M 760 430 C 861 378 894 321 1022 308 C 1081 302 1115 326 1150 354" fill="none" stroke="#67d4c2" strokeOpacity=".19" strokeWidth="1.1" />
+            <path d="M 82 42 C 139 8 210 32 298 36 C 390 41 463 19 553 28 C 648 38 719 54 810 57 C 905 37 971 16 1048 43 C 1115 66 1131 109 1139 167 C 1148 226 1168 267 1151 329 C 1137 382 1116 423 1062 438 C 1007 454 941 425 859 431 C 761 438 706 464 616 462 C 526 440 469 478 376 457 C 283 437 218 482 141 457 C 69 470 59 460 51 390 C 43 300 28 230 39 157 C 48 87 39 58 82 42 Z" fill="#121214" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
           </svg>
           <ContactStarfield motion="sway" density={0.7} opacity={0.65} palette="about" />
 
           <div className="relative z-10 lg:max-w-[54%] lg:-translate-y-5">
             <div className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.045] px-3.5 py-2 text-xs font-medium text-white/85 shadow-[inset_0_1px_0_rgba(255,255,255,.06)] backdrop-blur-xl sm:text-[13px]">
-              <span className="relative grid h-2.5 w-2.5 place-items-center"><span className="absolute h-2.5 w-2.5 animate-ping rounded-full bg-emerald-400/35" /><span className="relative h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_9px_rgba(52,211,153,.65)]" /></span>
+              <span className="relative grid h-2.5 w-2.5 place-items-center"><span className="absolute h-2.5 w-2.5 animate-ping rounded-full bg-[#4C8DFF]/30" /><span className="relative h-2 w-2 rounded-full bg-[#4C8DFF]" /></span>
               Student <span className="text-white/35">•</span> Builder <span className="text-white/35">•</span> Always learning
             </div>
 
             <h3 className="mt-5 max-w-[650px] text-[clamp(1.75rem,3.55vw,3.15rem)] font-medium leading-[1.08] tracking-[-0.04em] sm:mt-6">
-              I enjoy turning <span className="bg-gradient-to-r from-sky-300 via-cyan-300 to-emerald-300 bg-clip-text text-transparent">complicated problems</span> into products that feel <span className="bg-gradient-to-r from-sky-300 via-cyan-300 to-emerald-300 bg-clip-text text-transparent">simple, fast, and genuinely useful.</span>
+              I enjoy turning <span className="text-[#4C8DFF]">complicated problems</span> into products that feel <span className="text-[#4C8DFF]">simple, fast, and genuinely useful.</span>
             </h3>
 
             <p className="mt-6 max-w-2xl border-t border-white/12 pt-4 text-[13px] leading-6 text-slate-100/85 sm:mt-7 sm:pt-5 sm:text-sm sm:leading-6">
@@ -62,28 +50,27 @@ export function About() {
             </p>
 
             <div className="mt-5 flex flex-wrap items-center gap-2.5">
-              <a href="#contact" className="focus-ring inline-flex min-h-10 items-center gap-2.5 rounded-full bg-gradient-to-r from-[#60bce8] to-[#65d2b4] px-5 text-[13px] font-semibold text-[#101820] shadow-[0_5px_18px_rgba(74,190,193,.18)] transition hover:from-[#78cbee] hover:to-[#77dfc4]">Let’s connect <ArrowUpRight size={15} /></a>
+              <a href="#contact" className="focus-ring inline-flex min-h-10 items-center gap-2.5 rounded-full bg-[#4C8DFF] px-5 text-[13px] font-semibold text-[#0B0B0D] shadow-[0_5px_18px_rgba(76,141,255,.16)] transition hover:bg-[#5D99FF]">Let’s connect <ArrowUpRight size={15} /></a>
               {socialLinks.map(({ href, label, icon: Icon }) => <a key={label} href={href} target={href.startsWith("mailto:") ? undefined : "_blank"} rel={href.startsWith("mailto:") ? undefined : "noreferrer"} aria-label={label} className="focus-ring grid h-10 w-10 place-items-center rounded-xl border border-white/12 bg-white/[0.055] text-white/85 shadow-[inset_0_1px_0_rgba(255,255,255,.06)] backdrop-blur-lg transition hover:border-white/25 hover:bg-white/[0.1] hover:text-white focus-visible:bg-white/[0.13] focus-visible:text-white"><Icon size={17} /></a>)}
             </div>
           </div>
 
           <div aria-hidden="true" className="relative z-10 mt-10 lg:absolute lg:right-[5%] lg:top-1/2 lg:mt-0 lg:w-[32%] lg:-translate-y-1/2">
-            <div className="absolute -inset-5 rounded-[34px] bg-cyan-400/[0.08] blur-2xl" />
-            <div className="relative overflow-hidden rounded-[25px] border border-[#75d7ee]/45 bg-gradient-to-br from-[#17232f]/95 via-[#101922]/95 to-[#0c151c]/95 p-4 shadow-[0_0_0_1px_rgba(83,190,216,.18),0_0_24px_rgba(50,166,201,.18),0_24px_52px_rgba(0,0,0,.36)] backdrop-blur-xl sm:rounded-[28px] sm:p-5 -rotate-[2.5deg] sm:-rotate-[3deg]">
+            <div className="relative overflow-hidden rounded-[25px] border border-white/10 bg-[#151517] p-4 shadow-[0_18px_44px_rgba(0,0,0,.28)] sm:rounded-[28px] sm:p-5 -rotate-[2.5deg] sm:-rotate-[3deg]">
               <div className="flex items-center justify-between border-b border-white/[0.09] px-1 pb-6">
-                <div className="flex gap-2"><span className="h-3.5 w-3.5 rounded-full bg-[#f16f70] shadow-[0_0_10px_rgba(241,111,112,.2)] sm:h-4 sm:w-4" /><span className="h-3.5 w-3.5 rounded-full bg-[#f0bd61] shadow-[0_0_10px_rgba(240,189,97,.18)] sm:h-4 sm:w-4" /><span className="h-3.5 w-3.5 rounded-full bg-[#34cf91] shadow-[0_0_10px_rgba(52,207,145,.2)] sm:h-4 sm:w-4" /></div>
+                <div className="flex gap-2"><span className="h-3.5 w-3.5 rounded-full bg-white/70 sm:h-4 sm:w-4" /><span className="h-3.5 w-3.5 rounded-full bg-white/40 sm:h-4 sm:w-4" /><span className="h-3.5 w-3.5 rounded-full bg-white/20 sm:h-4 sm:w-4" /></div>
                 <Copy size={19} className="text-slate-300 sm:h-5 sm:w-5" />
               </div>
-              <div className="mt-4 rounded-[19px] bg-[#111820]/90 px-3.5 py-8 font-mono text-[14px] leading-[2.05] text-slate-300 shadow-[inset_0_1px_0_rgba(255,255,255,.035)] sm:px-4 sm:py-9 sm:text-[15px]">
-                <CodeLine number="1"><span className="text-cyan-300">ideas</span><span className="text-white">(</span></CodeLine>
+              <div className="mt-4 rounded-[19px] bg-[#1C1C1F] px-3.5 py-8 font-mono text-[14px] leading-[2.05] text-slate-300 shadow-[inset_0_1px_0_rgba(255,255,255,.035)] sm:px-4 sm:py-9 sm:text-[15px]">
+                <CodeLine number="1"><span className="text-[#4C8DFF]">ideas</span><span className="text-white">(</span></CodeLine>
                 <CodeLine number="2"><span className="pl-3 text-slate-300">complicated_problems</span></CodeLine>
                 <CodeLine number="3"><span className="text-white">)</span></CodeLine>
-                <CodeLine number="4"><span className="text-amber-300">.map</span><span className="text-white">(</span><span className="text-violet-300">to_simple_solutions</span><span className="text-white">)</span></CodeLine>
-                <CodeLine number="5"><span className="text-emerald-300">.ship</span><span className="text-white">()</span></CodeLine>
+                <CodeLine number="4"><span className="text-[#4C8DFF]">.map</span><span className="text-white">(</span><span className="text-[#4C8DFF]">to_simple_solutions</span><span className="text-white">)</span></CodeLine>
+                <CodeLine number="5"><span className="text-[#4C8DFF]">.ship</span><span className="text-white">()</span></CodeLine>
               </div>
             </div>
-            <div className="absolute -bottom-4 -right-4 flex items-center gap-2.5 rounded-[18px] border border-emerald-100/35 bg-gradient-to-br from-white/[0.15] via-[#12312f]/45 to-[#0d2224]/45 px-5 py-3 text-sm font-medium leading-[1.15] text-white shadow-[inset_0_1px_0_rgba(255,255,255,.2),0_10px_28px_rgba(0,0,0,.28),0_0_20px_rgba(45,220,190,.12)] backdrop-blur-2xl sm:-bottom-5 sm:-right-5 sm:px-5 sm:py-3.5 sm:text-base">
-              <span className="h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,.75)]" /><span>Building<br />in public.</span>
+            <div className="absolute -bottom-4 -right-4 flex items-center gap-2.5 rounded-[18px] border border-white/12 bg-[#171719]/90 px-5 py-3 text-sm font-medium leading-[1.15] text-white shadow-[0_10px_28px_rgba(0,0,0,.28)] backdrop-blur-2xl sm:-bottom-5 sm:-right-5 sm:px-5 sm:py-3.5 sm:text-base">
+              <span className="h-3 w-3 rounded-full bg-[#4C8DFF]" /><span>Building<br />in public.</span>
             </div>
           </div>
         </Reveal>

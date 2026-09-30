@@ -115,12 +115,14 @@ export function ContactStarfield({
       const centerY = height / 2;
       const driftX = motion === "sway" && !reducedMotion ? Math.sin(time / 6500) * 18 : 0;
       const influenceRadius = Math.min(150, Math.max(88, Math.min(width, height) * 0.23));
-      const halo = context.createRadialGradient(pointerX, pointerY, 0, pointerX, pointerY, influenceRadius);
-      halo.addColorStop(0, lightMode ? "rgba(54, 104, 184, 0.13)" : "rgba(10, 93, 105, 0.11)");
-      halo.addColorStop(0.68, lightMode ? "rgba(107, 119, 171, 0.045)" : "rgba(3, 39, 48, 0.045)");
-      halo.addColorStop(1, lightMode ? "rgba(231, 235, 242, 0)" : "rgba(3, 8, 11, 0)");
-      context.fillStyle = halo;
-      context.fillRect(0, 0, width, height);
+      if (palette !== "about") {
+        const halo = context.createRadialGradient(pointerX, pointerY, 0, pointerX, pointerY, influenceRadius);
+        halo.addColorStop(0, lightMode ? "rgba(54, 104, 184, 0.13)" : "rgba(10, 93, 105, 0.11)");
+        halo.addColorStop(0.68, lightMode ? "rgba(107, 119, 171, 0.045)" : "rgba(3, 39, 48, 0.045)");
+        halo.addColorStop(1, lightMode ? "rgba(231, 235, 242, 0)" : "rgba(3, 8, 11, 0)");
+        context.fillStyle = halo;
+        context.fillRect(0, 0, width, height);
+      }
 
       const renderedStarCount = stars.length;
       for (let index = 0; index < renderedStarCount; index += 1) {
@@ -162,7 +164,7 @@ export function ContactStarfield({
         const alpha = star.alpha * opacity * visibility;
         const lightColor = `hsla(${star.hue === 42 ? 39 : star.hue === 190 ? 190 : 212}, ${star.hue === 42 ? 72 : 70}%, ${star.hue === 42 ? 51 : star.hue === 190 ? 42 : 48}%, ${alpha * (star.highlight ? 0.86 : 0.62)})`;
         context.fillStyle = palette === "about"
-          ? star.hue === 190 ? `rgba(104, 218, 194, ${alpha})` : `rgba(255, 255, 255, ${alpha})`
+          ? star.hue === 190 ? `rgba(76, 141, 255, ${alpha})` : `rgba(255, 255, 255, ${alpha})`
           : lightMode ? lightColor : `hsla(${star.hue}, 88%, 78%, ${alpha})`;
         context.shadowColor = palette !== "about" && lightMode && star.highlight ? lightColor : "transparent";
         context.shadowBlur = palette !== "about" && lightMode && star.highlight ? 5 : 0;
