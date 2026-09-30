@@ -24,8 +24,8 @@ export function About() {
       <div className="site-shell">
         <SectionHeading number="01" eyebrow="About" title="Still learning. Already shipping." description="I’m a first-year Computer Science student at SRM University, developing strong foundations while shipping full-stack products in public." />
 
-        <Reveal className="relative isolate px-6 py-7 text-white sm:px-9 sm:py-9 lg:min-h-[430px] lg:px-14 lg:py-10">
-          <svg aria-hidden="true" viewBox="0 0 1200 480" preserveAspectRatio="none" className="pointer-events-none absolute inset-[-2.5%] z-0 h-[105%] w-[105%] overflow-visible">
+        <Reveal className="relative isolate px-6 pb-7 pt-14 text-white sm:px-9 sm:pb-9 sm:pt-16 lg:min-h-[430px] lg:px-14 lg:pb-10 lg:pt-16">
+          <svg aria-hidden="true" viewBox="0 0 1200 500" preserveAspectRatio="none" className="pointer-events-none absolute inset-[-2.5%] z-0 h-[105%] w-[105%] overflow-visible">
             <defs>
               <linearGradient id="about-liquid-fill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#152337" /><stop offset=".48" stopColor="#101720" /><stop offset="1" stopColor="#10201f" /></linearGradient>
               <linearGradient id="about-liquid-edge" x1="0" y1="0" x2="1" y2=".45"><stop offset="0" stopColor="#8dc9ff" stopOpacity=".74" /><stop offset=".52" stopColor="#5a8cae" stopOpacity=".18" /><stop offset="1" stopColor="#75e2d0" stopOpacity=".68" /></linearGradient>
@@ -33,8 +33,8 @@ export function About() {
               <radialGradient id="about-liquid-teal"><stop stopColor="#36bb9e" stopOpacity=".2" /><stop offset="1" stopColor="#36bb9e" stopOpacity="0" /></radialGradient>
               <filter id="about-liquid-glow" x="-12%" y="-18%" width="124%" height="136%"><feGaussianBlur stdDeviation="12" /></filter>
             </defs>
-            <path d="M 82 66 C 139 30 210 54 298 58 C 390 63 463 41 553 50 C 648 60 719 76 810 57 C 905 37 971 16 1048 43 C 1115 66 1131 109 1139 167 C 1148 226 1168 267 1151 329 C 1137 382 1116 423 1062 438 C 1007 454 941 425 859 431 C 761 438 706 454 616 432 C 526 410 469 448 376 427 C 283 407 218 452 141 427 C 69 404 59 359 51 306 C 43 249 28 211 39 157 C 48 111 39 90 82 66 Z" fill="none" stroke="#62bdf3" strokeOpacity=".45" strokeWidth="20" filter="url(#about-liquid-glow)" />
-            <path d="M 82 66 C 139 30 210 54 298 58 C 390 63 463 41 553 50 C 648 60 719 76 810 57 C 905 37 971 16 1048 43 C 1115 66 1131 109 1139 167 C 1148 226 1168 267 1151 329 C 1137 382 1116 423 1062 438 C 1007 454 941 425 859 431 C 761 438 706 454 616 432 C 526 410 469 448 376 427 C 283 407 218 452 141 427 C 69 404 59 359 51 306 C 43 249 28 211 39 157 C 48 111 39 90 82 66 Z" fill="url(#about-liquid-fill)" stroke="url(#about-liquid-edge)" strokeWidth="1.8" />
+            <path d="M 82 42 C 139 8 210 32 298 36 C 390 41 463 19 553 28 C 648 38 719 54 810 57 C 905 37 971 16 1048 43 C 1115 66 1131 109 1139 167 C 1148 226 1168 267 1151 329 C 1137 382 1116 423 1062 438 C 1007 454 941 425 859 431 C 761 438 706 464 616 462 C 526 440 469 478 376 457 C 283 437 218 482 141 457 C 69 470 59 460 51 390 C 43 300 28 230 39 157 C 48 87 39 58 82 42 Z" fill="none" stroke="#62bdf3" strokeOpacity=".45" strokeWidth="20" filter="url(#about-liquid-glow)" />
+            <path d="M 82 42 C 139 8 210 32 298 36 C 390 41 463 19 553 28 C 648 38 719 54 810 57 C 905 37 971 16 1048 43 C 1115 66 1131 109 1139 167 C 1148 226 1168 267 1151 329 C 1137 382 1116 423 1062 438 C 1007 454 941 425 859 431 C 761 438 706 464 616 462 C 526 440 469 478 376 457 C 283 437 218 482 141 457 C 69 470 59 460 51 390 C 43 300 28 230 39 157 C 48 87 39 58 82 42 Z" fill="url(#about-liquid-fill)" stroke="url(#about-liquid-edge)" strokeWidth="1.8" />
             <ellipse cx="180" cy="110" rx="330" ry="220" fill="url(#about-liquid-blue)" />
             <ellipse cx="1080" cy="410" rx="280" ry="240" fill="url(#about-liquid-teal)" />
             <path d="M 650 390 C 800 380 838 233 974 174 C 1040 145 1097 151 1142 188" fill="none" stroke="#63c6ec" strokeOpacity=".28" strokeWidth="1.4" />
