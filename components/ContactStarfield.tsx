@@ -54,6 +54,9 @@ export function ContactStarfield({
     let pointer = { x: 0.5, y: 0.5 };
     let target = pointer;
     let lightMode = !document.documentElement.classList.contains("dark");
+    const aboutBlobPath = palette === "about"
+      ? new Path2D("M 82 42 C 139 8 210 32 298 36 C 390 41 463 19 553 28 C 648 38 719 54 810 57 C 905 37 971 16 1048 43 C 1115 66 1131 109 1139 167 C 1148 226 1168 267 1151 329 C 1137 382 1116 423 1062 438 C 1007 454 941 425 859 431 C 761 438 706 464 616 462 C 526 440 469 478 376 457 C 283 437 218 482 141 457 C 69 470 59 460 51 390 C 43 300 28 230 39 157 C 48 87 39 58 82 42 Z")
+      : null;
     const starCount = Math.round((particleCount ?? (window.innerWidth < 640 ? 1700 : 3600)) * density);
     const startTime = performance.now();
     const stars: Star[] = Array.from({ length: starCount }, () => {
@@ -93,6 +96,14 @@ export function ContactStarfield({
     const draw = () => {
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
       context.clearRect(0, 0, width, height);
+      const clipToAboutBlob = palette === "about" && lightMode && aboutBlobPath;
+      if (clipToAboutBlob) {
+        context.save();
+        context.translate(-width * 0.025, -height * 0.025);
+        context.scale((width * 1.05) / 1200, (height * 1.05) / 500);
+        context.clip(aboutBlobPath);
+        context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      }
 
       const pointerX = pointer.x * width;
       const pointerY = pointer.y * height;
@@ -158,6 +169,7 @@ export function ContactStarfield({
         context.fill();
         context.shadowBlur = 0;
       }
+      if (clipToAboutBlob) context.restore();
     };
 
     const move = (event: PointerEvent) => {
