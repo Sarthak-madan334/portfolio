@@ -33,15 +33,15 @@ export function About() {
           <svg aria-hidden="true" viewBox="0 0 1200 500" preserveAspectRatio="none" className="pointer-events-none absolute inset-[-2.5%] z-0 h-[105%] w-[105%] overflow-visible">
             <defs>
               <linearGradient id="about-liquid-fill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#152337" /><stop offset=".48" stopColor="#101720" /><stop offset="1" stopColor="#10201f" /></linearGradient>
-              <linearGradient id="about-liquid-edge" x1="0" y1="0" x2="1" y2=".45"><stop offset="0" stopColor="#8dc9ff" stopOpacity=".74" /><stop offset=".52" stopColor="#5a8cae" stopOpacity=".18" /><stop offset="1" stopColor="#75e2d0" stopOpacity=".68" /></linearGradient>
-              <radialGradient id="about-liquid-blue"><stop stopColor="#3983c4" stopOpacity=".25" /><stop offset="1" stopColor="#3983c4" stopOpacity="0" /></radialGradient>
-              <radialGradient id="about-liquid-teal"><stop stopColor="#36bb9e" stopOpacity=".2" /><stop offset="1" stopColor="#36bb9e" stopOpacity="0" /></radialGradient>
+              <linearGradient id="about-liquid-edge" x1="0" y1="0" x2="1" y2=".45"><stop offset="0" stopColor="#8dc9ff" stopOpacity=".6" /><stop offset=".52" stopColor="#5a8cae" stopOpacity=".14" /><stop offset="1" stopColor="#75e2d0" stopOpacity=".54" /></linearGradient>
+              <radialGradient id="about-liquid-blue"><stop stopColor="#3983c4" stopOpacity=".18" /><stop offset="1" stopColor="#3983c4" stopOpacity="0" /></radialGradient>
+              <radialGradient id="about-liquid-teal"><stop stopColor="#36bb9e" stopOpacity=".14" /><stop offset="1" stopColor="#36bb9e" stopOpacity="0" /></radialGradient>
               <filter id="about-liquid-glow" x="-12%" y="-18%" width="124%" height="136%"><feGaussianBlur stdDeviation="12" /></filter>
             </defs>
-            <path d="M 82 42 C 139 8 210 32 298 36 C 390 41 463 19 553 28 C 648 38 719 54 810 57 C 905 37 971 16 1048 43 C 1115 66 1131 109 1139 167 C 1148 226 1168 267 1151 329 C 1137 382 1116 423 1062 438 C 1007 454 941 425 859 431 C 761 438 706 464 616 462 C 526 440 469 478 376 457 C 283 437 218 482 141 457 C 69 470 59 460 51 390 C 43 300 28 230 39 157 C 48 87 39 58 82 42 Z" fill="none" stroke="#62bdf3" strokeOpacity=".28" strokeWidth="16" filter="url(#about-liquid-glow)" />
+            <path d="M 82 42 C 139 8 210 32 298 36 C 390 41 463 19 553 28 C 648 38 719 54 810 57 C 905 37 971 16 1048 43 C 1115 66 1131 109 1139 167 C 1148 226 1168 267 1151 329 C 1137 382 1116 423 1062 438 C 1007 454 941 425 859 431 C 761 438 706 464 616 462 C 526 440 469 478 376 457 C 283 437 218 482 141 457 C 69 470 59 460 51 390 C 43 300 28 230 39 157 C 48 87 39 58 82 42 Z" fill="none" stroke="#62bdf3" strokeOpacity=".16" strokeWidth="12" filter="url(#about-liquid-glow)" />
             <path d="M 82 42 C 139 8 210 32 298 36 C 390 41 463 19 553 28 C 648 38 719 54 810 57 C 905 37 971 16 1048 43 C 1115 66 1131 109 1139 167 C 1148 226 1168 267 1151 329 C 1137 382 1116 423 1062 438 C 1007 454 941 425 859 431 C 761 438 706 464 616 462 C 526 440 469 478 376 457 C 283 437 218 482 141 457 C 69 470 59 460 51 390 C 43 300 28 230 39 157 C 48 87 39 58 82 42 Z" fill="url(#about-liquid-fill)" stroke="url(#about-liquid-edge)" strokeWidth="1.8" />
-            <ellipse cx="180" cy="110" rx="330" ry="220" fill="url(#about-liquid-blue)" opacity=".72" />
-            <ellipse cx="1080" cy="410" rx="280" ry="240" fill="url(#about-liquid-teal)" opacity=".68" />
+            <ellipse cx="180" cy="110" rx="330" ry="220" fill="url(#about-liquid-blue)" opacity=".58" />
+            <ellipse cx="1080" cy="410" rx="280" ry="240" fill="url(#about-liquid-teal)" opacity=".54" />
             <path d="M 650 390 C 800 380 838 233 974 174 C 1040 145 1097 151 1142 188" fill="none" stroke="#63c6ec" strokeOpacity=".28" strokeWidth="1.4" />
             <path d="M 760 430 C 861 378 894 321 1022 308 C 1081 302 1115 326 1150 354" fill="none" stroke="#67d4c2" strokeOpacity=".19" strokeWidth="1.1" />
           </svg>
