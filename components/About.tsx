@@ -1,7 +1,7 @@
 import { ArrowUpRight, Box, Copy, Github, GraduationCap, Linkedin, Mail, Users, Zap } from "lucide-react";
 import type { ReactNode } from "react";
 import { Reveal } from "./Reveal";
-import { AboutDotField } from "./AboutDotField";
+import { ContactStarfield } from "./ContactStarfield";
 import { links } from "@/lib/data";
 
 const highlights = [
@@ -45,7 +45,7 @@ export function About() {
             <path d="M 650 390 C 800 380 838 233 974 174 C 1040 145 1097 151 1142 188" fill="none" stroke="#63c6ec" strokeOpacity=".28" strokeWidth="1.4" />
             <path d="M 760 430 C 861 378 894 321 1022 308 C 1081 302 1115 326 1150 354" fill="none" stroke="#67d4c2" strokeOpacity=".19" strokeWidth="1.1" />
           </svg>
-          <AboutDotField />
+          <ContactStarfield motion="sway" density={0.7} opacity={0.65} palette="about" />
 
           <div className="relative z-10 lg:max-w-[54%]">
             <div className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.045] px-3.5 py-2 text-xs font-medium text-white/85 shadow-[inset_0_1px_0_rgba(255,255,255,.06)] backdrop-blur-xl sm:text-[13px]">
@@ -57,7 +57,7 @@ export function About() {
               I enjoy turning <span className="bg-gradient-to-r from-sky-300 via-cyan-300 to-emerald-300 bg-clip-text text-transparent">complicated problems</span> into products that feel <span className="bg-gradient-to-r from-sky-300 via-cyan-300 to-emerald-300 bg-clip-text text-transparent">simple, fast, and genuinely useful.</span>
             </h3>
 
-            <p className="mt-6 max-w-2xl border-t border-white/12 pt-4 text-[13px] leading-6 text-slate-200/75 sm:mt-7 sm:pt-5 sm:text-sm sm:leading-6">
+            <p className="mt-6 max-w-2xl border-t border-white/12 pt-4 text-[13px] leading-6 text-slate-100/85 sm:mt-7 sm:pt-5 sm:text-sm sm:leading-6">
               Right now I’m sharpening DSA and systems fundamentals while exploring how modern web engineering and useful AI can create genuinely better experiences.
             </p>
 

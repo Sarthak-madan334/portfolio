@@ -18,8 +18,26 @@ type Star = {
 };
 
 type ParticleMotion = "ambient" | "orbit" | "sway";
+type ParticlePalette = "theme" | "about";
 
-export function ContactStarfield({ motion = "ambient", particleCount }: { motion?: ParticleMotion; particleCount?: number }) {
+function smoothstep(edge0: number, edge1: number, value: number) {
+  const t = Math.min(1, Math.max(0, (value - edge0) / (edge1 - edge0)));
+  return t * t * (3 - 2 * t);
+}
+
+export function ContactStarfield({
+  motion = "ambient",
+  particleCount,
+  density = 1,
+  opacity = 1,
+  palette = "theme",
+}: {
+  motion?: ParticleMotion;
+  particleCount?: number;
+  density?: number;
+  opacity?: number;
+  palette?: ParticlePalette;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -36,7 +54,7 @@ export function ContactStarfield({ motion = "ambient", particleCount }: { motion
     let pointer = { x: 0.5, y: 0.5 };
     let target = pointer;
     let lightMode = !document.documentElement.classList.contains("dark");
-    const starCount = particleCount ?? (window.innerWidth < 640 ? 1700 : 3600);
+    const starCount = Math.round((particleCount ?? (window.innerWidth < 640 ? 1700 : 3600)) * density);
     const startTime = performance.now();
     const stars: Star[] = Array.from({ length: starCount }, () => {
       // Most points gather into a loose, vertically stretched orbital cloud,
@@ -111,12 +129,32 @@ export function ContactStarfield({ motion = "ambient", particleCount }: { motion
         const x = baseX + (dx / direction) * push;
         const y = baseY + (dy / direction) * push;
 
+        let visibility = 1;
+        if (palette === "about") {
+          const normalizedX = x / width;
+          const normalizedY = y / height;
+          const textZone = width >= 768
+            ? Math.hypot((normalizedX - 0.31) / 0.34, (normalizedY - 0.5) / 0.52)
+            : Math.hypot((normalizedX - 0.5) / 0.58, (normalizedY - 0.31) / 0.3);
+          const cardZone = width >= 768
+            ? Math.hypot((normalizedX - 0.82) / 0.2, (normalizedY - 0.5) / 0.4)
+            : Math.hypot((normalizedX - 0.5) / 0.5, (normalizedY - 0.8) / 0.22);
+          visibility = Math.min(
+            smoothstep(0.78, 1.28, textZone),
+            smoothstep(1, 1.24, cardZone),
+          );
+          if (visibility < 0.015) continue;
+        }
+
         context.beginPath();
         context.arc(x, y, star.size * (lightMode ? (star.highlight ? 1.55 : 1.12) : 1), 0, Math.PI * 2);
-        const lightColor = `hsla(${star.hue === 42 ? 39 : star.hue === 190 ? 190 : 212}, ${star.hue === 42 ? 72 : 70}%, ${star.hue === 42 ? 51 : star.hue === 190 ? 42 : 48}%, ${star.alpha * (star.highlight ? 0.86 : 0.62)})`;
-        context.fillStyle = lightMode ? lightColor : `hsla(${star.hue}, 88%, 78%, ${star.alpha})`;
-        context.shadowColor = lightMode && star.highlight ? lightColor : "transparent";
-        context.shadowBlur = lightMode && star.highlight ? 5 : 0;
+        const alpha = star.alpha * opacity * visibility;
+        const lightColor = `hsla(${star.hue === 42 ? 39 : star.hue === 190 ? 190 : 212}, ${star.hue === 42 ? 72 : 70}%, ${star.hue === 42 ? 51 : star.hue === 190 ? 42 : 48}%, ${alpha * (star.highlight ? 0.86 : 0.62)})`;
+        context.fillStyle = palette === "about"
+          ? star.hue === 190 ? `rgba(104, 218, 194, ${alpha})` : `rgba(255, 255, 255, ${alpha})`
+          : lightMode ? lightColor : `hsla(${star.hue}, 88%, 78%, ${alpha})`;
+        context.shadowColor = palette !== "about" && lightMode && star.highlight ? lightColor : "transparent";
+        context.shadowBlur = palette !== "about" && lightMode && star.highlight ? 5 : 0;
         context.fill();
         context.shadowBlur = 0;
       }
@@ -207,7 +245,7 @@ export function ContactStarfield({ motion = "ambient", particleCount }: { motion
       document.removeEventListener("visibilitychange", visibility);
       window.cancelAnimationFrame(frame);
     };
-  }, [motion, particleCount]);
+  }, [motion, particleCount, density, opacity, palette]);
 
   return <canvas ref={canvasRef} aria-hidden="true" className="pointer-events-none absolute inset-0 z-0" />;
 }
