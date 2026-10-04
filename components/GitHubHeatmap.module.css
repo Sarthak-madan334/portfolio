@@ -1,0 +1,27 @@
+.palette {
+  --activity-level-0: rgba(255, 255, 255, .06);
+  --activity-level-1: #1e3a8a;
+  --activity-level-2: #2563eb;
+  --activity-level-3: #3b82f6;
+  --activity-level-4: #60a5fa;
+  --activity-accent: #4c8dff;
+}
+
+.host { position: relative; min-width: 0; }
+.viewport { overflow-x: auto; padding: 2px; margin: -2px; scrollbar-width: thin; scrollbar-color: #52525b transparent; }
+.graph { width: 100%; }
+.months { display: grid; grid-template-columns: repeat(var(--week-count), minmax(0, 1fr)); column-gap: 4px; margin-bottom: 8px; color: #a1a1aa; font-size: 11px; line-height: 16px; }
+.months span { overflow: visible; }
+.grid { display: grid; grid-template-rows: repeat(7, auto); grid-template-columns: repeat(var(--week-count), minmax(0, 1fr)); grid-auto-flow: column; gap: 4px; }
+.cell, .placeholder { width: 100%; min-width: 0; aspect-ratio: 1; border-radius: 3px; }
+.cell { display: block; padding: 0; border: 0; cursor: pointer; transition: transform 120ms ease, filter 120ms ease; }
+.cell:focus-visible { outline: 2px solid #e4e4e7; outline-offset: 1px; }
+.today { outline: 1.5px solid var(--activity-accent); outline-offset: 1px; }
+.legendCell { width: var(--activity-cell-size, 18px); height: var(--activity-cell-size, 18px); border-radius: 3px; flex-shrink: 0; }
+.tooltip { position: absolute; z-index: 30; width: max-content; max-width: 100%; padding: 6px 10px; border: 1px solid rgba(255,255,255,.12); border-radius: 999px; background: #18181b; color: #f4f4f5; font-size: 12px; line-height: 18px; text-align: center; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity 120ms ease, visibility 120ms ease; }
+.tooltip[data-visible="true"] { opacity: 1; visibility: visible; }
+.arrow { position: absolute; bottom: -4px; left: var(--arrow-left); width: 7px; height: 7px; border-right: 1px solid rgba(255,255,255,.12); border-bottom: 1px solid rgba(255,255,255,.12); background: #18181b; transform: translateX(-50%) rotate(45deg); }
+.tooltip[data-below="true"] .arrow { bottom: auto; top: -4px; transform: translateX(-50%) rotate(225deg); }
+@media (max-width: 639px) { .graph { min-width: var(--mobile-grid-width); } }
+@media (hover: hover) { .cell:hover { transform: scale(1.1); filter: brightness(1.15); } }
+@media (prefers-reduced-motion: reduce) { .cell, .tooltip { transition: none; } .cell:hover { transform: none; } }
