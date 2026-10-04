@@ -52,7 +52,7 @@ export function AboutGitHubActivity() {
   }, []);
 
   return (
-    <div className={`about-github-activity ${styles.palette} relative w-full max-w-[520px] rounded-[25px] border border-white/[0.08] bg-[#151517] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:rounded-[28px]`}
+    <div className={`about-github-activity ${styles.palette} relative w-full max-w-[590px] rounded-[25px] border border-white/[0.08] bg-[#151517] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:rounded-[28px]`}
       style={{ "--activity-cell-size": `${cellSize}px` } as CSSProperties}>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
         <p className="flex items-center gap-2 text-[13px] text-[#A1A1AA]">
