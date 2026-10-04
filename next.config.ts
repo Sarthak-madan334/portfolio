@@ -7,7 +7,7 @@ const contentSecurityPolicy = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self' data:",
-  `connect-src 'self'${isDev ? " ws: http: https:" : ""}`,
+  `connect-src 'self' https://github-contributions-api.jogruber.de${isDev ? " ws: http: https:" : ""}`,
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self' mailto:",

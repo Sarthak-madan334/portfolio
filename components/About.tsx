@@ -1,15 +1,9 @@
-import { ArrowUpRight, Box, Copy, Github, GraduationCap, Linkedin, Mail, Users, Zap } from "lucide-react";
+import { ArrowUpRight, Copy, Github, Linkedin, Mail } from "lucide-react";
 import type { ReactNode } from "react";
 import { Reveal } from "./Reveal";
 import { ContactStarfield } from "./ContactStarfield";
+import { AboutGitHubActivity } from "./AboutGitHubActivity";
 import { links } from "@/lib/data";
-
-const highlights = [
-  { icon: GraduationCap, title: "1st Year", text: <>Computer Science<br />at SRM University.</>, color: "border-[#4C8DFF]/25 bg-[#4C8DFF]/10 text-[#4C8DFF] dark:border-[#4C8DFF]/30 dark:bg-[#4C8DFF]/15 dark:text-[#4C8DFF]" },
-  { icon: Box, title: "Building", text: <>Full-stack products<br />and real projects.</>, color: "border-[#4C8DFF]/25 bg-[#4C8DFF]/10 text-[#4C8DFF] dark:border-[#4C8DFF]/30 dark:bg-[#4C8DFF]/15 dark:text-[#4C8DFF]" },
-  { icon: Zap, title: "Learning", text: <>DSA, systems &amp; modern<br />web engineering.</>, color: "border-[#4C8DFF]/25 bg-[#4C8DFF]/10 text-[#4C8DFF] dark:border-[#4C8DFF]/30 dark:bg-[#4C8DFF]/15 dark:text-[#4C8DFF]" },
-  { icon: Users, title: "Sharing", text: <>My journey<br />in public.</>, color: "border-[#4C8DFF]/25 bg-[#4C8DFF]/10 text-[#4C8DFF] dark:border-[#4C8DFF]/30 dark:bg-[#4C8DFF]/15 dark:text-[#4C8DFF]" },
-];
 
 const socialLinks = [
   { href: links.github, label: "GitHub", icon: Github },
@@ -75,12 +69,20 @@ export function About() {
           </div>
         </Reveal>
 
-        <div className="mt-6 grid grid-cols-2 md:grid-cols-4">
-          {highlights.map(({ icon: Icon, title, text, color }, index) => <div key={title} className={`relative px-4 py-4 sm:px-6 sm:py-5 lg:px-7 ${index % 2 === 1 ? "border-l border-[#e1e4eb] dark:border-white/10 md:border-l-0" : ""} ${index > 1 ? "border-t border-[#e1e4eb] dark:border-white/10 md:border-t-0" : ""} ${index > 0 ? "md:border-l md:border-[#e1e4eb] md:dark:border-white/10" : ""}`}>
-            <span className={`grid h-11 w-11 place-items-center rounded-2xl border ${color}`}><Icon size={23} strokeWidth={2} /></span>
-            <h4 className="mt-3 text-lg font-semibold tracking-[-0.035em] text-[#11131a] dark:text-white sm:text-xl">{title}</h4>
-            <p className="mt-1 text-[13px] leading-5 text-[#5e6677] dark:text-white/60 sm:text-sm sm:leading-5">{text}</p>
-          </div>)}
+        <div className="mt-6 grid py-4 sm:py-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+          <dl className="flex items-start gap-16 text-left lg:gap-20">
+            <div className="flex flex-col">
+              <dt className="mt-2 whitespace-nowrap text-sm leading-5 text-[#A1A1AA]">Projects built</dt>
+              <dd className="order-first text-5xl font-semibold leading-none tracking-[-0.05em] text-[#11131a] dark:text-white sm:text-[56px]">10+</dd>
+            </div>
+            <div className="flex flex-col">
+              <dt className="mt-2 whitespace-nowrap text-sm leading-5 text-[#A1A1AA]">Commits pushed</dt>
+              <dd className="order-first text-5xl font-semibold leading-none tracking-[-0.05em] text-[#11131a] dark:text-white sm:text-[56px]">370+</dd>
+            </div>
+          </dl>
+          <div className="mt-8 min-w-0 lg:mt-0 lg:pl-8">
+            <AboutGitHubActivity />
+          </div>
         </div>
       </div>
     </section>
