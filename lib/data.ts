@@ -27,13 +27,6 @@ export const projects = [
     tech: ["Next.js", "TypeScript", "Tailwind", "DeepSeek R1", "OpenRouter"],
     live: "https://deadlock-alpha.vercel.app", status: null, github: "https://github.com/Sarthak-madan334/Deadlock", accent: "cyan",
   },
-  {
-    index: "04", title: "NexStore", subtitle: "AI-powered e-commerce",
-    description: "A responsive shopping experience with product discovery, cart, wishlist, flash sales, and an AI assistant for useful recommendations.",
-    highlights: ["AI shopping assistant", "Search, cart & wishlist", "Responsive storefront"],
-    tech: ["React.js", "JavaScript", "Claude AI", "Vercel"],
-    live: "https://nexstore-dusky.vercel.app/", status: null, github: "https://github.com/Sarthak-madan334/nexstore", accent: "acid",
-  },
 ] as const;
 
 export type StackItem = { name: string; mark: string; use: string };
