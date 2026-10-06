@@ -29,6 +29,7 @@ export function BloopPet() {
   const moodRef = useRef(70);
   const openRef = useRef(false);
   const openedOnce = useRef(false);
+  const snackReplies = useRef(0);
   const lastInteraction = useRef(0);
   const nextId = useRef(0);
   const busyRef = useRef(false);
@@ -168,7 +169,10 @@ export function BloopPet() {
     touch();
     changeMood(20);
     hop(true);
-    addMessage("bot", "Nom nom nom! Thank you! ♥");
+    if (snackReplies.current < 2) {
+      snackReplies.current += 1;
+      addMessage("bot", "Nom nom nom! Thank you! ♥");
+    }
   };
 
   const sendMessage = async (value: string) => {
