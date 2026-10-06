@@ -4,10 +4,13 @@ const username = "Sarthak-madan334";
 export const dynamic = "force-dynamic";
 
 function fiveMonthWindow(now = new Date()) {
-  const first = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 4, 1));
+  const parts = Object.fromEntries(new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Kolkata", year: "numeric", month: "2-digit", day: "2-digit",
+  }).formatToParts(now).map(({ type, value }) => [type, value]));
+  const first = new Date(Date.UTC(Number(parts.year), Number(parts.month) - 5, 1));
   return {
     firstDate: first.toISOString().slice(0, 10),
-    today: now.toISOString().slice(0, 10),
+    today: `${parts.year}-${parts.month}-${parts.day}`,
   };
 }
 
@@ -33,14 +36,14 @@ function parseContributions(markup: string): Contribution[] {
 
 export async function GET() {
   try {
-    const response = await fetch(`https://github.com/users/${username}/contributions`, {
+    const { firstDate, today } = fiveMonthWindow();
+    const response = await fetch(`https://github.com/users/${username}/contributions?to=${today}`, {
       headers: { Accept: "text/html", "User-Agent": "sarthak-portfolio" },
       cache: "no-store",
       signal: AbortSignal.timeout(10_000),
     });
     if (!response.ok) throw new Error(`GitHub contributions unavailable (${response.status})`);
 
-    const { firstDate, today } = fiveMonthWindow();
     const contributions = parseContributions(await response.text())
       .filter(({ date }) => date >= firstDate && date <= today);
     if (!contributions.length) throw new Error("GitHub returned no contribution days");
