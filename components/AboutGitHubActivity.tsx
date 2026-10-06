@@ -7,15 +7,6 @@ import { GitHubHeatmap } from "./GitHubHeatmap";
 import type { Contribution } from "./GitHubHeatmap";
 import styles from "./GitHubHeatmap.module.css";
 
-const username = "Sarthak-madan334";
-
-function getFiveMonthWindow() {
-  const now = new Date();
-  const firstDay = new Date(Date.UTC(now.getFullYear(), now.getMonth() - 4, 1));
-  const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-  return { firstDate: firstDay.toISOString().slice(0, 10), today };
-}
-
 export function AboutGitHubActivity() {
   const [fiveMonthTotal, setFiveMonthTotal] = useState<number | null>(null);
   const [totalUnavailable, setTotalUnavailable] = useState(false);
@@ -24,18 +15,16 @@ export function AboutGitHubActivity() {
 
   useEffect(() => {
     const controller = new AbortController();
-    const year = new Date().getUTCFullYear();
-    async function loadTotal() {
+    async function loadActivity() {
       try {
-        const response = await fetch(
-          `https://github-contributions-api.jogruber.de/v4/${username}?y=${year}`,
-          { signal: controller.signal },
-        );
+        const response = await fetch("/api/github-contributions", { signal: controller.signal, cache: "no-store" });
         if (!response.ok) throw new Error("Contribution total unavailable");
-        const data = await response.json();
-        const { firstDate, today } = getFiveMonthWindow();
-        const contributions = data.contributions as Contribution[] | undefined;
-        if (!Array.isArray(contributions)) throw new Error("Contribution data unavailable");
+        const data = await response.json() as { contributions?: Contribution[]; firstDate?: string; today?: string };
+        const { firstDate, today } = data;
+        const contributions = data.contributions;
+        if (!Array.isArray(contributions) || typeof firstDate !== "string" || typeof today !== "string") {
+          throw new Error("Contribution data unavailable");
+        }
         const count = contributions
           .filter(({ date }) => date >= firstDate && date <= today)
           .reduce((total, item) => total + item.count, 0);
@@ -47,8 +36,17 @@ export function AboutGitHubActivity() {
         if (!controller.signal.aborted) setTotalUnavailable(true);
       }
     }
-    void loadTotal();
-    return () => controller.abort();
+    void loadActivity();
+    const refresh = window.setInterval(() => void loadActivity(), 5 * 60 * 1000);
+    const onFocus = () => { if (document.visibilityState === "visible") void loadActivity(); };
+    document.addEventListener("visibilitychange", onFocus);
+    window.addEventListener("focus", onFocus);
+    return () => {
+      controller.abort();
+      window.clearInterval(refresh);
+      document.removeEventListener("visibilitychange", onFocus);
+      window.removeEventListener("focus", onFocus);
+    };
   }, []);
 
   return (
