@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Reveal } from "./Reveal";
 import { ContactStarfield } from "./ContactStarfield";
 import { AboutGitHubActivity } from "./AboutGitHubActivity";
+import { AboutStats } from "./AboutStats";
 import { links } from "@/lib/data";
 
 const socialLinks = [
@@ -70,16 +71,7 @@ export function About() {
         </Reveal>
 
         <div className="mt-6 grid py-4 sm:py-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
-          <dl className="flex items-start gap-16 text-left lg:gap-20">
-            <div className="flex flex-col">
-              <dt className="mt-2 whitespace-nowrap text-sm leading-5 text-[#A1A1AA]">Projects built</dt>
-              <dd className="order-first text-5xl font-semibold leading-none tracking-[-0.05em] text-[#11131a] dark:text-white sm:text-[56px]">10+</dd>
-            </div>
-            <div className="flex flex-col">
-              <dt className="mt-2 whitespace-nowrap text-sm leading-5 text-[#A1A1AA]">Commits pushed</dt>
-              <dd className="order-first text-5xl font-semibold leading-none tracking-[-0.05em] text-[#11131a] dark:text-white sm:text-[56px]">370+</dd>
-            </div>
-          </dl>
+          <AboutStats />
           <div className="mt-8 min-w-0 lg:mt-0 lg:pl-8">
             <AboutGitHubActivity />
           </div>
