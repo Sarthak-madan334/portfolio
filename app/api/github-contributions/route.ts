@@ -1,7 +1,7 @@
 import type { Contribution } from "@/components/GitHubHeatmap";
 
 const username = "Sarthak-madan334";
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 function fiveMonthWindow(now = new Date()) {
   const first = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 4, 1));
@@ -35,7 +35,7 @@ export async function GET() {
   try {
     const response = await fetch(`https://github.com/users/${username}/contributions`, {
       headers: { Accept: "text/html", "User-Agent": "sarthak-portfolio" },
-      next: { revalidate },
+      cache: "no-store",
       signal: AbortSignal.timeout(10_000),
     });
     if (!response.ok) throw new Error(`GitHub contributions unavailable (${response.status})`);
@@ -45,9 +45,9 @@ export async function GET() {
       .filter(({ date }) => date >= firstDate && date <= today);
     if (!contributions.length) throw new Error("GitHub returned no contribution days");
 
-    return Response.json({ contributions, firstDate, today });
+    return Response.json({ contributions, firstDate, today }, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {
     console.error("Failed to load GitHub contribution data", error);
-    return Response.json({ error: "GitHub activity is temporarily unavailable." }, { status: 502 });
+    return Response.json({ error: "GitHub activity is temporarily unavailable." }, { status: 502, headers: { "Cache-Control": "no-store" } });
   }
 }

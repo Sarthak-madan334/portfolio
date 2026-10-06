@@ -37,7 +37,9 @@ export function AboutGitHubActivity() {
       }
     }
     void loadActivity();
-    const refresh = window.setInterval(() => void loadActivity(), 5 * 60 * 1000);
+    const refresh = window.setInterval(() => {
+      if (document.visibilityState === "visible") void loadActivity();
+    }, 60 * 1000);
     const onFocus = () => { if (document.visibilityState === "visible") void loadActivity(); };
     document.addEventListener("visibilitychange", onFocus);
     window.addEventListener("focus", onFocus);
