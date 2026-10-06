@@ -1,4 +1,5 @@
 import { About } from "@/components/About";
+import { BloopPet } from "@/components/BloopPet";
 import { Achievements } from "@/components/Achievements";
 import { AmbientBackground } from "@/components/AmbientBackground";
 import { Contact } from "@/components/Contact";
@@ -24,6 +25,7 @@ export default function Home() {
         <Contact />
         <Footer />
       </main>
+      <BloopPet />
     </>
   );
 }
