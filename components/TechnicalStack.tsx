@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Braces,
@@ -11,7 +12,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { stackGroups } from "@/lib/data";
-import { SectionHeading } from "./SectionHeading";
+import { TechSphere } from "./TechSphere";
 
 const icons = [Code2, Layers3, CloudCog, Database, Cpu, Wrench, Braces];
 const accents = [
@@ -34,6 +35,8 @@ const spans = [
 ];
 
 export function TechnicalStack() {
+  const [activeGroup, setActiveGroup] = useState<number | null>(null);
+
   return (
     <section
       id="stack"
@@ -47,13 +50,14 @@ export function TechnicalStack() {
       />
 
       <div className="site-shell relative">
-        <SectionHeading
-          number="02"
-          eyebrow="Technical stack"
-          title="One toolkit. Every layer."
-          description="The technologies I use across product engineering—visible at a glance, from interface to infrastructure."
-          descriptionClassName="text-[#55565d] dark:text-white/55"
-        />
+        <div className="grid items-center gap-7 md:grid-cols-[minmax(0,1fr)_320px] lg:grid-cols-[minmax(0,1fr)_360px]">
+          <div>
+            <p className="mb-5 flex items-center gap-3 text-sm font-medium tracking-[-0.01em] text-[#77777d] dark:text-white/50"><span className="grid h-7 min-w-7 place-items-center rounded-full bg-[#ececf0] px-2 text-[10px] font-bold text-[#55555b] dark:bg-white/[0.08] dark:text-white/60">02</span><span>Technical stack</span></p>
+            <h2 className="max-w-3xl text-3xl font-semibold leading-[1.04] tracking-[-0.05em] text-[#1d1d1f] dark:text-white sm:text-5xl">One toolkit. <span className="block sm:inline">Every layer.</span></h2>
+            <p className="mt-5 max-w-md text-sm leading-6 text-[#55565d] dark:text-white/55">The technologies I use across product engineering—visible at a glance, from interface to infrastructure.</p>
+          </div>
+          <TechSphere onHoverGroup={setActiveGroup} />
+        </div>
 
         <div className="mt-8 grid grid-cols-2 gap-x-5 md:gap-x-8 lg:grid-cols-12">
           {stackGroups.map((group, index) => {
@@ -68,7 +72,7 @@ export function TechnicalStack() {
                 whileHover={{ y: -3 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.42, delay: index * 0.045 }}
-                className={`group relative border-t border-black/[0.10] py-4 dark:border-white/[0.12] sm:py-5 ${spans[index]}`}
+                className={`group relative border-t py-4 sm:py-5 ${activeGroup === index ? "border-black/25 dark:border-white/30" : "border-black/[0.10] dark:border-white/[0.12]"} ${spans[index]}`}
               >
                 <motion.span
                   aria-hidden="true"
@@ -86,7 +90,7 @@ export function TechnicalStack() {
                   >
                     <Icon size={17} />
                   </motion.span>
-                  <h3 className="text-[13px] font-semibold tracking-[-0.025em] text-[#17181c] dark:text-white sm:text-sm">
+                  <h3 className={`text-[13px] font-semibold tracking-[-0.025em] transition-colors sm:text-sm ${activeGroup === index ? accent.icon : "text-[#17181c] dark:text-white"}`}>
                     {group.title}
                   </h3>
                   <span className="ml-auto hidden font-mono text-[9px] text-black/25 dark:text-white/25 sm:block">

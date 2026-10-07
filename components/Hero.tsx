@@ -8,7 +8,7 @@ import { ProductStage } from "./ProductStage";
 export function Hero() {
   return (
     <section id="home" className="noise relative min-h-screen overflow-hidden border-b border-black/[0.06] bg-[#f5f5f7]/70 pt-[74px] transition-colors duration-500 dark:border-white/[0.07] dark:bg-[#08090b]/75">
-      <div className="site-shell relative z-10 grid min-h-[calc(100vh-74px)] items-center gap-12 py-16 lg:grid-cols-[1.08fr_0.92fr] lg:py-16">
+      <div className="site-shell relative z-10 grid min-h-[calc(100vh-74px)] items-center gap-12 py-16 lg:grid-cols-2 lg:py-16">
         <div>
           <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: .6 }}>
             <p className="text-3xl font-semibold tracking-[-0.045em] text-[#1d1d1f] dark:text-white sm:text-4xl">Sarthak Madan</p>
