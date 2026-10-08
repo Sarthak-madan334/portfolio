@@ -3,12 +3,12 @@
 import { motion } from "framer-motion";
 import { ArrowDown, ArrowUpRight, FileText, Github, Linkedin } from "lucide-react";
 import { links } from "@/lib/data";
-import { ProductStage } from "./ProductStage";
+import { GrillrStage } from "./GrillrStage";
 
 export function Hero() {
   return (
-    <section id="home" className="noise relative min-h-screen overflow-hidden border-b border-black/[0.06] bg-[#f5f5f7]/70 pt-[74px] transition-colors duration-500 dark:border-white/[0.07] dark:bg-[#08090b]/75">
-      <div className="site-shell relative z-10 grid min-h-[calc(100vh-74px)] items-center gap-12 py-16 lg:grid-cols-2 lg:py-16">
+    <section id="home" className="noise relative min-h-[100svh] overflow-hidden border-b border-black/[0.06] bg-[#f5f5f7]/70 pt-[74px] transition-colors duration-500 dark:border-white/[0.07] dark:bg-[#08090b]/75">
+      <div className="site-shell relative z-10 grid min-h-[calc(100svh-74px)] items-center gap-10 py-10 sm:py-12 lg:grid-cols-2 lg:items-start lg:gap-8 lg:py-[clamp(1.25rem,4vh,2.75rem)]">
         <div>
           <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: .6 }}>
             <p className="text-3xl font-semibold tracking-[-0.045em] text-[#1d1d1f] dark:text-white sm:text-4xl">Sarthak Madan</p>
@@ -18,13 +18,13 @@ export function Hero() {
             Full-stack products.
             <span className="mt-2 block text-[#2563eb]">Practical AI.<br />Beautifully built.</span>
           </motion.h1>
-          <motion.p initial={false} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28 }} className="mt-7 max-w-xl text-base leading-7 text-[#6e6e73] dark:text-white/55 sm:text-lg sm:leading-8">
-            I build fast, thoughtful web products using React, Next.js, and practical AI — focused on clean interfaces, real usability, and production-ready execution.
+          <motion.p initial={false} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28 }} className="mt-7 max-w-xl text-sm leading-6 text-[#6e6e73] dark:text-[#A1A1AA] sm:text-base sm:leading-7 lg:mt-4 lg:text-sm lg:leading-6">
+            I built Grillr, an AI interview coach with live voice sessions.
           </motion.p>
-          <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38 }} className="mt-8">
+          <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38 }} className="mt-8 lg:mt-5">
             <a href="#projects" className="focus-ring group inline-flex items-center gap-3 rounded-full bg-[#1d1d1f] px-7 py-4 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(0,0,0,.18)] transition hover:scale-[1.02] hover:bg-black dark:bg-white dark:text-[#111113] dark:hover:bg-white/85">View my projects <ArrowDown size={15} className="transition group-hover:translate-y-0.5" /></a>
           </motion.div>
-          <motion.div initial={false} animate={{ opacity: 1 }} transition={{ delay: .48 }} className="mt-7 flex max-w-xl flex-wrap items-center gap-3">
+          <motion.div initial={false} animate={{ opacity: 1 }} transition={{ delay: .48 }} className="mt-7 flex max-w-xl flex-wrap items-center gap-3 lg:mt-4">
             <div className="flex flex-wrap items-center gap-2.5">
               <a href="/Sarthak-Madan-Resume.pdf" target="_blank" className="hero-profile-button focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-full px-4 text-sm font-semibold"><span className="hero-profile-icon"><FileText size={15} strokeWidth={1.9} /></span><span>Résumé</span><ArrowUpRight size={14} strokeWidth={2} /></a>
               <a href={links.github} target="_blank" rel="noreferrer" aria-label="GitHub profile" className="hero-profile-button focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-full px-4 text-sm font-semibold"><span className="hero-profile-icon"><Github size={16} fill="currentColor" strokeWidth={1.7} /></span><span>GitHub</span></a>
@@ -32,7 +32,7 @@ export function Hero() {
             </div>
           </motion.div>
         </div>
-        <ProductStage />
+        <GrillrStage />
       </div>
     </section>
   );

@@ -48,9 +48,9 @@ export function AboutStats() {
 
   const stats = [
     { label: "Projects built", value: 10, suffix: "+" },
-    { label: "Commits pushed", value: 470, suffix: "+" },
-    ...(data.language ? [{ label: "Top language", value: data.language.name, suffix: "", detail: `${data.language.percentage}% of public code`, title: "Share of language bytes in original public repositories, excluding forks." }] : []),
-    ...(data.pullRequestCount === undefined ? [] : [{ label: "Pull requests", value: data.pullRequestCount, suffix: "+", detail: "Authored on GitHub" }]),
+    { label: "Commits pushed", value: 520, suffix: "+" },
+    { label: "Top language", value: data.language?.name ?? "TypeScript", suffix: "", detail: data.language ? `${data.language.percentage}% of public code` : "Primary language across public repositories", title: "Share of language bytes in original public repositories, excluding forks." },
+    { label: "Pull requests", value: data.pullRequestCount ?? 26, suffix: "+", detail: "Authored on GitHub" },
   ];
 
   return <dl aria-label="Developer statistics" className="grid min-w-0 grid-cols-2 self-center text-left">
