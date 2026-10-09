@@ -19,7 +19,7 @@ export function Hero() {
             <span className="mt-2 block text-[#2563eb]">Practical AI.<br />Beautifully built.</span>
           </motion.h1>
           <motion.p initial={false} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28 }} className="mt-7 max-w-xl text-sm leading-6 text-[#6e6e73] dark:text-[#A1A1AA] sm:text-base sm:leading-7 lg:mt-4 lg:text-sm lg:leading-6">
-            I built Grillr, an AI interview coach with live voice sessions.
+            Computer science student at SRM University, exploring full-stack engineering, practical AI, and the systems behind great software.
           </motion.p>
           <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38 }} className="mt-8 lg:mt-5">
             <a href="#projects" className="focus-ring group inline-flex items-center gap-3 rounded-full bg-[#1d1d1f] px-7 py-4 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(0,0,0,.18)] transition hover:scale-[1.02] hover:bg-black dark:bg-white dark:text-[#111113] dark:hover:bg-white/85">View my projects <ArrowDown size={15} className="transition group-hover:translate-y-0.5" /></a>
