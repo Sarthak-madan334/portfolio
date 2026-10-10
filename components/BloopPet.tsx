@@ -95,7 +95,12 @@ export function BloopPet() {
   useEffect(() => {
     const timer = window.setInterval(() => {
       const amount = Date.now() - lastInteraction.current > 30_000 ? -3 : -1;
-      if (changeMood(amount) < 25 && openRef.current && Math.random() < 0.3) {
+      if (!openRef.current) {
+        moodRef.current = Math.max(0, Math.min(100, moodRef.current + amount));
+        try { localStorage.setItem(MOOD_KEY, String(moodRef.current)); } catch { /* Storage may be unavailable. */ }
+        return;
+      }
+      if (changeMood(amount) < 25 && Math.random() < 0.3) {
         addMessage("bot", `${NAME}… is anyone there? 🥺`);
       }
     }, 6_000);
@@ -122,19 +127,32 @@ export function BloopPet() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const followPointer = (event: PointerEvent) => {
-      const pet = petRef.current;
-      if (!pet) return;
-      const bounds = pet.getBoundingClientRect();
-      const dx = event.clientX - (bounds.left + bounds.width / 2);
-      const dy = event.clientY - (bounds.top + bounds.height / 2);
-      const distance = Math.hypot(dx, dy) || 1;
-      const reach = Math.min(3.5, distance / 45);
-      const offset = `translate(${(dx / distance) * reach}px, ${(dy / distance) * reach}px)`;
-      if (leftPupil.current) leftPupil.current.style.transform = offset;
-      if (rightPupil.current) rightPupil.current.style.transform = offset;
+      latestPointer = event;
+      if (pointerFrame) return;
+      pointerFrame = window.requestAnimationFrame(() => {
+        pointerFrame = 0;
+        if (!latestPointer) return;
+        const { clientX, clientY } = latestPointer;
+        latestPointer = null;
+        const pet = petRef.current;
+        if (!pet) return;
+        const bounds = pet.getBoundingClientRect();
+        const dx = clientX - (bounds.left + bounds.width / 2);
+        const dy = clientY - (bounds.top + bounds.height / 2);
+        const distance = Math.hypot(dx, dy) || 1;
+        const reach = Math.min(3.5, distance / 45);
+        const offset = `translate(${(dx / distance) * reach}px, ${(dy / distance) * reach}px)`;
+        if (leftPupil.current) leftPupil.current.style.transform = offset;
+        if (rightPupil.current) rightPupil.current.style.transform = offset;
+      });
     };
+    let pointerFrame = 0;
+    let latestPointer: PointerEvent | null = null;
     window.addEventListener("pointermove", followPointer, { passive: true });
-    return () => window.removeEventListener("pointermove", followPointer);
+    return () => {
+      window.removeEventListener("pointermove", followPointer);
+      window.cancelAnimationFrame(pointerFrame);
+    };
   }, []);
 
   useEffect(() => {
@@ -153,6 +171,7 @@ export function BloopPet() {
   const clickPet = () => {
     touch();
     if (!open) {
+      setMood(moodRef.current);
       setOpen(true);
       if (!openedOnce.current) {
         openedOnce.current = true;

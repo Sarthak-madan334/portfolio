@@ -51,6 +51,7 @@ export function ContactStarfield({
     let height = 0;
     let pixelRatio = 1;
     let frame = 0;
+    let sectionVisible = false;
     let pointer = { x: 0.5, y: 0.5 };
     let target = pointer;
     let lightMode = !document.documentElement.classList.contains("dark");
@@ -58,38 +59,46 @@ export function ContactStarfield({
       ? new Path2D("M 82 42 C 139 8 210 32 298 36 C 390 41 463 19 553 28 C 648 38 719 54 810 57 C 905 37 971 16 1048 43 C 1115 66 1131 109 1139 167 C 1148 226 1168 267 1151 329 C 1137 382 1116 423 1062 438 C 1007 454 941 425 859 431 C 761 438 706 464 616 462 C 526 440 469 478 376 457 C 283 437 218 482 141 457 C 69 470 59 460 51 390 C 43 300 28 230 39 157 C 48 87 39 58 82 42 Z")
       : null;
     const starCount = Math.round((particleCount ?? (window.innerWidth < 640 ? 1700 : 3600)) * density);
-    const startTime = performance.now();
-    const stars: Star[] = Array.from({ length: starCount }, () => {
-      // Most points gather into a loose, vertically stretched orbital cloud,
-      // with the rest spread across the whole section like distant stars.
-      const clustered = Math.random() < 0.68;
-      const angle = Math.random() * Math.PI * 2;
-      const radius = 0.22 + Math.random() * 0.83;
-      return {
-        x: clustered ? 0.5 + Math.cos(angle) * radius * 0.49 : Math.random(),
-        y: clustered ? 0.5 + Math.sin(angle) * radius * 0.53 : Math.random(),
-        size: Math.random() * 1.05 + 0.2,
-        alpha: Math.random() * 0.58 + 0.18,
-        hue: Math.random() > 0.93 ? 42 : Math.random() > 0.62 ? 190 : 210,
-        highlight: Math.random() < 0.1,
-        moves: Math.random() < 0.88,
-        offsetX: 0,
-        offsetY: 0,
-        targetOffsetX: (Math.random() - 0.5) * 28,
-        targetOffsetY: (Math.random() - 0.5) * 28,
-        nextDriftAt: startTime + Math.random() * 4000,
-      };
-    });
+    let startTime = 0;
+    let stars: Star[] = [];
+
+    const initializeStars = () => {
+      if (stars.length) return;
+      startTime = performance.now();
+      stars = Array.from({ length: starCount }, () => {
+        // Most points gather into a loose, vertically stretched orbital cloud,
+        // with the rest spread across the whole section like distant stars.
+        const clustered = Math.random() < 0.68;
+        const angle = Math.random() * Math.PI * 2;
+        const radius = 0.22 + Math.random() * 0.83;
+        return {
+          x: clustered ? 0.5 + Math.cos(angle) * radius * 0.49 : Math.random(),
+          y: clustered ? 0.5 + Math.sin(angle) * radius * 0.53 : Math.random(),
+          size: Math.random() * 1.05 + 0.2,
+          alpha: Math.random() * 0.58 + 0.18,
+          hue: Math.random() > 0.93 ? 42 : Math.random() > 0.62 ? 190 : 210,
+          highlight: Math.random() < 0.1,
+          moves: Math.random() < 0.88,
+          offsetX: 0,
+          offsetY: 0,
+          targetOffsetX: (Math.random() - 0.5) * 28,
+          targetOffsetY: (Math.random() - 0.5) * 28,
+          nextDriftAt: startTime + Math.random() * 4000,
+        };
+      });
+    };
 
     const resize = () => {
       const bounds = section.getBoundingClientRect();
       width = bounds.width;
       height = bounds.height;
       pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.round(width * pixelRatio);
-      canvas.height = Math.round(height * pixelRatio);
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
+      if (!sectionVisible) return;
+      canvas.width = Math.round(width * pixelRatio);
+      canvas.height = Math.round(height * pixelRatio);
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
       draw();
     };
 
@@ -182,18 +191,20 @@ export function ContactStarfield({
       };
 
       if (reducedMotion) {
-        pointer = target;
-        draw();
+        if (sectionVisible) {
+          pointer = target;
+          draw();
+        }
         return;
       }
 
-      if (!frame) frame = window.requestAnimationFrame(animate);
+      if (sectionVisible && !frame) frame = window.requestAnimationFrame(animate);
     };
 
     let lastDrawAt = 0;
     const animate = (time: number) => {
       frame = 0;
-      if (document.hidden) return;
+      if (document.hidden || !sectionVisible) return;
 
       pointer = {
         x: pointer.x + (target.x - pointer.x) * 0.14,
@@ -222,7 +233,7 @@ export function ContactStarfield({
 
     const leave = () => {
       target = { x: 0.5, y: 0.5 };
-      if (reducedMotion) {
+      if (reducedMotion && sectionVisible) {
         pointer = target;
         draw();
       }
@@ -231,28 +242,42 @@ export function ContactStarfield({
       if (document.hidden) {
         window.cancelAnimationFrame(frame);
         frame = 0;
-      } else if (!reducedMotion && !frame) {
-        frame = window.requestAnimationFrame(animate);
+      } else if (sectionVisible) {
+        draw();
+        if (!reducedMotion && !frame) frame = window.requestAnimationFrame(animate);
       }
     };
+    const sectionVisibility = new IntersectionObserver(([entry]) => {
+      sectionVisible = entry.isIntersecting;
+      if (!sectionVisible) {
+        window.cancelAnimationFrame(frame);
+        frame = 0;
+        return;
+      }
+      initializeStars();
+      resize();
+      if (!reducedMotion && !document.hidden && !frame) {
+        frame = window.requestAnimationFrame(animate);
+      }
+    }, { rootMargin: "250px 0px" });
     const themeObserver = new MutationObserver(() => {
       const nextLightMode = !document.documentElement.classList.contains("dark");
       if (nextLightMode !== lightMode) {
         lightMode = nextLightMode;
-        draw();
+        if (sectionVisible) draw();
       }
     });
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     const observer = new ResizeObserver(resize);
     observer.observe(section);
+    sectionVisibility.observe(section);
     section.addEventListener("pointermove", move, { passive: true });
     section.addEventListener("pointerleave", leave);
     document.addEventListener("visibilitychange", visibility);
     resize();
-    if (!reducedMotion && !document.hidden) frame = window.requestAnimationFrame(animate);
-
     return () => {
       observer.disconnect();
+      sectionVisibility.disconnect();
       themeObserver.disconnect();
       section.removeEventListener("pointermove", move);
       section.removeEventListener("pointerleave", leave);
