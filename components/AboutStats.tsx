@@ -48,7 +48,7 @@ export function AboutStats() {
 
   const stats = [
     { label: "Projects built", value: 10, suffix: "+" },
-    { label: "Commits pushed", value: 520, suffix: "+" },
+    { label: "Commits pushed", value: 530, suffix: "+" },
     { label: "Top language", value: data.language?.name ?? "TypeScript", suffix: "", detail: data.language ? `${data.language.percentage}% of public code` : "Primary language across public repositories", title: "Share of language bytes in original public repositories, excluding forks." },
     { label: "Pull requests", value: data.pullRequestCount ?? 26, suffix: "+", detail: "Authored on GitHub" },
   ];
