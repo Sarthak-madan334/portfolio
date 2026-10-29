@@ -175,7 +175,7 @@ export function GitHubHeatmap({ contributions, firstDate, today, onCellSize }: {
     const current = activeDay.current;
     if (current?.date === day.date || (current && Date.now() < nextSelectionAt.current)) return;
     activeDay.current = day;
-    nextSelectionAt.current = Date.now() + 3_000;
+    nextSelectionAt.current = Date.now() + 1_000;
     setActive(day);
   }
 
