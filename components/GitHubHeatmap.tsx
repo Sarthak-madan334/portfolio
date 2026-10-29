@@ -57,10 +57,10 @@ export function GitHubHeatmap({ contributions, firstDate, today, onCellSize }: {
   const weeks = useMemo(() => buildWeeks(contributions, firstDate, today), [contributions, firstDate, today]);
   const months = useMemo(() => weeks.flatMap((week, column) => week.filter(day => day.inRange && day.date.endsWith("-01"))
     .map(day => ({ column, label: formatDate(day.date).slice(0, 3) }))), [weeks]);
-  const host = useRef<HTMLDivElement>(null);
   const viewport = useRef<HTMLDivElement>(null);
   const grid = useRef<HTMLDivElement>(null);
   const cache = useRef(new Map<string, GitHubDayActivity>());
+  const nextSelectionAt = useRef(0);
   const [active, setActive] = useState<Day | null>(null);
   const [details, setDetails] = useState<{ date: string; data: GitHubDayActivity | null; error: boolean } | null>(null);
   const detailsId = useId();
@@ -75,7 +75,6 @@ export function GitHubHeatmap({ contributions, firstDate, today, onCellSize }: {
       const cell = root.querySelector<HTMLButtonElement>("button");
       if (cell) onCellSize(cell.getBoundingClientRect().width);
       if (window.matchMedia("(max-width: 639px)").matches) scroll.scrollLeft = scroll.scrollWidth;
-      setActive(null);
     };
     measure();
     const observer = new ResizeObserver(measure);
@@ -120,18 +119,16 @@ export function GitHubHeatmap({ contributions, firstDate, today, onCellSize }: {
   }
 
   const graphStyle = { "--week-count": weeks.length, "--mobile-grid-width": `${weeks.length * 18 + (weeks.length - 1) * 4}px` } as CSSProperties;
+  function selectDay(day: Day) {
+    if (active?.date === day.date || (active && Date.now() < nextSelectionAt.current)) return;
+    nextSelectionAt.current = Date.now() + 3_000;
+    setActive(day);
+  }
+
   return (
-    <div ref={host} className={styles.host}
-      onMouseLeave={() => { if (!host.current?.contains(document.activeElement)) setActive(null); }}
-      onBlurCapture={event => { if (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget)) setActive(null); }}
+    <div className={styles.host}
       onKeyDown={event => { if (event.key === "Escape") setActive(null); }}>
-      <div ref={viewport} className={styles.viewport} role="region" aria-label="GitHub contributions over the last five months" onScroll={() => {
-        const focused = document.activeElement;
-        if (focused instanceof HTMLButtonElement && viewport.current?.contains(focused)) {
-          const day = weeks.flat().find(item => item.date === focused.dataset.date);
-          if (day) setActive(day);
-        } else setActive(null);
-      }}>
+      <div ref={viewport} className={styles.viewport} role="region" aria-label="GitHub contributions over the last five months">
         <div className={styles.graph} style={graphStyle}>
           <div className={styles.months} aria-hidden="true">
             {months.map(({ column, label }) => <span key={label} style={{ gridColumn: column + 1 }}>{label}</span>)}
@@ -146,9 +143,9 @@ export function GitHubHeatmap({ contributions, firstDate, today, onCellSize }: {
               aria-controls={active?.date === day.date ? detailsId : undefined}
               className={`${styles.cell} ${day.date === today ? styles.today : ""}`}
               style={{ backgroundColor: `var(--activity-level-${day.level})`, boxShadow: day.level === 0 ? "inset 0 0 0 1px rgba(255,255,255,.07)" : undefined }}
-              onMouseEnter={() => setActive(day)}
-              onFocus={() => setActive(day)}
-              onClick={() => setActive(day)}
+              onMouseEnter={() => selectDay(day)}
+              onFocus={() => selectDay(day)}
+              onClick={() => selectDay(day)}
             /> : <span key={day.date} className={styles.placeholder} aria-hidden="true" />)}
           </div>
         </div>
