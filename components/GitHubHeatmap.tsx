@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties } from "react";
+import { X } from "lucide-react";
 import type { GitHubDayActivity, GitHubDayItem } from "@/lib/github-day";
 import styles from "./GitHubHeatmap.module.css";
 
@@ -57,15 +58,22 @@ export function GitHubHeatmap({ contributions, firstDate, today, onCellSize }: {
   const weeks = useMemo(() => buildWeeks(contributions, firstDate, today), [contributions, firstDate, today]);
   const months = useMemo(() => weeks.flatMap((week, column) => week.filter(day => day.inRange && day.date.endsWith("-01"))
     .map(day => ({ column, label: formatDate(day.date).slice(0, 3) }))), [weeks]);
+  const host = useRef<HTMLDivElement>(null);
   const viewport = useRef<HTMLDivElement>(null);
   const grid = useRef<HTMLDivElement>(null);
+  const bubble = useRef<HTMLDivElement>(null);
   const cache = useRef(new Map<string, GitHubDayActivity>());
+  const activeDay = useRef<Day | null>(null);
+  const hoverTimer = useRef<number | undefined>(undefined);
   const nextSelectionAt = useRef(0);
   const [active, setActive] = useState<Day | null>(null);
+  const [bubblePosition, setBubblePosition] = useState({ left: 0, top: 0, width: 260, maxHeight: 170, arrow: 24, side: "right" });
   const [details, setDetails] = useState<{ date: string; data: GitHubDayActivity | null; error: boolean } | null>(null);
   const detailsId = useId();
   const activeDate = active?.date;
   const activeCount = active?.count;
+
+  useEffect(() => () => window.clearTimeout(hoverTimer.current), []);
 
   useLayoutEffect(() => {
     const root = grid.current;
@@ -81,6 +89,49 @@ export function GitHubHeatmap({ contributions, firstDate, today, onCellSize }: {
     observer.observe(root);
     return () => observer.disconnect();
   }, [weeks, onCellSize]);
+
+  useLayoutEffect(() => {
+    if (!activeDate) return;
+    const container = host.current;
+    const panel = bubble.current;
+    const scroll = viewport.current;
+    const root = grid.current;
+    const cell = root?.querySelector<HTMLButtonElement>(`button[data-date="${activeDate}"]`);
+    if (!container || !panel || !scroll || !root || !cell) return;
+
+    const measure = () => {
+      const bounds = container.getBoundingClientRect();
+      const gridBounds = root.getBoundingClientRect();
+      const viewBounds = scroll.getBoundingClientRect();
+      const cellBounds = cell.getBoundingClientRect();
+      const gap = 12;
+      const targetLeft = Math.max(viewBounds.left, Math.min(cellBounds.left, viewBounds.right));
+      const targetRight = Math.max(viewBounds.left, Math.min(cellBounds.right, viewBounds.right));
+      const leftSpace = Math.max(0, targetLeft - viewBounds.left - gap);
+      const rightSpace = Math.max(0, viewBounds.right - targetRight - gap);
+      const side = rightSpace >= leftSpace ? "right" : "left";
+      const width = Math.round(Math.min(340, Math.max(leftSpace, rightSpace)));
+      const maxHeight = Math.round(gridBounds.height);
+      const height = Math.min(panel.getBoundingClientRect().height, maxHeight);
+      const centerY = cellBounds.top + cellBounds.height / 2;
+      const top = Math.round(Math.max(gridBounds.top, Math.min(centerY - height / 2, gridBounds.bottom - height)) - bounds.top);
+      const left = Math.round((side === "right" ? targetRight + gap : targetLeft - gap - width) - bounds.left);
+      const arrow = Math.round(Math.max(12, Math.min(height - 12, centerY - bounds.top - top)));
+      setBubblePosition(current => current.left === left && current.top === top && current.width === width &&
+        current.maxHeight === maxHeight && current.arrow === arrow && current.side === side
+        ? current : { left, top, width, maxHeight, arrow, side });
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(container);
+    observer.observe(panel);
+    scroll.addEventListener("scroll", measure, { passive: true });
+    return () => {
+      observer.disconnect();
+      scroll.removeEventListener("scroll", measure);
+    };
+  }, [activeDate]);
 
   useEffect(() => {
     if (!activeDate || !activeCount) return;
@@ -120,14 +171,26 @@ export function GitHubHeatmap({ contributions, firstDate, today, onCellSize }: {
 
   const graphStyle = { "--week-count": weeks.length, "--mobile-grid-width": `${weeks.length * 18 + (weeks.length - 1) * 4}px` } as CSSProperties;
   function selectDay(day: Day) {
-    if (active?.date === day.date || (active && Date.now() < nextSelectionAt.current)) return;
+    const current = activeDay.current;
+    if (current?.date === day.date || (current && Date.now() < nextSelectionAt.current)) return;
+    activeDay.current = day;
     nextSelectionAt.current = Date.now() + 3_000;
     setActive(day);
   }
 
+  function cancelHover() {
+    window.clearTimeout(hoverTimer.current);
+  }
+
+  function closeDetails() {
+    cancelHover();
+    activeDay.current = null;
+    setActive(null);
+  }
+
   return (
-    <div className={styles.host}
-      onKeyDown={event => { if (event.key === "Escape") setActive(null); }}>
+    <div ref={host} className={styles.host}
+      onKeyDown={event => { if (event.key === "Escape") closeDetails(); }}>
       <div ref={viewport} className={styles.viewport} role="region" aria-label="GitHub contributions over the last five months">
         <div className={styles.graph} style={graphStyle}>
           <div className={styles.months} aria-hidden="true">
@@ -143,17 +206,28 @@ export function GitHubHeatmap({ contributions, firstDate, today, onCellSize }: {
               aria-controls={active?.date === day.date ? detailsId : undefined}
               className={`${styles.cell} ${day.date === today ? styles.today : ""}`}
               style={{ backgroundColor: `var(--activity-level-${day.level})`, boxShadow: day.level === 0 ? "inset 0 0 0 1px rgba(255,255,255,.07)" : undefined }}
-              onMouseEnter={() => selectDay(day)}
-              onFocus={() => selectDay(day)}
-              onClick={() => selectDay(day)}
+              onMouseEnter={() => {
+                cancelHover();
+                hoverTimer.current = window.setTimeout(() => selectDay(day), 160);
+              }}
+              onMouseLeave={cancelHover}
+              onFocus={() => { cancelHover(); selectDay(day); }}
+              onClick={() => { cancelHover(); selectDay(day); }}
             /> : <span key={day.date} className={styles.placeholder} aria-hidden="true" />)}
           </div>
         </div>
       </div>
-      {active && <section id={detailsId} className={styles.detailPanel} aria-label={`Activity on ${formatDate(active.date)}`}>
+      {active && <div ref={bubble} className={styles.bubble} data-side={bubblePosition.side}
+        style={{ left: bubblePosition.left, top: bubblePosition.top, width: bubblePosition.width,
+          "--bubble-max-height": `${bubblePosition.maxHeight}px`, "--arrow-top": `${bubblePosition.arrow}px` } as CSSProperties}>
+        <section id={detailsId} className={styles.detailPanel} aria-label={`Activity on ${formatDate(active.date)}`}>
         <div className={styles.detailHeader}>
           <strong>{formatDate(active.date)}</strong>
-          <span>{active.count === 0 ? "No contributions" : `${active.count} contribution${active.count === 1 ? "" : "s"}`}</span>
+          <div className={styles.detailActions}>
+            <span>{active.count === 0 ? "No contributions" : `${active.count} contribution${active.count === 1 ? "" : "s"}`}</span>
+            <button type="button" aria-label="Close activity details" title="Close activity details"
+              onClick={closeDetails}><X size={14} aria-hidden="true" /></button>
+          </div>
         </div>
         {active.count > 0 && <div aria-live="polite">
           {error ? <p className={styles.detailNote}>Public activity details are temporarily unavailable.</p>
@@ -177,7 +251,8 @@ export function GitHubHeatmap({ contributions, firstDate, today, onCellSize }: {
                   </div>
                 </>}
         </div>}
-      </section>}
+        </section>
+      </div>}
     </div>
   );
 }
