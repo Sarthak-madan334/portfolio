@@ -33,8 +33,10 @@ export function BloopPet() {
   const lastInteraction = useRef(0);
   const nextId = useRef(0);
   const busyRef = useRef(false);
+  const queuedAnalysis = useRef<string | null>(null);
   const messagesRef = useRef<ChatMessage[]>([]);
   const logRef = useRef<HTMLDivElement>(null);
+  const chatPanelRef = useRef<HTMLElement>(null);
   const petRef = useRef<HTMLButtonElement>(null);
   const leftPupil = useRef<SVGGElement>(null);
   const rightPupil = useRef<SVGGElement>(null);
@@ -53,9 +55,15 @@ export function BloopPet() {
     return next;
   }, []);
 
+  const closeChat = useCallback(() => {
+    queuedAnalysis.current = null;
+    openRef.current = false;
+    setOpen(false);
+  }, []);
+
   const touch = () => { lastInteraction.current = Date.now(); };
 
-  const hop = (showHeart = false) => {
+  const hop = useCallback((showHeart = false) => {
     const pet = petRef.current;
     if (pet) {
       pet.classList.remove(styles.hopping);
@@ -68,7 +76,7 @@ export function BloopPet() {
       setHearts((current) => [...current, id]);
       window.setTimeout(() => setHearts((current) => current.filter((item) => item !== id)), 950);
     }
-  };
+  }, []);
 
   useEffect(() => {
     lastInteraction.current = Date.now();
@@ -162,22 +170,27 @@ export function BloopPet() {
   useEffect(() => {
     if (!open) return;
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") closeChat();
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open]);
+  }, [open, closeChat]);
+
+  const openChat = useCallback(() => {
+    if (!openRef.current) setMood(moodRef.current);
+    openRef.current = true;
+    setOpen(true);
+    if (!openedOnce.current) {
+      openedOnce.current = true;
+      setHint(false);
+      addMessage("bot", `${NAME}! I'm ${NAME}. Pet me, feed me, or ask about Sarthak's work. ♥`);
+    }
+  }, [addMessage]);
 
   const clickPet = () => {
     touch();
     if (!open) {
-      setMood(moodRef.current);
-      setOpen(true);
-      if (!openedOnce.current) {
-        openedOnce.current = true;
-        setHint(false);
-        addMessage("bot", `${NAME}! I'm ${NAME}. Pet me, feed me, or ask about Sarthak's work. ♥`);
-      }
+      openChat();
       return;
     }
     changeMood(4);
@@ -194,13 +207,13 @@ export function BloopPet() {
     }
   };
 
-  const sendMessage = async (value: string) => {
+  const sendMessage = useCallback(async (value: string, activityDate?: string) => {
     const question = value.trim();
     if (!question || busyRef.current) return;
     busyRef.current = true;
     setBusy(true);
     setInput("");
-    touch();
+    lastInteraction.current = Date.now();
     changeMood(2);
 
     const history = messagesRef.current
@@ -215,13 +228,13 @@ export function BloopPet() {
       const response = await fetch("/api/bloop", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: question, history }),
+        body: JSON.stringify({ message: question, history: activityDate ? [] : history, ...(activityDate ? { activityDate } : {}) }),
       });
       const data = await response.json() as { reply?: string; error?: string };
       if (!response.ok || typeof data.reply !== "string") throw new Error(data.error || "Bloop couldn't answer just now.");
       const remaining = Math.max(0, 600 - (performance.now() - started));
       if (remaining) await new Promise((resolve) => window.setTimeout(resolve, remaining));
-      const reply = withMood(data.reply, moodRef.current);
+      const reply = activityDate ? data.reply : withMood(data.reply, moodRef.current);
       messagesRef.current = messagesRef.current.map((item) => item.id === typingId ? { ...item, role: "bot", text: reply } : item);
       setMessages(messagesRef.current);
       hop();
@@ -232,8 +245,30 @@ export function BloopPet() {
     } finally {
       busyRef.current = false;
       setBusy(false);
+      const queued = queuedAnalysis.current;
+      queuedAnalysis.current = null;
+      if (queued) window.setTimeout(() => window.dispatchEvent(new CustomEvent("bloop:analyze-day", { detail: { date: queued } })), 0);
     }
-  };
+  }, [addMessage, changeMood, hop]);
+
+  useEffect(() => {
+    const onAnalyzeDay = (event: Event) => {
+      const date = (event as CustomEvent<{ date?: unknown }>).detail?.date;
+      if (typeof date !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(date)) return;
+      openChat();
+      window.requestAnimationFrame(() => chatPanelRef.current?.focus());
+      if (busyRef.current) {
+        queuedAnalysis.current = date;
+        return;
+      }
+      const label = new Date(`${date}T00:00:00Z`).toLocaleDateString("en-US", {
+        month: "short", day: "numeric", year: "numeric", timeZone: "UTC",
+      });
+      void sendMessage(`Summarize Sarthak's public GitHub activity on ${label}.`, date);
+    };
+    window.addEventListener("bloop:analyze-day", onAnalyzeDay);
+    return () => window.removeEventListener("bloop:analyze-day", onAnalyzeDay);
+  }, [openChat, sendMessage]);
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -246,7 +281,7 @@ export function BloopPet() {
 
   return (
     <aside className={styles.widget} aria-label={`${NAME} portfolio helper`}>
-      {open && <section id="bloop-chat" className={styles.panel} aria-label={`Chat with ${NAME}`}>
+      {open && <section ref={chatPanelRef} id="bloop-chat" className={styles.panel} aria-label={`Chat with ${NAME}`} tabIndex={-1}>
         <div className={styles.header}>
           <div className={styles.moodGroup}>
             <span>Mood</span>
@@ -255,7 +290,7 @@ export function BloopPet() {
             </span>
           </div>
           <button type="button" className={styles.snack} onClick={giveSnack}>🍪 Snack</button>
-          <button type="button" className={styles.close} onClick={() => setOpen(false)} aria-label="Close Bloop chat">×</button>
+          <button type="button" className={styles.close} onClick={closeChat} aria-label="Close Bloop chat">×</button>
         </div>
 
         <div ref={logRef} className={styles.log} role="log" aria-live="polite" aria-relevant="additions text">
