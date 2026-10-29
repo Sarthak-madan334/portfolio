@@ -171,6 +171,7 @@ export function GitHubHeatmap({ contributions, firstDate, today, onCellSize }: {
 
   const graphStyle = { "--week-count": weeks.length, "--mobile-grid-width": `${weeks.length * 18 + (weeks.length - 1) * 4}px` } as CSSProperties;
   function selectDay(day: Day) {
+    if (day.count === 0) return;
     const current = activeDay.current;
     if (current?.date === day.date || (current && Date.now() < nextSelectionAt.current)) return;
     activeDay.current = day;
