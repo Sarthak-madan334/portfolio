@@ -236,10 +236,10 @@ export function GitHubHeatmap({ contributions, firstDate, today, onCellSize }: {
               }}>
               <Sparkles size={12} aria-hidden="true" /> AI
             </button>}
-            <button type="button" aria-label="Close activity details" title="Close activity details"
-              onClick={closeDetails}><X size={14} aria-hidden="true" /></button>
           </div>
         </div>
+        <button type="button" className={styles.closeDetails} aria-label="Close activity details" title="Close activity details"
+          onClick={closeDetails}><X size={14} aria-hidden="true" /></button>
         {active.count > 0 && <div aria-live="polite">
           {error ? <p className={styles.detailNote}>Public activity details are temporarily unavailable.</p>
             : !activity ? <p className={styles.detailNote}>Loading public activity...</p>
