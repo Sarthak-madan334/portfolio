@@ -222,6 +222,8 @@ export function GitHubHeatmap({ contributions, firstDate, today, onCellSize }: {
         style={{ left: bubblePosition.left, top: bubblePosition.top, width: bubblePosition.width,
           "--bubble-max-height": `${bubblePosition.maxHeight}px`, "--arrow-top": `${bubblePosition.arrow}px` } as CSSProperties}>
         <section id={detailsId} className={styles.detailPanel} aria-label={`Activity on ${formatDate(active.date)}`}>
+        <button type="button" className={styles.closeDetails} aria-label="Close activity details" title="Close activity details"
+          onClick={closeDetails}><X size={14} aria-hidden="true" /></button>
         <div className={styles.detailHeader}>
           <strong>{formatDate(active.date)}</strong>
           <div className={styles.detailActions}>
@@ -238,8 +240,6 @@ export function GitHubHeatmap({ contributions, firstDate, today, onCellSize }: {
             </button>}
           </div>
         </div>
-        <button type="button" className={styles.closeDetails} aria-label="Close activity details" title="Close activity details"
-          onClick={closeDetails}><X size={14} aria-hidden="true" /></button>
         {active.count > 0 && <div aria-live="polite">
           {error ? <p className={styles.detailNote}>Public activity details are temporarily unavailable.</p>
             : !activity ? <p className={styles.detailNote}>Loading public activity...</p>
