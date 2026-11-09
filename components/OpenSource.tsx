@@ -9,6 +9,18 @@ import { SectionHeading } from "./SectionHeading";
 
 const contributions = [
   {
+    pr: "PR #8827",
+    title: "Preserved person-company links when undoing changes.",
+    description:
+      "Made company-link undo safe: repeated requests to link an already-linked company no longer offer undo, while primary-company changes remain undoable. Undo now also preserves later primary-company selections and explicit clears.",
+    href: "https://github.com/open-mercato/open-mercato/pull/8827",
+    company: "Open Mercato",
+    date: "Nov 2026",
+    accent: "bg-[#111318]",
+    glow: "bg-[#34a853]/35",
+    showMergedLabel: true,
+  },
+  {
     pr: "PR #52",
     title: "Fixed crossword printing in Crucigrama.",
     description: (
@@ -40,6 +52,10 @@ const mobileContributions = [
   ...contributions.filter((contribution) => contribution.showMergedLabel),
   ...contributions.filter((contribution) => !contribution.showMergedLabel),
 ];
+
+function contributionDate(contribution: (typeof contributions)[number]) {
+  return "date" in contribution ? contribution.date : "Jun 2026";
+}
 
 export function OpenSource() {
   return (
@@ -211,6 +227,7 @@ function MobileContributionCard({
   active: boolean;
 }) {
   const dark = contribution.showMergedLabel;
+  const company = "company" in contribution ? contribution.company : null;
 
   return (
     <motion.article
@@ -261,8 +278,13 @@ function MobileContributionCard({
           <span className="rounded-full bg-[#e6f4ea] px-3 py-1.5 text-[10px] font-semibold text-[#137333] dark:bg-white/10 dark:text-white/75">
             Open source
           </span>
+          {company && (
+            <span className="rounded-full bg-[#f1f3f4] px-3 py-1.5 text-[10px] font-semibold text-[#5f6368] dark:bg-white/10 dark:text-white/75">
+              {company}
+            </span>
+          )}
           <span className="rounded-full bg-[#f1f3f4] px-3 py-1.5 text-[10px] font-semibold text-[#5f6368] dark:bg-white/10 dark:text-white/75">
-            Jun 2026
+            {contributionDate(contribution)}
           </span>
         </div>
         <h3 className={`mt-5 text-[2rem] font-semibold leading-[1.03] tracking-[-0.055em] ${dark ? "text-[#111113] dark:text-white" : "text-[#111113] dark:text-white"}`}>
@@ -281,14 +303,21 @@ function MobileContributionCard({
 }
 
 function DesktopContributionBody({ contribution }: { contribution: (typeof contributions)[number] }) {
+  const company = "company" in contribution ? contribution.company : null;
+
   return (
     <>
       <div className="flex flex-wrap gap-2">
         <span className="rounded-full bg-[#e6f4ea] px-3 py-1.5 text-[10px] font-semibold text-[#137333]">
           Open source
         </span>
+        {company && (
+          <span className="rounded-full bg-[#f1f3f4] px-3 py-1.5 text-[10px] font-semibold text-[#5f6368]">
+            {company}
+          </span>
+        )}
         <span className="rounded-full bg-[#f1f3f4] px-3 py-1.5 text-[10px] font-semibold text-[#5f6368]">
-          Jun 2026
+          {contributionDate(contribution)}
         </span>
         {contribution.showMergedLabel && (
           <span className="rounded-full bg-[#f1f3f4] px-3 py-1.5 text-[10px] font-semibold text-[#5f6368]">
