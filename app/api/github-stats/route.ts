@@ -4,10 +4,10 @@ import type { GitHubStats } from "@/lib/github-stats";
 const username = "Sarthak-madan334";
 type Repository = { name: string; fork: boolean };
 
-async function readJson(url: string) {
+async function readJson(url: string, revalidate = 3600, accept = "application/json") {
   const response = await fetch(url, {
-    headers: { Accept: "application/json", "User-Agent": "sarthak-portfolio" },
-    next: { revalidate: 3600 },
+    headers: { Accept: accept, "User-Agent": "sarthak-portfolio" },
+    next: { revalidate },
     signal: AbortSignal.timeout(10_000),
   });
   if (!response.ok) throw new Error(`GitHub stats unavailable (${response.status})`);
@@ -41,8 +41,17 @@ async function pullRequestStats(): Promise<GitHubStats> {
   return { pullRequestCount: data.total_count };
 }
 
+async function commitStats(): Promise<GitHubStats> {
+  const query = encodeURIComponent(`author:${username}`);
+  const data = await readJson(`https://api.github.com/search/commits?q=${query}&per_page=1`, 60, "application/vnd.github+json");
+  if (!Number.isInteger(data.total_count) || data.total_count < 0 || data.incomplete_results !== false) {
+    throw new Error("Invalid commit data");
+  }
+  return { commitCount: data.total_count };
+}
+
 export async function GET() {
-  const results = await Promise.allSettled([repositoryStats(), pullRequestStats()]);
+  const results = await Promise.allSettled([repositoryStats(), pullRequestStats(), commitStats()]);
   const stats: GitHubStats = {};
   for (const result of results) if (result.status === "fulfilled") Object.assign(stats, result.value);
   return Response.json(stats, { headers: { "Cache-Control": "no-store" } });
