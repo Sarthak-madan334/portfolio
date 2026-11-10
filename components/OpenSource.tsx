@@ -9,6 +9,18 @@ import { SectionHeading } from "./SectionHeading";
 
 const contributions = [
   {
+    pr: "PR #9068",
+    title: "Rendered EUDR plot names safely in map popups.",
+    description:
+      "Made GeoJSON plot names render as text in Leaflet popups, preventing stored HTML from running while keeping ordinary plot names intact.",
+    href: "https://github.com/open-mercato/open-mercato/pull/9068",
+    company: "Open Mercato",
+    date: "Nov 2026",
+    accent: "bg-[#111318]",
+    glow: "bg-[#34a853]/35",
+    showMergedLabel: true,
+  },
+  {
     pr: "PR #8827",
     title: "Preserved person-company links when undoing changes.",
     description:
