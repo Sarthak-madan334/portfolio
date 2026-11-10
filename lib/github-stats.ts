@@ -1,5 +1,6 @@
 export type GitHubStats = {
   pullRequestCount?: number;
+  commitCount?: number;
   language?: { name: string; percentage: number };
 };
 
