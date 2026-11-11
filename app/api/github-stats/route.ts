@@ -2,8 +2,8 @@ import { calculateTopLanguage } from "@/lib/github-stats";
 import type { GitHubStats } from "@/lib/github-stats";
 
 const username = "Sarthak-madan334";
-const commitBaseline = 481;
-const commitBaselineAt = "2026-11-11T06:37:46Z";
+const commitBaseline = 585;
+const commitBaselineAt = "2026-11-11T06:53:04Z";
 type Repository = { name: string; fork: boolean };
 
 async function readJson(url: string, revalidate = 3600, accept = "application/json") {
