@@ -73,9 +73,7 @@ export function AboutStats() {
     return () => { window.clearInterval(interval); document.removeEventListener("visibilitychange", onVisibilityChange); controller.abort(); };
   }, []);
 
-  const commitCount = data.commitCount === undefined
-    ? 480
-    : Math.floor((data.commitCount + 46) / 10) * 10;
+  const commitCount = Math.floor((data.commitCount ?? 481) / 10) * 10;
   const stats = [
     { label: "Projects built", value: 10, suffix: "+" },
     { label: "Commits pushed", value: commitCount, suffix: "+" },
