@@ -2,6 +2,8 @@ import { calculateTopLanguage } from "@/lib/github-stats";
 import type { GitHubStats } from "@/lib/github-stats";
 
 const username = "Sarthak-madan334";
+const commitBaseline = 585;
+const commitBaselineAt = "2026-11-11T06:53:04Z";
 type Repository = { name: string; fork: boolean };
 
 async function readJson(url: string, revalidate = 3600, accept = "application/json") {
@@ -42,12 +44,40 @@ async function pullRequestStats(): Promise<GitHubStats> {
 }
 
 async function commitStats(): Promise<GitHubStats> {
-  const query = encodeURIComponent(`author:${username}`);
-  const data = await readJson(`https://api.github.com/search/commits?q=${query}&per_page=1`, 60, "application/vnd.github+json");
-  if (!Number.isInteger(data.total_count) || data.total_count < 0 || data.incomplete_results !== false) {
-    throw new Error("Invalid commit data");
+  const events = await readJson(`https://api.github.com/users/${username}/events/public?per_page=100`, 60, "application/vnd.github+json");
+  if (!Array.isArray(events)) throw new Error("Invalid GitHub event data");
+
+  const commitShas = new Set<string>();
+  const zeroSha = "0000000000000000000000000000000000000000";
+  const pushes = events.filter(event => event?.type === "PushEvent"
+    && typeof event.created_at === "string" && event.created_at > commitBaselineAt
+    && typeof event.repo?.name === "string"
+    && typeof event.payload?.before === "string" && typeof event.payload?.head === "string"
+    && event.payload.head !== zeroSha);
+
+  for (const event of pushes) {
+    try {
+      let before = event.payload.before;
+      if (before === zeroSha) {
+        const repository = await readJson(`https://api.github.com/repos/${event.repo.name}`, 3600, "application/vnd.github+json");
+        if (typeof repository.default_branch !== "string") continue;
+        before = repository.default_branch;
+      }
+      const comparison = await readJson(
+        `https://api.github.com/repos/${event.repo.name}/compare/${before}...${event.payload.head}`,
+        60,
+        "application/vnd.github+json",
+      );
+      if (!Array.isArray(comparison.commits)) continue;
+      for (const commit of comparison.commits) {
+        if (typeof commit?.sha === "string") commitShas.add(commit.sha);
+      }
+    } catch {
+      // Keep counting the pushes whose comparisons are available.
+    }
   }
-  return { commitCount: data.total_count };
+
+  return { commitCount: commitBaseline + commitShas.size };
 }
 
 export async function GET() {
