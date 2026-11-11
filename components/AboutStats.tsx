@@ -74,8 +74,8 @@ export function AboutStats() {
   }, []);
 
   const commitCount = data.commitCount === undefined
-    ? 560
-    : Math.max(560, Math.ceil((data.commitCount + 128) / 10) * 10);
+    ? 480
+    : Math.floor((data.commitCount + 46) / 10) * 10;
   const stats = [
     { label: "Projects built", value: 10, suffix: "+" },
     { label: "Commits pushed", value: commitCount, suffix: "+" },
