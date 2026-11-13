@@ -33,6 +33,18 @@ const contributions = [
     showMergedLabel: true,
   },
   {
+    pr: "PR #9177",
+    title: "Removed hard-coded admin notification fallback.",
+    description:
+      "Onboarding and demo-feedback flows now skip operator notifications with a warning when ADMIN_EMAIL is unset; demo feedback also returns 404 when demo mode is disabled.",
+    href: "https://github.com/open-mercato/open-mercato/pull/9177",
+    company: "Open Mercato",
+    date: "Nov 2026",
+    accent: "bg-[#111318]",
+    glow: "bg-[#34a853]/35",
+    showMergedLabel: false,
+  },
+  {
     pr: "PR #41",
     title: "Improved code execution console in AlgoForge.",
     description:
