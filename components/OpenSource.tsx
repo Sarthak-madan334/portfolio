@@ -33,22 +33,6 @@ const contributions = [
     showMergedLabel: true,
   },
   {
-    pr: "PR #52",
-    title: "Fixed crossword printing in Crucigrama.",
-    description: (
-      <>
-        Reproduced the issue, traced it through the{" "}
-        <span className="font-medium text-[#1d1d1f] dark:text-white">react-to-print</span>{" "}
-        integration, and submitted a focused fix to restore reliable crossword
-        printing.
-      </>
-    ),
-    href: "https://github.com/m0nt4ld0/crucigrama/pull/52",
-    accent: "bg-[#2563eb]",
-    glow: "bg-[#7c3aed]/35",
-    showMergedLabel: false,
-  },
-  {
     pr: "PR #41",
     title: "Improved code execution console in AlgoForge.",
     description:
