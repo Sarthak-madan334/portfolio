@@ -64,20 +64,28 @@ function Empty({ loading }: { loading: boolean }) {
 
 function Trend({ months }: { months: { key: string; count: number; label: string }[] }) {
   const width = 360;
-  const height = 126;
   const max = Math.max(1, ...months.map(month => month.count));
+  const top = 25;
+  const bottom = 103;
   const points = months.map((month, index) => ({
     ...month,
-    x: 20 + index * (width - 40) / Math.max(1, months.length - 1),
-    y: 10 + (1 - month.count / max) * (height - 31),
+    x: 46 + index * (width - 66) / Math.max(1, months.length - 1),
+    y: bottom - month.count / max * (bottom - top),
   }));
-  return <svg viewBox={`0 0 ${width} ${height}`} className="h-[126px] w-full overflow-visible" role="img" aria-label="Monthly GitHub contributions">
-    {[0, .5, 1].map(level => <line key={level} x1="20" x2="340" y1={10 + level * (height - 31)} y2={10 + level * (height - 31)} stroke="rgba(255,255,255,.09)" strokeDasharray="3 4" />)}
+  return <svg viewBox={`0 0 ${width} 136`} className="h-[136px] w-full overflow-visible" role="img" aria-label="Monthly GitHub contributions">
+    {(max > 1 ? [1, .5, 0] : [1, 0]).map(level => {
+      const y = bottom - level * (bottom - top);
+      return <g key={level}>
+        <line x1="41" x2="340" y1={y} y2={y} stroke="rgba(255,255,255,.09)" strokeDasharray="3 4" />
+        <text x="32" y={y + 3} textAnchor="end" fill="#9ca3af" fontSize="10">{Math.round(max * level)}</text>
+      </g>;
+    })}
     <polyline points={points.map(point => `${point.x},${point.y}`).join(" ")} fill="none" stroke={accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
     {points.map(point => <g key={point.key} tabIndex={0} aria-label={`${point.label}: ${point.count} contributions`}>
       <title>{`${point.label}: ${point.count} contributions`}</title>
       <circle cx={point.x} cy={point.y} r="4" fill="#121416" stroke={accent} strokeWidth="2.5" />
-      <text x={point.x} y="124" textAnchor="middle" fill="#9ca3af" fontSize="11">{point.label}</text>
+      <text x={point.x} y={point.y - 10} textAnchor="middle" fill="#c3c9d3" fontSize="10" fontWeight="600">{point.count}</text>
+      <text x={point.x} y="132" textAnchor="middle" fill="#9ca3af" fontSize="11">{point.label}</text>
     </g>)}
   </svg>;
 }
