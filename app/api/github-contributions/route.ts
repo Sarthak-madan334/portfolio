@@ -30,7 +30,6 @@ async function graphQLCalendar(firstDate: string, today: string, token: string) 
     body: JSON.stringify({
       query: `query Activity($login: String!, $from: DateTime!, $to: DateTime!) {
         user(login: $login) { contributionsCollection(from: $from, to: $to) {
-          totalCommitContributions
           contributionCalendar { weeks { contributionDays { date contributionCount } } }
         } }
       }`,
@@ -43,11 +42,11 @@ async function graphQLCalendar(firstDate: string, today: string, token: string) 
   if (body.errors?.length) throw new Error("GitHub GraphQL returned errors");
   const collection = body.data?.user?.contributionsCollection;
   const weeks = collection?.contributionCalendar?.weeks;
-  if (!Array.isArray(weeks) || !Number.isInteger(collection.totalCommitContributions)) throw new Error("Invalid GitHub calendar");
+  if (!Array.isArray(weeks)) throw new Error("Invalid GitHub calendar");
   const contributions = weeks.flatMap((week: { contributionDays?: { date: string; contributionCount: number }[] }) => week.contributionDays ?? [])
     .filter((day: { date: string; contributionCount: number }) => typeof day.date === "string" && Number.isInteger(day.contributionCount))
     .map((day: { date: string; contributionCount: number }) => ({ date: day.date, count: day.contributionCount }));
-  return { contributions, commitCount: collection.totalCommitContributions as number };
+  return { contributions };
 }
 
 export async function GET() {
@@ -69,7 +68,7 @@ export async function GET() {
     if (!response.ok) throw new Error(`GitHub calendar unavailable (${response.status})`);
     const contributions = parsePublicCalendar(await response.text()).filter(day => day.date >= firstDate && day.date <= today);
     if (!contributions.length) throw new Error("GitHub returned no contribution days");
-    return Response.json({ contributions, firstDate, today, commitCount: null }, { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=300" } });
+    return Response.json({ contributions, firstDate, today }, { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=300" } });
   } catch (error) {
     console.error("Failed to load GitHub contribution data", error);
     return Response.json({ error: "GitHub activity is temporarily unavailable." }, { status: 502, headers: { "Cache-Control": "no-store" } });

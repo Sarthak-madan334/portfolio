@@ -2,13 +2,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { CSSProperties } from "react";
-import { BarChart3, CalendarDays, Code2, GitCommit, Github, GitPullRequest, Layers3, PieChart, Zap } from "lucide-react";
+import { BarChart3, Braces, CalendarDays, Code2, Github, GitPullRequest, Layers3, PieChart, Zap } from "lucide-react";
 import type { GitHubStats } from "@/lib/github-stats";
 import { GitHubHeatmap } from "./GitHubHeatmap";
 import type { Contribution } from "./GitHubHeatmap";
 import styles from "./GitHubHeatmap.module.css";
 
-type Calendar = { contributions: Contribution[]; firstDate: string; today: string; commitCount: number | null };
+type Calendar = { contributions: Contribution[]; firstDate: string; today: string };
 const accent = "#367DFF";
 const languageColors = ["#367DFF", "#2563d9", "#6b9df2", "#91a8d2", "#536176"];
 const dayMs = 86_400_000;
@@ -167,7 +167,7 @@ export function AboutGitHubActivity() {
   const summary = [
     { label: "Contributions", value: activity?.total, icon: Code2, title: "Contributions in the displayed period" },
     { label: "Projects built", value: stats.projectCount, icon: Layers3, title: "Public original repositories, excluding archived repositories" },
-    { label: "Commits pushed", value: calendar?.commitCount, icon: GitCommit, title: "Qualifying commit contributions in the displayed period; requires GitHub authentication" },
+    { label: "Languages used", value: stats.languageCount, icon: Braces, title: "Distinct languages in original public repositories, excluding forks and archived repositories" },
     { label: "Pull requests", value: stats.pullRequestCount, icon: GitPullRequest, title: "Pull requests authored on GitHub" },
     { label: "Top language", value: stats.language?.name, icon: Code2, title: "By language bytes in public original, non-archived repositories" },
   ];

@@ -33,6 +33,7 @@ async function repositoryStats(): Promise<GitHubStats> {
   const sorted = Array.from(totals).sort((a, b) => b[1] - a[1]);
   const total = sorted.reduce((sum, [, bytes]) => sum + bytes, 0);
   if (!total) return result;
+  result.languageCount = totals.size;
   const top = sorted.slice(0, 4).map(([name, bytes]) => ({ name, percentage: Math.round(bytes / total * 1000) / 10 }));
   const rest = sorted.slice(4).reduce((sum, [, bytes]) => sum + bytes, 0);
   result.languages = rest ? [...top, { name: "Other", percentage: Math.round(rest / total * 1000) / 10 }] : top;

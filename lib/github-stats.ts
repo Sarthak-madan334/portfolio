@@ -1,6 +1,7 @@
 export type GitHubStats = {
   pullRequestCount?: number;
   projectCount?: number;
+  languageCount?: number;
   language?: { name: string; percentage: number };
   languages?: { name: string; percentage: number }[];
 };
