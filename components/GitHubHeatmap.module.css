@@ -1,10 +1,10 @@
 .palette {
   --activity-level-0: rgba(255, 255, 255, .06);
-  --activity-level-1: #1e3a8a;
-  --activity-level-2: #2563eb;
-  --activity-level-3: #3b82f6;
-  --activity-level-4: #60a5fa;
-  --activity-accent: #4c8dff;
+  --activity-level-1: #17376d;
+  --activity-level-2: #2254a8;
+  --activity-level-3: #2d69da;
+  --activity-level-4: #367dff;
+  --activity-accent: #367dff;
 }
 
 .host { position: relative; min-width: 0; }
