@@ -1,7 +1,8 @@
 export type GitHubStats = {
   pullRequestCount?: number;
-  commitCount?: number;
+  projectCount?: number;
   language?: { name: string; percentage: number };
+  languages?: { name: string; percentage: number }[];
 };
 
 export function calculateTopLanguage(repositories: Record<string, number>[]) {

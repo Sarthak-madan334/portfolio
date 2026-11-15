@@ -3,7 +3,6 @@ import type { ReactNode } from "react";
 import { Reveal } from "./Reveal";
 import { ContactStarfield } from "./ContactStarfield";
 import { AboutGitHubActivity } from "./AboutGitHubActivity";
-import { AboutStats } from "./AboutStats";
 import { links } from "@/lib/data";
 
 const socialLinks = [
@@ -70,12 +69,7 @@ export function About() {
           </div>
         </Reveal>
 
-        <div className="mt-6 grid py-4 sm:py-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
-          <AboutStats />
-          <div className="mt-8 min-w-0 lg:mt-0 lg:pl-8">
-            <AboutGitHubActivity />
-          </div>
-        </div>
+        <div className="mt-8"><AboutGitHubActivity /></div>
       </div>
     </section>
   );
