@@ -174,7 +174,7 @@ export function AboutGitHubActivity() {
   const recentMax = Math.max(1, ...(activity?.recent.map(day => day.count) ?? []));
 
   return <div className={`${styles.palette} text-white`} style={{ "--activity-accent": accent } as CSSProperties}>
-    <div className="rounded-[18px] border border-white/[0.11] bg-[#121214] p-5 sm:p-6">
+    <div className={`${styles.glassPanel} rounded-[18px] p-5 sm:p-6`}>
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <h3 className="flex items-center gap-3 text-xl font-semibold tracking-[-0.03em] sm:text-2xl"><span className="grid h-9 w-9 place-items-center rounded-xl bg-[#367DFF]/[0.12] text-[#367DFF]"><Github size={21} /></span>GitHub activity</h3>
         <span className="flex items-center gap-2 text-xs text-[#a1a1aa]"><CalendarDays size={15} /> Last 5 months</span>
@@ -194,7 +194,7 @@ export function AboutGitHubActivity() {
     </div>
 
     <div className="mt-3 grid gap-3 lg:grid-cols-[1fr_1.3fr_1.2fr]">
-      <section className="min-w-0 rounded-[18px] border border-white/[0.11] bg-[#121214] p-5">
+      <section className={`${styles.glassPanel} min-w-0 rounded-[18px] p-5`}>
         <h4 className="flex items-center gap-2.5 text-base font-semibold"><Zap size={17} className="text-[#367DFF]" /> Contribution streak</h4>
         {activity ? <>
           <div className="mt-5 flex items-end justify-between gap-3">
@@ -205,12 +205,12 @@ export function AboutGitHubActivity() {
         </> : <div className="mt-8"><Empty loading={!calendarFailed} /></div>}
       </section>
 
-      <section className="min-w-0 rounded-[18px] border border-white/[0.11] bg-[#121214] p-5">
+      <section className={`${styles.glassPanel} min-w-0 rounded-[18px] p-5`}>
         <h4 className="flex items-center gap-2.5 text-base font-semibold"><BarChart3 size={17} className="text-[#367DFF]" /> Activity trend</h4>
         {activity ? <div className="mt-3"><Trend months={activity.months} /></div> : <div className="mt-8"><Empty loading={!calendarFailed} /></div>}
       </section>
 
-      <section className="min-w-0 rounded-[18px] border border-white/[0.11] bg-[#121214] p-5">
+      <section className={`${styles.glassPanel} min-w-0 rounded-[18px] p-5`}>
         <h4 className="flex items-center gap-2.5 text-base font-semibold"><PieChart size={17} className="text-[#367DFF]" /> Top languages</h4>
         <p className="mt-1 text-[11px] text-[#a1a1aa]">Public repository languages · excluding forks and archived repos</p>
         {stats.languages?.length ? <div className="mt-3"><Languages languages={stats.languages} /></div> : <div className="mt-8"><Empty loading={!statsLoaded && !statsFailed} /></div>}
