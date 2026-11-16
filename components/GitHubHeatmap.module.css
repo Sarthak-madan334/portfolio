@@ -1,10 +1,10 @@
 .palette {
-  --activity-text: #18181b;
-  --activity-muted: #666b75;
-  --activity-secondary: #535966;
-  --activity-divider: rgba(24, 24, 27, .1);
-  --activity-gridline: rgba(24, 24, 27, .12);
-  --activity-donut-track: #e5e7eb;
+  --activity-text: #f4f4f5;
+  --activity-muted: #a1a1aa;
+  --activity-secondary: #b0b7c4;
+  --activity-divider: rgba(255, 255, 255, .1);
+  --activity-gridline: rgba(255, 255, 255, .1);
+  --activity-donut-track: #272a30;
   --activity-level-0: rgba(255, 255, 255, .06);
   --activity-level-1: #17376d;
   --activity-level-2: #2254a8;
@@ -15,9 +15,9 @@
 
 .glassPanel {
   color: var(--activity-text);
-  border: 1px solid rgba(255, 255, 255, .78);
-  background-color: rgba(255, 255, 255, .58);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .92), 0 14px 38px rgba(35, 45, 65, .1);
+  border: 1px solid rgba(255, 255, 255, .15);
+  background-color: rgba(8, 9, 11, .94);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 14px 38px rgba(0, 0, 0, .2);
   -webkit-backdrop-filter: blur(18px) saturate(135%);
   backdrop-filter: blur(18px) saturate(135%);
 }
@@ -42,7 +42,7 @@
 .secondaryText { color: var(--activity-secondary); }
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .glassPanel { background-color: rgba(255, 255, 255, .92); }
+  .glassPanel { background-color: #08090b; }
   :global(.dark) .glassPanel { background-color: #17181c; }
 }
 
