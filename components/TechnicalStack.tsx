@@ -1,120 +1,66 @@
 "use client";
 
-import { motion } from "framer-motion";
-import {
-  Braces,
-  CloudCog,
-  Code2,
-  Cpu,
-  Database,
-  Layers3,
-  Wrench,
-} from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { Braces, CloudCog, Code2, Cpu, Database, Layers3, Wrench } from "lucide-react";
 import { stackGroups } from "@/lib/data";
 
 const icons = [Code2, Layers3, CloudCog, Database, Cpu, Wrench, Braces];
+const brandMarks = ["typescript", "react", "nodedotjs", "postgresql", null, "github", null];
 const accents = [
-  { icon: "text-blue-600", dot: "bg-blue-500" },
-  { icon: "text-violet-600", dot: "bg-violet-500" },
-  { icon: "text-cyan-700", dot: "bg-cyan-500" },
-  { icon: "text-emerald-700", dot: "bg-emerald-500" },
-  { icon: "text-fuchsia-700", dot: "bg-fuchsia-500" },
-  { icon: "text-sky-700", dot: "bg-sky-500" },
-  { icon: "text-amber-700", dot: "bg-amber-500" },
-];
-const spans = [
-  "lg:col-span-3",
-  "lg:col-span-3",
-  "lg:col-span-3",
-  "lg:col-span-3",
-  "lg:col-span-4",
-  "lg:col-span-4",
-  "col-span-2 lg:col-span-4",
+  "text-[#3178c6] dark:text-[#60a5fa]",
+  "text-[#087ea4] dark:text-[#61dafb]",
+  "text-[#43853d] dark:text-[#7cc66e]",
+  "text-[#336791] dark:text-[#83b5df]",
+  "text-[#95652c] dark:text-[#d9af78]",
+  "text-[#24292f] dark:text-white/85",
+  "text-[#737379] dark:text-white/65",
 ];
 
 export function TechnicalStack() {
-  return (
-    <section
-      id="stack"
-      className="relative overflow-hidden border-y border-black/[0.06] bg-[#f5f5f7] py-14 transition-colors duration-500 dark:border-white/[0.07] dark:bg-[#0e0f12] sm:py-20"
-    >
-      <motion.div
-        aria-hidden="true"
-        animate={{ x: [0, 80, 0], scale: [1, 1.12, 1] }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute -right-20 top-1/3 h-64 w-64 rounded-full bg-blue-200/25 blur-[90px]"
-      />
+  const reduceMotion = useReducedMotion();
 
-      <div className="site-shell relative">
-        <div className="max-w-3xl">
+  return (
+    <section id="stack" aria-labelledby="stack-heading" className="border-y border-black/[0.06] bg-[#f5f5f7] py-10 transition-colors duration-500 dark:border-white/[0.07] dark:bg-[#0e0f12] sm:py-12">
+      <div className="site-shell">
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
           <div>
-            <p className="mb-5 flex items-center gap-3 text-sm font-medium tracking-[-0.01em] text-[#77777d] dark:text-white/50"><span className="grid h-7 min-w-7 place-items-center rounded-full bg-[#ececf0] px-2 text-[10px] font-bold text-[#55555b] dark:bg-white/[0.08] dark:text-white/60">02</span><span>Technical stack</span></p>
-            <h2 className="max-w-3xl text-3xl font-semibold leading-[1.04] tracking-[-0.05em] text-[#1d1d1f] dark:text-white sm:text-5xl">One toolkit. <span className="block sm:inline">Every layer.</span></h2>
-            <p className="mt-5 max-w-md text-sm leading-6 text-[#55565d] dark:text-white/55">The technologies I use across product engineering—visible at a glance, from interface to infrastructure.</p>
+            <p className="mb-3 flex items-center gap-2.5 text-xs font-medium text-[#737379] dark:text-white/50">
+              <span className="grid h-6 w-6 place-items-center rounded-full bg-black/[0.05] text-[10px] dark:bg-white/[0.08]">02</span>
+              Technical stack
+            </p>
+            <h2 id="stack-heading" className="text-3xl font-semibold leading-tight tracking-[-0.05em] text-[#1d1d1f] dark:text-white sm:text-4xl">Built with purpose.</h2>
           </div>
+          <p className="text-xs leading-5 text-[#737379] dark:text-white/50">The tools behind the work.</p>
         </div>
 
-        <div className="mt-8 grid grid-cols-2 gap-x-5 md:gap-x-8 lg:grid-cols-12">
+        <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-4">
           {stackGroups.map((group, index) => {
-            const Icon = icons[index];
-            const accent = accents[index];
-
+            const Icon = icons[index] ?? Braces;
+            const isConcepts = group.title === "Core Concepts";
             return (
-              <motion.div
+              <motion.article
                 key={group.title}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -3 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.42, delay: index * 0.045 }}
-                className={`group relative border-t border-black/[0.10] py-4 dark:border-white/[0.12] sm:py-5 ${spans[index]}`}
+                initial={false}
+                whileHover={reduceMotion ? undefined : { y: -2 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className={`group relative rounded-xl border border-black/[0.07] bg-white/65 p-3 backdrop-blur-md transition-colors duration-200 hover:border-black/20 hover:bg-white dark:border-white/[0.08] dark:bg-white/[0.025] dark:hover:border-white/20 dark:hover:bg-white/[0.055] ${isConcepts ? "col-span-2" : ""}`}
               >
-                <motion.span
-                  aria-hidden="true"
-                  className={`absolute -top-px left-0 h-[2px] origin-left ${accent.dot}`}
-                  initial={{ width: 0 }}
-                  whileInView={{ width: 34 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.12 + index * 0.045 }}
-                />
-
-                <div className="flex items-center gap-2.5">
-                  <motion.span
-                    whileHover={{ rotate: 9, scale: 1.12 }}
-                    className={accent.icon}
-                  >
-                    <Icon size={17} />
-                  </motion.span>
-                  <h3 className="text-[13px] font-semibold tracking-[-0.025em] text-[#17181c] sm:text-sm dark:text-white">
-                    {group.title}
-                  </h3>
-                  <span className="ml-auto hidden font-mono text-[9px] text-black/25 dark:text-white/25 sm:block">
-                    0{index + 1}
+                <div className="flex items-center gap-2">
+                  <span aria-hidden="true" className={`grid h-5 w-5 shrink-0 place-items-center transition-transform duration-200 group-hover:scale-110 motion-reduce:transform-none ${accents[index]}`}>
+                    {brandMarks[index] ? (
+                      <span className="block h-4 w-4 bg-current" style={{ maskImage: `url(/stack-icons/${brandMarks[index]}.svg)`, WebkitMaskImage: `url(/stack-icons/${brandMarks[index]}.svg)`, maskSize: "contain", maskRepeat: "no-repeat", maskPosition: "center" }} />
+                    ) : <Icon size={16} strokeWidth={1.8} />}
                   </span>
+                  <h3 className="text-xs font-semibold leading-4 tracking-[-0.015em] text-[#1d1d1f] dark:text-white/90 sm:text-[13px]">{group.title}</h3>
                 </div>
-
-                <div className="mt-2.5 flex flex-wrap items-center gap-x-2 gap-y-1.5">
-                  {group.items.map((item, itemIndex) => (
-                    <span key={item.name} className="inline-flex items-center gap-2">
-                      <span
-                        title={item.use}
-                        aria-label={`${item.name}: ${item.use}`}
-                        className="cursor-default text-[11px] font-medium text-[#55565d] dark:text-white/55 sm:text-xs"
-                      >
-                        {item.name}
-                      </span>
-                      {itemIndex < group.items.length - 1 && (
-                        <motion.span
-                          aria-hidden="true"
-                          animate={{ opacity: [0.28, 0.72, 0.28] }}
-                          transition={{ duration: 2.4, delay: index * 0.14, repeat: Infinity }}
-                          className={`h-1 w-1 rounded-full ${accent.dot}`}
-                        />
-                      )}
-                    </span>
+                <ul className="mt-2 flex flex-wrap gap-x-2 gap-y-1">
+                  {group.items.map((item) => (
+                    <li key={item.name} title={item.use} className="text-[11px] leading-4 text-[#606068] transition-colors duration-200 group-hover:text-[#35353b] dark:text-white/60 dark:group-hover:text-white/80">
+                      {item.name}
+                    </li>
                   ))}
-                </div>
-              </motion.div>
+                </ul>
+              </motion.article>
             );
           })}
         </div>
