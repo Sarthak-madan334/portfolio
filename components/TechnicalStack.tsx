@@ -53,9 +53,10 @@ export function TechnicalStack() {
                   </span>
                   <h3 className="text-xs font-semibold leading-4 tracking-[-0.015em] text-[#1d1d1f] dark:text-white/90 sm:text-[13px]">{group.title}</h3>
                 </div>
-                <ul className="mt-2 flex flex-wrap gap-x-2 gap-y-1">
+                <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
                   {group.items.map((item) => (
-                    <li key={item.name} title={item.use} className="text-[11px] leading-4 text-[#606068] transition-colors duration-200 group-hover:text-[#35353b] dark:text-white/60 dark:group-hover:text-white/80">
+                    <li key={item.name} title={item.use} className="inline-flex items-center gap-1.5 text-[11px] leading-4 text-[#606068] transition-colors duration-200 group-hover:text-[#35353b] dark:text-white/60 dark:group-hover:text-white/80">
+                      <span aria-hidden="true" className="h-1 w-1 shrink-0 rounded-full bg-blue-500 dark:bg-blue-400" />
                       {item.name}
                     </li>
                   ))}
