@@ -43,7 +43,7 @@ export function TechnicalStack() {
                 initial={false}
                 whileHover={reduceMotion ? undefined : { y: -2 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className={`group relative rounded-xl border border-black/[0.07] bg-white/65 p-3 backdrop-blur-md transition-colors duration-200 hover:border-black/20 hover:bg-white dark:border-white/[0.08] dark:bg-white/[0.025] dark:hover:border-white/20 dark:hover:bg-white/[0.055] ${isConcepts ? "col-span-2" : ""}`}
+                className={`group relative rounded-xl border border-black/[0.07] bg-[#111113] p-3 backdrop-blur-md transition-colors duration-200 hover:border-black/30 hover:bg-[#1b1b1d] dark:border-white/[0.08] dark:bg-white/[0.025] dark:hover:border-white/20 dark:hover:bg-white/[0.055] ${isConcepts ? "col-span-2" : ""}`}
               >
                 <div className="flex items-center gap-2">
                   <span aria-hidden="true" className={`grid h-5 w-5 shrink-0 place-items-center transition-transform duration-200 group-hover:scale-110 motion-reduce:transform-none ${accents[index]}`}>
@@ -51,11 +51,11 @@ export function TechnicalStack() {
                       <span className="block h-4 w-4 bg-current" style={{ maskImage: `url(/stack-icons/${brandMarks[index]}.svg)`, WebkitMaskImage: `url(/stack-icons/${brandMarks[index]}.svg)`, maskSize: "contain", maskRepeat: "no-repeat", maskPosition: "center" }} />
                     ) : <Icon size={16} strokeWidth={1.8} />}
                   </span>
-                  <h3 className="text-xs font-semibold leading-4 tracking-[-0.015em] text-[#1d1d1f] dark:text-white/90 sm:text-[13px]">{group.title}</h3>
+                  <h3 className="text-xs font-semibold leading-4 tracking-[-0.015em] text-white sm:text-[13px]">{group.title}</h3>
                 </div>
                 <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
                   {group.items.map((item) => (
-                    <li key={item.name} title={item.use} className="inline-flex items-center gap-1.5 text-[11px] leading-4 text-[#606068] transition-colors duration-200 group-hover:text-[#35353b] dark:text-white/60 dark:group-hover:text-white/80">
+                    <li key={item.name} title={item.use} className="inline-flex items-center gap-1.5 text-[11px] leading-4 text-white/65 transition-colors duration-200 group-hover:text-white/90 dark:text-white/60 dark:group-hover:text-white/80">
                       <span aria-hidden="true" className="h-1 w-1 shrink-0 rounded-full bg-blue-500 dark:bg-blue-400" />
                       {item.name}
                     </li>
