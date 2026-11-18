@@ -14,15 +14,15 @@ export function Projects() {
       <div className="site-shell hidden lg:block">
         <SectionHeading number="03" eyebrow="Selected work" title="Projects, presented as products." description="End-to-end builds that show how I think across product structure, interface craft, integrations, and deployment." />
         <div className="mt-12 space-y-8">
-          {projects.map((project, index) => { const dark = project.title === "Grillr" || project.title === "DEADLOCK"; return <Reveal key={project.title} delay={index * .08}>
+          {projects.map((project, index) => { const dark = project.title === "Grillr"; return <Reveal key={project.title} delay={index * .08}>
             <motion.article whileHover={{ y: -4 }} transition={{ duration: .3 }} className={`relative overflow-hidden rounded-[40px] ${dark ? "bg-[#0b0b0f] text-white" : "bg-[#e8f0fe] text-[#1d1d1f] dark:bg-[#151925] dark:text-white"}`}>
-              {dark && <><div className={`absolute -right-24 -top-28 h-96 w-96 rounded-full blur-[100px] ${project.title === "Grillr" ? "bg-[#7c3aed]/25" : "bg-[#e50914]/30"}`} /><div className="absolute bottom-0 left-[30%] h-64 w-64 rounded-full bg-[#7c3aed]/20 blur-[90px]" /></>}
+              {dark && <><div className="absolute -right-24 -top-28 h-96 w-96 rounded-full bg-[#7c3aed]/25 blur-[100px]" /><div className="absolute bottom-0 left-[30%] h-64 w-64 rounded-full bg-[#7c3aed]/20 blur-[90px]" /></>}
               <div className="relative grid min-h-[620px] lg:grid-cols-[0.82fr_1.18fr]">
                 <div className="flex flex-col justify-between p-8 sm:p-12 lg:p-14">
-                  <div><span className={`text-xs font-semibold ${dark ? "text-white/45" : "text-[#5f6368] dark:text-white/45"}`}>PROJECT {project.index} · {project.live ? "LIVE" : project.status?.toUpperCase()}</span><h3 className="mt-8 text-5xl font-semibold tracking-[-0.065em] sm:text-7xl">{project.title}</h3><p className={`mt-4 text-sm font-semibold ${dark ? (project.title === "Grillr" ? "text-[#b7a2ff]" : "text-[#ff6b73]") : "text-[#1967d2] dark:text-[#78a6ff]"}`}>{project.subtitle}</p><p className={`mt-8 max-w-lg text-base leading-8 ${dark ? "text-white/60" : "text-[#5f6368] dark:text-white/55"}`}>{project.description}</p></div>
+                  <div><span className={`text-xs font-semibold ${dark ? "text-white/45" : "text-[#5f6368] dark:text-white/45"}`}>PROJECT {project.index} · {project.live ? "LIVE" : project.status?.toUpperCase()}</span><h3 className="mt-8 text-5xl font-semibold tracking-[-0.065em] sm:text-7xl">{project.title}</h3><p className={`mt-4 text-sm font-semibold ${dark ? "text-[#b7a2ff]" : "text-[#1967d2] dark:text-[#78a6ff]"}`}>{project.subtitle}</p><p className={`mt-8 max-w-lg text-base leading-8 ${dark ? "text-white/60" : "text-[#5f6368] dark:text-white/55"}`}>{project.description}</p></div>
                   <div className="mt-10"><div className="flex flex-wrap gap-2">{project.tech.map((tech)=><span key={tech} className={`rounded-full px-3 py-1.5 text-[10px] font-semibold ${dark ? "bg-white/10 text-white/65" : "bg-white/70 text-[#4b5563] dark:bg-white/10 dark:text-white/65"}`}>{tech}</span>)}</div><div className="mt-8 flex flex-wrap items-center gap-3">{project.live ? <ProjectLink href={project.live} label="View live" primary dark={dark} icon={<ArrowUpRight size={15} />} /> : <ProjectStatus label={project.status ?? "In development"} dark={dark} />}<ProjectLink href={project.github} label="GitHub" dark={dark} icon={<Github size={15} />} /></div></div>
                 </div>
-                <div className="relative min-h-[460px] overflow-hidden p-6 lg:min-h-full lg:p-10">{project.title === "Grillr" ? <GrillrVisual /> : project.title === "MigrationY" ? <MigrationVisual /> : project.title === "DEADLOCK" ? <DeadlockVisual /> : <StoreVisual />}</div>
+                <div className="relative min-h-[460px] overflow-hidden p-6 lg:min-h-full lg:p-10">{project.title === "Grillr" ? <GrillrVisual /> : <MigrationVisual />}</div>
               </div>
             </motion.article>
           </Reveal>; })}
@@ -130,8 +130,8 @@ function MobileProjects() {
 }
 
 function MobileProjectCard({ project, index, active }: { project: (typeof projects)[number]; index: number; active: boolean }) {
-  const dark = project.title === "Grillr" || project.title === "DEADLOCK";
-  const title = project.title === "DEADLOCK" ? "Deadlock" : project.title;
+  const dark = project.title === "Grillr";
+  const title = project.title;
 
   return (
     <motion.article
@@ -165,7 +165,7 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
 
       <div className="relative p-3 pb-0">
         <div className={`overflow-hidden rounded-[17px] border ${dark ? "border-white/12 bg-[#121318]" : "border-white/80 bg-white dark:border-white/10 dark:bg-[#111318]"}`}>
-          {project.title === "Grillr" ? <MobileGrillrPreview /> : project.title === "MigrationY" ? <MobileMigrationPreview /> : project.title === "DEADLOCK" ? <MobileDeadlockPreview /> : <MobileStorePreview />}
+          {project.title === "Grillr" ? <MobileGrillrPreview /> : <MobileMigrationPreview />}
         </div>
       </div>
 

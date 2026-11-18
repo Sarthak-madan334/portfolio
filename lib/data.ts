@@ -20,13 +20,6 @@ export const projects = [
     tech: ["Next.js", "TypeScript", "Python", "FastAPI", "PostgreSQL", "Docker"],
     live: null, status: "In development", github: "https://github.com/Sarthak-madan334/MigrationY", accent: "blue",
   },
-  {
-    index: "03", title: "DEADLOCK", subtitle: "AI-powered failure intelligence",
-    description: "A multi-agent platform that pressure-tests goals, surfaces hidden risks, and turns possible failure into a concrete recovery strategy.",
-    highlights: ["5 expert-agent workflows", "Risk simulation & debate", "Actionable recovery plans"],
-    tech: ["Next.js", "TypeScript", "Tailwind", "DeepSeek R1", "OpenRouter"],
-    live: "https://deadlock-alpha.vercel.app", status: null, github: "https://github.com/Sarthak-madan334/Deadlock", accent: "cyan",
-  },
 ] as const;
 
 export type StackItem = { name: string; mark: string; use: string };
