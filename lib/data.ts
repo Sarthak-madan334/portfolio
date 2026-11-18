@@ -7,18 +7,25 @@ export const links = {
 
 export const projects = [
   {
-    index: "01", title: "Grillr", subtitle: "AI-powered interview coach",
+    index: "01", title: "TokGuard", subtitle: "A token-saving toolkit for coding agents",
+    description: "Helps Codex, Claude Code, Antigravity, and other MCP-compatible agents stay focused with compact repository maps, targeted code reads, filtered command output, and a guided workflow with planning, drift checks, and verification.",
+    highlights: ["Compact repo maps and targeted reads", "Cleaner command output and budget tracking", "Work orders, drift checks, and verification"],
+    tech: ["Node.js", "Python", "MCP", "CLI"],
+    live: "https://tokguard.vercel.app", npm: "https://www.npmjs.com/package/tokguard", status: null, github: "https://github.com/Sarthak-madan334/tokguard", accent: "cyan",
+  },
+  {
+    index: "02", title: "Grillr", subtitle: "AI-powered interview coach",
     description: "A voice-first mock interview coach that asks adaptive follow-ups, analyzes speech, and turns each answer into clear, actionable feedback.",
     highlights: ["Real-time voice interviews", "Adaptive follow-up questions", "Speech analysis & retry coaching"],
     tech: ["Next.js", "TypeScript", "FastAPI", "WebSockets", "Supabase"],
-    live: "https://grillr-eight.vercel.app", status: null, github: "https://github.com/Sarthak-madan334/Grillr", accent: "violet",
+    live: "https://grillr-eight.vercel.app", npm: null, status: null, github: "https://github.com/Sarthak-madan334/Grillr", accent: "violet",
   },
   {
-    index: "02", title: "MigrationY", subtitle: "Database migration rehearsal",
+    index: "03", title: "MigrationY", subtitle: "Database migration rehearsal",
     description: "Rehearse database migrations against seeded PostgreSQL data, then compare representative queries before and after to spot regressions early.",
     highlights: ["Migration rehearsal workflow", "Seeded PostgreSQL test data", "Before-and-after query checks"],
     tech: ["Next.js", "TypeScript", "Python", "FastAPI", "PostgreSQL", "Docker"],
-    live: null, status: "In development", github: "https://github.com/Sarthak-madan334/MigrationY", accent: "blue",
+    live: null, npm: null, status: "In development", github: "https://github.com/Sarthak-madan334/MigrationY", accent: "blue",
   },
 ] as const;
 
