@@ -197,12 +197,10 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
           ))}
         </div>
 
-        <div className="mt-5 flex flex-wrap items-center gap-3">
+        <div className="-mx-2 mt-5 flex flex-nowrap items-center gap-1.5 whitespace-nowrap">
           {project.live ? <MobileProjectLink href={project.live} label="View live" primary dark={dark} icon={<ArrowUpRight size={15} />} /> : <ProjectStatus label={project.status ?? "In development"} dark={dark} />}
-          <div className="inline-flex shrink-0 flex-nowrap items-center gap-3 whitespace-nowrap">
-            <MobileProjectLink href={project.github} label="GitHub" dark={dark} icon={<Github size={15} />} />
-            {project.npm && <MobileProjectLink href={project.npm} label="npm package" dark={dark} icon={<Package size={15} />} />}
-          </div>
+          <MobileProjectLink href={project.github} label="GitHub" dark={dark} icon={<Github size={13} />} />
+          {project.npm && <MobileProjectLink href={project.npm} label="Package" dark={dark} icon={<Package size={13} />} />}
         </div>
       </div>
     </motion.article>
@@ -479,7 +477,7 @@ function MobileProjectLink({ href, label, icon, primary = false, dark = false }:
       : "border border-black/15 text-[#1d1d1f] dark:border-white/20 dark:text-white";
 
   return (
-    <a href={href} target="_blank" rel="noreferrer" className={`focus-ring inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-xs font-semibold transition active:scale-[0.98] ${cls}`}>
+    <a href={href} target="_blank" rel="noreferrer" className={`focus-ring inline-flex shrink-0 items-center gap-1 rounded-full px-1.5 py-2.5 text-[10px] font-semibold transition active:scale-[0.98] ${cls}`}>
       {label}
       {icon}
     </a>
