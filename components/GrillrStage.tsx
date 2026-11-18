@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AudioLines, Code2, Mic2 } from "lucide-react";
+import { Bot, Code2, FileCode2, Mic2, ScanLine } from "lucide-react";
 
 const waveform = [8, 13, 10, 20, 27, 17, 11, 24, 34, 20, 13, 29, 38, 23, 14, 25, 32, 18, 10, 22, 30, 16, 8, 19, 26, 14, 7];
 const panel = "absolute overflow-hidden rounded-[22px] border border-white/[0.12] bg-[#141519] text-white shadow-[0_20px_44px_rgba(0,0,0,.28)]";
@@ -11,7 +11,7 @@ export function GrillrStage() {
   return (
     <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}
       className="relative hidden min-h-[clamp(500px,calc(100svh-170px),610px)] items-center lg:flex"
-      aria-label="Selected work and interview practice preview">
+      aria-label="TokGuard coding agent and Grillr interview previews">
       <div className="relative mx-auto h-[480px] w-[110%] max-w-[627px] -translate-x-[5%]">
         <article className={`${panel} left-0 top-[25%] z-10 h-[300px] w-[44%] -rotate-[6deg]`}>
           <div className={bar}>01 <span className="ml-2 text-white/40">·</span> HOW I BUILD</div>
@@ -27,40 +27,39 @@ export function GrillrStage() {
         </article>
 
         <article className={`${panel} left-[27%] top-[7%] z-30 h-[400px] w-[48%] rotate-[1deg] border-white/[0.16] bg-[#111216]`}>
-          <div className="flex items-center justify-between border-b border-white/[0.08] bg-white/[0.025] px-4 py-3.5">
-            <div className="flex items-center gap-2.5">
-              <span className="grid h-8 w-8 place-items-center rounded-[11px] bg-[#b7a5eb] text-[#211a32]"><AudioLines size={16} /></span>
-              <div><p className="text-[13px] font-semibold tracking-[-0.03em]">Grillr<span className="text-[#b7a5eb]">.</span></p><p className="mt-0.5 text-[9px] text-white/45">Voice interview coach</p></div>
-            </div>
-            <span className="flex items-center gap-1.5 text-[9px] text-white/50"><span className="h-1.5 w-1.5 rounded-full bg-emerald-300" /> LIVE</span>
+          <div className="flex items-center gap-3 border-b border-white/10 px-4 py-4">
+            <ScanLine className="text-violet-300" size={23} />
+            <div><h3 className="text-sm font-semibold">TokGuard</h3><p className="text-[10px] text-white/55">Context for coding agents</p></div>
           </div>
-          <div className="px-4 pt-5">
-            <div className="flex items-center justify-between text-[9px] font-medium uppercase tracking-[0.12em]">
-              <span className="text-[#c5b4f4]">Behavioral interview</span><span className="text-white/40">04 / 08</span>
-            </div>
-            <div className="mt-2.5 flex gap-1">{Array.from({ length: 8 }, (_, index) => <span key={index} className={`h-0.5 flex-1 rounded-full ${index < 4 ? "bg-[#b7a5eb]/80" : "bg-white/10"}`} />)}</div>
-            <p className="mt-6 text-[17px] font-medium leading-[1.3] tracking-[-0.035em] text-white/90">Tell me about a time you solved a difficult problem.</p>
-            <div className="mt-5 rounded-[15px] border border-white/[0.07] bg-white/[0.025] px-3.5 py-3">
-              <div className="flex items-center justify-between text-[9px] text-white/45"><span>Your answer</span><span className="font-mono">01:24</span></div>
-              <div className="my-3 flex h-12 items-center justify-center gap-[3px]" aria-hidden="true">
-                {waveform.map((height, index) => <span key={index} style={{ height }} className={`w-[3px] shrink-0 rounded-full ${index > 8 && index < 20 ? "bg-[#c5b4f4]" : "bg-[#b7a5eb]/35"}`} />)}
+          <figure className="px-4 pt-4">
+            <div className="relative rounded-2xl border border-white/10 bg-[#11121a] p-3">
+              <div className="space-y-1.5 font-mono text-[10px]">
+                {["layout.tsx", "auth.ts", "theme.css"].map((file) => (
+                  <div key={file} className={`flex items-center gap-2 rounded-md border px-2 py-1.5 ${file === "auth.ts" ? "border-violet-300/35 bg-violet-300/10 text-violet-200" : "border-transparent text-white/40"}`}>
+                    <FileCode2 size={13} />{file}
+                  </div>
+                ))}
               </div>
-              <div className="mt-2.5 flex items-center gap-2 border-t border-white/[0.06] pt-2.5">
-                <Mic2 size={12} className="text-[#c5b4f4]" /><span className="text-[9px] text-white/55">Listening to your answer</span>
+              <div aria-hidden="true" className="ml-4 h-5 w-5 rounded-bl-lg border-b border-l border-violet-300/55" />
+              <div className="ml-5 flex items-center gap-2 rounded-lg border border-violet-300/25 bg-[#1c1b2a] p-2">
+                <Bot size={24} className="shrink-0 text-violet-200" />
+                <div className="text-[10px] text-white/75">Agent context<code className="block text-[9px] text-violet-200">auth.ts · lines 12–24</code></div>
               </div>
             </div>
-          </div>
+            <figcaption className="mt-4 text-sm font-medium leading-snug">Only the code the agent needs.</figcaption>
+            <p className="mt-2 text-[11px] leading-relaxed text-white/55">TokGuard maps the repo and narrows each read to the lines that matter.</p>
+          </figure>
         </article>
 
         <article className={`${panel} left-[55%] top-[25%] z-20 h-[300px] w-[44%] rotate-[5deg]`}>
-          <div className={`${bar} text-right`}>02 <span className="mx-1 text-white/40">·</span> IN PROGRESS</div>
-          <div className="pl-[44%] pr-3 pt-5">
-            <p className="text-[9px] font-medium uppercase tracking-[0.12em] text-white/40">Selected work</p>
-            <div className="mt-3 space-y-3">
-              <div><p className="text-[12px] font-semibold tracking-[-0.02em]">MigrationY</p><p className="mt-0.5 text-[9px] leading-4 text-white/45">Database rehearsal</p></div>
-              <div className="border-t border-white/[0.07] pt-2.5"><p className="text-[12px] font-semibold tracking-[-0.02em]">Deadlock</p><p className="mt-0.5 text-[9px] leading-4 text-white/45">Failure intelligence</p></div>
-              <span className="inline-flex rounded-full border border-emerald-300/[0.16] px-2 py-1 text-[8px] text-emerald-200/75">Building in public</span>
+          <div className="pl-[48%] pr-3 pt-5">
+            <Mic2 size={19} className="text-violet-300" />
+            <h3 className="mt-3 text-base font-semibold">Grillr</h3>
+            <p className="mt-1 text-[10px] text-white/55">Voice interview coach</p>
+            <div aria-hidden="true" className="mt-5 flex h-14 items-center gap-[2px] border-y border-white/10">
+              {waveform.map((height, index) => <span key={index} style={{ height }} className="min-w-0 flex-1 rounded-full bg-violet-300/70" />)}
             </div>
+            <p className="mt-2 font-mono text-[9px] text-violet-200">Recording · 01:24</p>
           </div>
         </article>
       </div>
