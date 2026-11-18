@@ -16,11 +16,11 @@ export function Projects() {
         <div className="mt-12 space-y-8">
           {projects.map((project, index) => { const isTokGuard = project.title === "TokGuard"; const dark = isTokGuard || project.title === "Grillr"; return <Reveal key={project.title} delay={index * .08}>
             <motion.article whileHover={{ y: -4 }} transition={{ duration: .3 }} className={`relative overflow-hidden rounded-[40px] ${dark ? "bg-[#0b0b0f] text-white" : "bg-[#e8f0fe] text-[#1d1d1f] dark:bg-[#151925] dark:text-white"}`}>
-              {dark && <><div className={`absolute -right-24 -top-28 h-96 w-96 rounded-full blur-[100px] ${isTokGuard ? "bg-[#27d7bd]/20" : "bg-[#7c3aed]/25"}`} /><div className={`absolute bottom-0 left-[30%] h-64 w-64 rounded-full blur-[90px] ${isTokGuard ? "bg-[#27d7bd]/12" : "bg-[#7c3aed]/20"}`} /></>}
+              {dark && <><div className={`absolute -right-24 -top-28 h-96 w-96 rounded-full blur-[100px] ${isTokGuard ? "bg-[#27d7bd]/8" : "bg-[#7c3aed]/25"}`} /><div className={`absolute bottom-0 left-[30%] h-64 w-64 rounded-full blur-[90px] ${isTokGuard ? "bg-[#27d7bd]/5" : "bg-[#7c3aed]/20"}`} /></>}
               <div className="relative grid min-h-[620px] lg:grid-cols-[0.82fr_1.18fr]">
                 <div className="flex flex-col justify-between p-8 sm:p-12 lg:p-14">
                   <div><span className={`text-xs font-semibold ${dark ? "text-white/45" : "text-[#5f6368] dark:text-white/45"}`}>PROJECT {project.index} · {project.live ? "LIVE" : project.status?.toUpperCase()}</span><h3 className="mt-8 text-5xl font-semibold tracking-[-0.065em] sm:text-7xl">{project.title}</h3><p className={`mt-4 text-sm font-semibold ${isTokGuard ? "text-[#63ead4]" : dark ? "text-[#b7a2ff]" : "text-[#1967d2] dark:text-[#78a6ff]"}`}>{project.subtitle}</p><p className={`mt-8 max-w-lg text-base leading-8 ${dark ? "text-white/60" : "text-[#5f6368] dark:text-white/55"}`}>{project.description}</p></div>
-                  <div className="mt-10"><div className="flex flex-wrap gap-2">{project.tech.map((tech)=><span key={tech} className={`rounded-full px-3 py-1.5 text-[10px] font-semibold ${dark ? "bg-white/10 text-white/65" : "bg-white/70 text-[#4b5563] dark:bg-white/10 dark:text-white/65"}`}>{tech}</span>)}</div><div className="mt-8 flex flex-wrap items-center gap-3">{project.live ? <ProjectLink href={project.live} label="Live site" primary dark={dark} icon={<ArrowUpRight size={15} />} /> : <ProjectStatus label={project.status ?? "In development"} dark={dark} />}{project.npm && <ProjectLink href={project.npm} label="npm package" dark={dark} icon={<Package size={15} />} />}<ProjectLink href={project.github} label="GitHub" dark={dark} icon={<Github size={15} />} /></div></div>
+                  <div className="mt-10"><div className="flex flex-wrap gap-2">{project.tech.map((tech)=><span key={tech} className={`rounded-full px-3 py-1.5 text-[10px] font-semibold ${dark ? "bg-white/10 text-white/65" : "bg-white/70 text-[#4b5563] dark:bg-white/10 dark:text-white/65"}`}>{tech}</span>)}</div><div className="mt-8 flex flex-nowrap items-center gap-2 whitespace-nowrap">{project.live ? <ProjectLink href={project.live} label="Live site" primary dark={dark} icon={<ArrowUpRight size={13} />} /> : <ProjectStatus label={project.status ?? "In development"} dark={dark} />}<ProjectLink href={project.github} label="GitHub" dark={dark} icon={<Github size={13} />} />{project.npm && <ProjectLink href={project.npm} label="Package" dark={dark} icon={<Package size={13} />} />}</div></div>
                 </div>
                 <div className="relative min-h-[460px] overflow-hidden p-6 lg:min-h-full lg:p-10">{isTokGuard ? <TokGuardVisual /> : project.title === "Grillr" ? <GrillrVisual /> : <MigrationVisual />}</div>
               </div>
@@ -197,10 +197,10 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
           ))}
         </div>
 
-        <div className="mt-5 flex flex-wrap gap-3">
+        <div className="-mx-2 mt-5 flex flex-nowrap items-center gap-1.5 whitespace-nowrap">
           {project.live ? <MobileProjectLink href={project.live} label="View live" primary dark={dark} icon={<ArrowUpRight size={15} />} /> : <ProjectStatus label={project.status ?? "In development"} dark={dark} />}
-          {project.npm && <MobileProjectLink href={project.npm} label="npm package" dark={dark} icon={<Package size={15} />} />}
-          <MobileProjectLink href={project.github} label="GitHub" dark={dark} icon={<Github size={15} />} />
+          <MobileProjectLink href={project.github} label="GitHub" dark={dark} icon={<Github size={13} />} />
+          {project.npm && <MobileProjectLink href={project.npm} label="Package" dark={dark} icon={<Package size={13} />} />}
         </div>
       </div>
     </motion.article>
@@ -333,17 +333,18 @@ function MobileTokGuardPreview() {
   return (
     <div className="relative h-[190px] overflow-hidden bg-[#f1fbf9] p-3 text-[#102320] dark:bg-[#111817] dark:text-white">
       <div className="flex items-center justify-between border-b border-[#0f766e]/10 pb-2 dark:border-white/[0.08]">
-        <span className="flex items-center gap-1.5 text-[9px] font-semibold"><Code2 size={12} className="text-[#079b87] dark:text-[#63ead4]"/> TOKGUARD WORKSPACE</span>
-        <span className="rounded-full border border-[#079b87]/15 bg-[#079b87]/[0.07] px-2 py-1 text-[7px] font-semibold text-[#087d70] dark:text-[#8af2df]">IN SCOPE</span>
+        <span className="flex items-center gap-1.5 text-[9px] font-semibold"><Code2 size={12} className="text-[#087d70] dark:text-[#63cbbb]"/> TOKGUARD · CODEX AGENT</span>
+        <span className="rounded-full border border-[#079b87]/15 bg-[#079b87]/[0.07] px-2 py-1 text-[7px] font-semibold text-[#087d70] dark:text-[#8af2df]">WORKING</span>
       </div>
       <div className="mt-3 rounded-xl border border-[#0f766e]/10 bg-white p-3 shadow-[0_8px_24px_rgba(15,118,110,0.08)] dark:border-white/[0.08] dark:bg-white/[0.035]">
-        <div className="flex items-center gap-2 text-[9px] font-semibold"><Terminal size={12} className="text-[#079b87] dark:text-[#63ead4]"/> Focused repository workflow</div>
-        <div className="mt-3 space-y-2 font-mono text-[8px]">
-          <div className="flex items-center gap-2 rounded-md bg-[#f4f8f7] px-2 py-1.5 dark:bg-white/[0.045]"><span className="text-[#079b87] dark:text-[#63ead4]">$</span><span>tg map</span><span className="ml-auto text-[#858d8b] dark:text-white/40">symbols · files</span></div>
-          <div className="flex items-center gap-2 rounded-md bg-[#f4f8f7] px-2 py-1.5 dark:bg-white/[0.045]"><span className="text-[#079b87] dark:text-[#63ead4]">$</span><span>tg find Projects</span><span className="ml-auto text-[#858d8b] dark:text-white/40">targeted context</span></div>
+        <p className="text-[7px] font-bold uppercase tracking-[.13em] text-[#71807c] dark:text-white/40">Current task</p>
+        <p className="mt-1.5 text-[10px] font-semibold leading-4">“Trace the auth flow and add rate limiting.”</p>
+        <div className="mt-3 flex items-center justify-between rounded-lg border border-[#0f766e]/10 bg-[#f5faf8] px-2.5 py-2 dark:border-white/[0.06] dark:bg-white/[0.035]">
+          <span className="flex items-center gap-2 text-[8px] font-medium text-[#4d625c] dark:text-white/65"><span className="grid h-5 w-5 place-items-center rounded-md bg-[#087d70]/10 text-[8px] font-bold text-[#087d70] dark:text-[#8af2df]">AI</span>Mapping relevant files</span>
+          <span className="font-mono text-[7px] text-[#087d70] dark:text-[#8af2df]">tg map</span>
         </div>
       </div>
-      <div className="mt-3 flex items-center justify-between text-[8px] font-medium text-[#63706d] dark:text-white/50"><span>PLAN <b className="ml-1 text-[#087d70] dark:text-[#8af2df]">→</b> CHECK <b className="ml-1 text-[#087d70] dark:text-[#8af2df]">→</b> VERIFY</span><span>LESS NOISE · MORE FOCUS</span></div>
+      <div className="mt-3 flex items-center justify-between text-[8px] font-medium text-[#63706d] dark:text-white/50"><span>MAP <b className="ml-1 text-[#087d70] dark:text-[#8af2df]">→</b> EDIT <b className="ml-1 text-[#087d70] dark:text-[#8af2df]">→</b> VERIFY</span><span>LESS NOISE · MORE FOCUS</span></div>
     </div>
   );
 }
@@ -351,31 +352,33 @@ function MobileTokGuardPreview() {
 function TokGuardVisual() {
   return (
     <div className="relative flex h-full min-h-[460px] items-center justify-center">
-      <div className="absolute left-[14%] top-[10%] h-64 w-64 rounded-full bg-[#28d8c1]/10 blur-[90px]" />
-      <div className="relative w-full max-w-[680px] overflow-hidden rounded-[28px] border border-white/[0.1] bg-[#0d1314]/95 p-4 shadow-[0_35px_100px_rgba(0,0,0,.48)] sm:p-6">
+      <div className="relative w-full max-w-[680px] overflow-hidden rounded-[28px] border border-[#b6eee5]/10 bg-[#101717] p-4 shadow-[0_35px_100px_rgba(0,0,0,.42)] sm:p-6">
         <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
-          <div className="flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-xl border border-[#53e2ce]/15 bg-[#53e2ce]/10 text-[#7af1df]"><Code2 size={18}/></span><div><p className="text-sm font-semibold tracking-tight">TokGuard</p><p className="mt-0.5 text-[10px] text-white/40">Focused agent workspace</p></div></div>
-          <span className="rounded-full border border-[#53e2ce]/15 bg-[#53e2ce]/[0.07] px-3 py-1.5 text-[9px] font-semibold tracking-wide text-[#8cebdc]">OPEN SOURCE · v2</span>
+          <div className="flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-xl border border-[#63cbbb]/15 bg-[#63cbbb]/[0.08] text-[#80d9cb]"><Code2 size={18}/></span><div><p className="text-sm font-semibold tracking-tight">TokGuard</p><p className="mt-0.5 text-[10px] text-white/40">AI coding agent workflow</p></div></div>
+          <span className="rounded-full border border-[#63cbbb]/15 bg-[#63cbbb]/[0.06] px-3 py-1.5 text-[9px] font-semibold tracking-wide text-[#9cdbd2]">AGENT WORKING</span>
         </div>
         <div className="grid gap-4 py-5 sm:grid-cols-[1fr_190px]">
           <div className="rounded-2xl border border-white/[0.08] bg-white/[0.035] p-4 sm:p-5">
-            <div className="flex items-center justify-between"><p className="text-[9px] font-semibold uppercase tracking-[.15em] text-[#77e7d5]/80">Repository context</p><span className="flex items-center gap-1.5 text-[9px] text-white/40"><span className="h-1.5 w-1.5 rounded-full bg-[#63ead4]"/> Focused</span></div>
-            <div className="mt-4 space-y-2 font-mono text-[10px]">
-              <div className="flex items-center gap-2 rounded-lg border border-white/[0.06] bg-black/20 px-3 py-2.5"><span className="text-[#63ead4]">$</span><span className="text-white/80">tg map</span><span className="ml-auto text-white/35">repo outline</span></div>
-              <div className="flex items-center gap-2 rounded-lg border border-white/[0.06] bg-black/20 px-3 py-2.5"><span className="text-[#63ead4]">$</span><span className="text-white/80">tg find cmd_plan</span><span className="ml-auto text-white/35">targeted search</span></div>
-              <div className="flex items-center gap-2 rounded-lg border border-[#63ead4]/15 bg-[#63ead4]/[0.06] px-3 py-2.5"><span className="text-[#63ead4]">$</span><span className="text-white/80">tg read tg/cli.py</span><span className="ml-auto text-[#8cebdc]/55">useful lines</span></div>
+            <div className="flex items-center justify-between"><p className="text-[9px] font-semibold uppercase tracking-[.15em] text-[#9cdbd2]/75">Current task</p><span className="flex items-center gap-1.5 text-[9px] text-white/40"><span className="h-1.5 w-1.5 rounded-full bg-[#72c8ba]"/> In progress</span></div>
+            <div className="mt-3 rounded-xl border border-white/[0.07] bg-black/20 p-3.5">
+              <p className="text-[8px] font-semibold uppercase tracking-[.12em] text-white/35">You asked</p>
+              <p className="mt-2 text-sm font-medium leading-6 text-white/85">“Trace the auth flow and add rate limiting.”</p>
             </div>
-            <div className="mt-4 flex flex-wrap gap-2 text-[8px] font-medium text-white/45"><span className="rounded-full border border-white/[0.08] px-2.5 py-1">MAP</span><span className="rounded-full border border-white/[0.08] px-2.5 py-1">FIND</span><span className="rounded-full border border-white/[0.08] px-2.5 py-1">READ</span><span className="rounded-full border border-white/[0.08] px-2.5 py-1">RUN</span></div>
+            <div className="mt-3 space-y-2 font-mono text-[9px]">
+              <div className="flex items-center gap-2 rounded-lg border border-white/[0.06] bg-black/20 px-3 py-2"><span className="text-[#9cdbd2]">$</span><span className="text-white/75">tg map</span><span className="ml-auto text-white/35">repo outline</span></div>
+              <div className="flex items-center gap-2 rounded-lg border border-white/[0.06] bg-black/20 px-3 py-2"><span className="text-[#9cdbd2]">$</span><span className="text-white/75">tg find auth</span><span className="ml-auto text-white/35">relevant files</span></div>
+              <div className="flex items-center gap-2 rounded-lg border border-[#63cbbb]/12 bg-[#63cbbb]/[0.035] px-3 py-2"><span className="text-[#9cdbd2]">$</span><span className="text-white/75">tg read auth.ts</span><span className="ml-auto text-[#9cdbd2]/55">focused context</span></div>
+            </div>
           </div>
           <div className="flex flex-col gap-3">
             <div className="rounded-2xl border border-white/[0.08] bg-white/[0.035] p-4">
-              <p className="text-[9px] font-semibold uppercase tracking-[.14em] text-white/40">Work order</p>
-              <div className="mt-4 space-y-3 text-[10px] text-white/65"><div className="flex items-center gap-2"><span className="grid h-5 w-5 place-items-center rounded-md bg-[#63ead4]/10 text-[#8cebdc]">01</span>Plan the task</div><div className="flex items-center gap-2"><span className="grid h-5 w-5 place-items-center rounded-md bg-[#63ead4]/10 text-[#8cebdc]">02</span>Keep scope clear</div><div className="flex items-center gap-2"><span className="grid h-5 w-5 place-items-center rounded-md bg-[#63ead4]/10 text-[#8cebdc]">03</span>Verify the result</div></div>
+              <p className="text-[9px] font-semibold uppercase tracking-[.14em] text-white/40">Agent plan</p>
+              <div className="mt-4 space-y-3 text-[10px] text-white/65"><div className="flex items-center gap-2"><span className="grid h-5 w-5 place-items-center rounded-md bg-[#63cbbb]/[0.08] text-[#9cdbd2]">01</span>Map the codebase</div><div className="flex items-center gap-2"><span className="grid h-5 w-5 place-items-center rounded-md bg-[#63cbbb]/[0.08] text-[#9cdbd2]">02</span>Make scoped edits</div><div className="flex items-center gap-2"><span className="grid h-5 w-5 place-items-center rounded-md bg-[#63cbbb]/[0.08] text-[#9cdbd2]">03</span>Run verification</div></div>
             </div>
-            <div className="flex flex-1 items-center gap-3 rounded-2xl border border-[#63ead4]/15 bg-[#63ead4]/[0.055] p-4"><Package size={19} className="shrink-0 text-[#8cebdc]"/><div><p className="text-[10px] font-semibold text-white/85">One command setup</p><p className="mt-1 font-mono text-[9px] text-[#8cebdc]/65">npx tokguard setup</p></div></div>
+            <div className="flex flex-1 items-center gap-3 rounded-2xl border border-[#63cbbb]/10 bg-[#63cbbb]/[0.035] p-4"><Terminal size={18} className="shrink-0 text-[#9cdbd2]"/><div><p className="text-[10px] font-semibold text-white/85">Less noise. More focus.</p><p className="mt-1 font-mono text-[9px] text-[#9cdbd2]/65">npx tokguard setup</p></div></div>
           </div>
         </div>
-        <div className="flex items-center justify-between rounded-xl border border-white/[0.07] bg-black/20 px-4 py-3"><span className="text-[10px] text-white/45">Map <span className="px-1 text-[#63ead4]">→</span> Find <span className="px-1 text-[#63ead4]">→</span> Read <span className="px-1 text-[#63ead4]">→</span> Run</span><span className="flex items-center gap-1.5 text-[10px] text-white/45"><Terminal size={12} className="text-[#8cebdc]"/> Stay in flow</span></div>
+        <div className="flex items-center justify-between rounded-xl border border-white/[0.07] bg-black/20 px-4 py-3"><span className="text-[10px] text-white/45">Map <span className="px-1 text-[#9cdbd2]">→</span> Find <span className="px-1 text-[#9cdbd2]">→</span> Read <span className="px-1 text-[#9cdbd2]">→</span> Verify</span><span className="flex items-center gap-1.5 text-[10px] text-white/45"><Terminal size={12} className="text-[#9cdbd2]"/> Stay in flow</span></div>
       </div>
     </div>
   );
@@ -474,7 +477,7 @@ function MobileProjectLink({ href, label, icon, primary = false, dark = false }:
       : "border border-black/15 text-[#1d1d1f] dark:border-white/20 dark:text-white";
 
   return (
-    <a href={href} target="_blank" rel="noreferrer" className={`focus-ring inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-xs font-semibold transition active:scale-[0.98] ${cls}`}>
+    <a href={href} target="_blank" rel="noreferrer" className={`focus-ring inline-flex shrink-0 items-center gap-1 rounded-full px-1.5 py-2.5 text-[10px] font-semibold transition active:scale-[0.98] ${cls}`}>
       {label}
       {icon}
     </a>
@@ -522,5 +525,5 @@ function StoreVisual() {
 
 function ProjectLink({ href, label, icon, primary=false, dark=false }: { href:string; label:string; icon:ReactNode; primary?:boolean; dark?:boolean }) {
   const cls = primary ? (dark ? "bg-white text-black" : "bg-[#1d1d1f] text-white dark:bg-white dark:text-black") : (dark ? "border border-white/20 text-white" : "border border-black/15 text-[#1d1d1f] dark:border-white/20 dark:text-white");
-  return <a href={href} target="_blank" rel="noreferrer" className={`focus-ring inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-xs font-semibold transition hover:scale-[1.02] ${cls}`}>{label}{icon}</a>;
+  return <a href={href} target="_blank" rel="noreferrer" className={`focus-ring inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-2 text-[11px] font-semibold transition hover:scale-[1.02] ${cls}`}>{label}{icon}</a>;
 }
