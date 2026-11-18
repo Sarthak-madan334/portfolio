@@ -20,7 +20,7 @@ export function Projects() {
               <div className="relative grid min-h-[620px] lg:grid-cols-[0.82fr_1.18fr]">
                 <div className="flex flex-col justify-between p-8 sm:p-12 lg:p-14">
                   <div><span className={`text-xs font-semibold ${dark ? "text-white/45" : "text-[#5f6368] dark:text-white/45"}`}>PROJECT {project.index} · {project.live ? "LIVE" : project.status?.toUpperCase()}</span><h3 className="mt-8 text-5xl font-semibold tracking-[-0.065em] sm:text-7xl">{project.title}</h3><p className={`mt-4 text-sm font-semibold ${isTokGuard ? "text-[#63ead4]" : dark ? "text-[#b7a2ff]" : "text-[#1967d2] dark:text-[#78a6ff]"}`}>{project.subtitle}</p><p className={`mt-8 max-w-lg text-base leading-8 ${dark ? "text-white/60" : "text-[#5f6368] dark:text-white/55"}`}>{project.description}</p></div>
-                  <div className="mt-10"><div className="flex flex-wrap gap-2">{project.tech.map((tech)=><span key={tech} className={`rounded-full px-3 py-1.5 text-[10px] font-semibold ${dark ? "bg-white/10 text-white/65" : "bg-white/70 text-[#4b5563] dark:bg-white/10 dark:text-white/65"}`}>{tech}</span>)}</div><div className="mt-8 flex flex-wrap items-center gap-3">{project.live ? <ProjectLink href={project.live} label="Live site" primary dark={dark} icon={<ArrowUpRight size={15} />} /> : <ProjectStatus label={project.status ?? "In development"} dark={dark} />}<ProjectLink href={project.github} label="GitHub" dark={dark} icon={<Github size={15} />} />{project.npm && <ProjectLink href={project.npm} label="npm package" dark={dark} icon={<Package size={15} />} />}</div></div>
+                  <div className="mt-10"><div className="flex flex-wrap gap-2">{project.tech.map((tech)=><span key={tech} className={`rounded-full px-3 py-1.5 text-[10px] font-semibold ${dark ? "bg-white/10 text-white/65" : "bg-white/70 text-[#4b5563] dark:bg-white/10 dark:text-white/65"}`}>{tech}</span>)}</div><div className="mt-8 flex flex-wrap items-center gap-3">{project.live ? <ProjectLink href={project.live} label="Live site" primary dark={dark} icon={<ArrowUpRight size={15} />} /> : <ProjectStatus label={project.status ?? "In development"} dark={dark} />}<div className="inline-flex shrink-0 flex-nowrap items-center gap-3 whitespace-nowrap"><ProjectLink href={project.github} label="GitHub" dark={dark} icon={<Github size={15} />} />{project.npm && <ProjectLink href={project.npm} label="npm package" dark={dark} icon={<Package size={15} />} />}</div></div></div>
                 </div>
                 <div className="relative min-h-[460px] overflow-hidden p-6 lg:min-h-full lg:p-10">{isTokGuard ? <TokGuardVisual /> : project.title === "Grillr" ? <GrillrVisual /> : <MigrationVisual />}</div>
               </div>
@@ -197,10 +197,12 @@ function MobileProjectCard({ project, index, active }: { project: (typeof projec
           ))}
         </div>
 
-        <div className="mt-5 flex flex-wrap gap-3">
+        <div className="mt-5 flex flex-wrap items-center gap-3">
           {project.live ? <MobileProjectLink href={project.live} label="View live" primary dark={dark} icon={<ArrowUpRight size={15} />} /> : <ProjectStatus label={project.status ?? "In development"} dark={dark} />}
-          <MobileProjectLink href={project.github} label="GitHub" dark={dark} icon={<Github size={15} />} />
-          {project.npm && <MobileProjectLink href={project.npm} label="npm package" dark={dark} icon={<Package size={15} />} />}
+          <div className="inline-flex shrink-0 flex-nowrap items-center gap-3 whitespace-nowrap">
+            <MobileProjectLink href={project.github} label="GitHub" dark={dark} icon={<Github size={15} />} />
+            {project.npm && <MobileProjectLink href={project.npm} label="npm package" dark={dark} icon={<Package size={15} />} />}
+          </div>
         </div>
       </div>
     </motion.article>
