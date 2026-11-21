@@ -2,7 +2,7 @@
 
 A personal portfolio featuring my projects, open-source contributions, technical skills, and GitHub activity.
 
-[Live site](https://sarthakmadan.dev) · [GitHub](https://github.com/Sarthak-madan334)
+[Live site](https://sarthakmadan.vercel.app) · [GitHub](https://github.com/Sarthak-madan334)
 
 ## Built with
 
