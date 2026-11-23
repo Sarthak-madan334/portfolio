@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Download, Menu, Moon, Sun, X } from "lucide-react";
-import { type MouseEvent, useEffect, useRef, useState } from "react";
+import { type MouseEvent, useEffect, useState } from "react";
 
 const navItems = [
   { label: "About", id: "about" },
@@ -14,35 +14,7 @@ const navItems = [
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [dark, setDark] = useState(false);
-  const scrolledRef = useRef(false);
-
-  useEffect(() => {
-    let frame = 0;
-    const syncScrolledState = () => {
-      frame = 0;
-      const scrollY = window.scrollY;
-      const nextScrolled = scrolledRef.current
-        ? scrollY > 8
-        : scrollY > 16;
-
-      if (nextScrolled !== scrolledRef.current) {
-        scrolledRef.current = nextScrolled;
-        setScrolled(nextScrolled);
-      }
-    };
-    const onScroll = () => {
-      if (!frame) frame = window.requestAnimationFrame(syncScrolledState);
-    };
-
-    syncScrolledState();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      if (frame) window.cancelAnimationFrame(frame);
-    };
-  }, []);
 
   useEffect(() => {
     const deviceTheme = window.matchMedia("(prefers-color-scheme: dark)");
@@ -99,7 +71,7 @@ export function Navbar() {
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-3 z-50 px-3 transition-all duration-300">
-      <nav className={`liquid-glass pointer-events-auto mx-auto flex h-[66px] w-full max-w-[1180px] items-center justify-between rounded-[24px] px-4 transition-shadow duration-300 sm:px-6 ${scrolled ? "liquid-glass-scrolled" : ""}`} aria-label="Main navigation">
+      <nav className="liquid-glass liquid-glass-scrolled pointer-events-auto mx-auto flex h-[66px] w-full max-w-[1180px] items-center justify-between rounded-[24px] px-4 sm:px-6" aria-label="Main navigation">
         <a href="#home" className="focus-ring rounded-full px-2 text-base font-bold tracking-[-0.035em] text-[#1d1d1f] dark:text-white" aria-label="Sarthak Madan — home">Sarthak Madan<span className="text-[#2563eb]">.</span></a>
         <div className="hidden items-center gap-1 lg:flex">{navItems.map((item) => <a key={item.id} href={`#${item.id}`} className="focus-ring inline-flex min-h-11 items-center rounded-full px-3 text-xs font-medium text-[#55555a] transition hover:bg-black/[0.045] hover:text-black dark:text-white/85 dark:hover:bg-white/[0.08] dark:hover:text-white">{item.label}</a>)}</div>
         <div className="flex items-center gap-3">
