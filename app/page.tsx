@@ -14,8 +14,8 @@ export default function Home() {
   return (
     <>
       <AmbientBackground />
+      <Navbar />
       <main className="relative z-10 overflow-hidden">
-        <Navbar />
         <Hero />
         <About />
         <TechnicalStack />
