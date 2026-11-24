@@ -70,7 +70,7 @@ export function Navbar() {
   };
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-3 z-50 px-3 transition-all duration-300">
+    <header className="pointer-events-none fixed inset-x-0 top-3 z-50 transform-gpu px-3 will-change-transform">
       <nav className="liquid-glass liquid-glass-scrolled pointer-events-auto mx-auto flex h-[66px] w-full max-w-[1180px] items-center justify-between rounded-[24px] px-4 sm:px-6" aria-label="Main navigation">
         <a href="#home" className="focus-ring rounded-full px-2 text-base font-bold tracking-[-0.035em] text-[#1d1d1f] dark:text-white" aria-label="Sarthak Madan — home">Sarthak Madan<span className="text-[#2563eb]">.</span></a>
         <div className="hidden items-center gap-1 lg:flex">{navItems.map((item) => <a key={item.id} href={`#${item.id}`} className="focus-ring inline-flex min-h-11 items-center rounded-full px-3 text-xs font-medium text-[#55555a] transition hover:bg-black/[0.045] hover:text-black dark:text-white/85 dark:hover:bg-white/[0.08] dark:hover:text-white">{item.label}</a>)}</div>
