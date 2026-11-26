@@ -71,7 +71,8 @@ export function GitHubHeatmap({ contributions, firstDate, today, onCellSize }: {
   const [details, setDetails] = useState<{ date: string; data: GitHubDayActivity | null; error: boolean } | null>(null);
   const detailsId = useId();
   const activeDate = active?.date;
-  const activeCount = active?.count;
+  const selectedDay = activeDate ? weeks.flat().find(day => day.date === activeDate) ?? active : null;
+  const activeCount = selectedDay?.count;
 
   useEffect(() => () => window.clearTimeout(hoverTimer.current), []);
 
@@ -218,31 +219,31 @@ export function GitHubHeatmap({ contributions, firstDate, today, onCellSize }: {
           </div>
         </div>
       </div>
-      {active && <div ref={bubble} className={styles.bubble} data-side={bubblePosition.side}
+      {selectedDay && <div ref={bubble} className={styles.bubble} data-side={bubblePosition.side}
         style={{ left: bubblePosition.left, top: bubblePosition.top, width: bubblePosition.width,
           "--bubble-max-height": `${bubblePosition.maxHeight}px`, "--arrow-top": `${bubblePosition.arrow}px` } as CSSProperties}>
-        <section id={detailsId} className={styles.detailPanel} aria-label={`Activity on ${formatDate(active.date)}`}>
+        <section id={detailsId} className={styles.detailPanel} aria-label={`Activity on ${formatDate(selectedDay.date)}`}>
         <button type="button" className={styles.closeDetails} aria-label="Close activity details" title="Close activity details"
           onClick={closeDetails}><X size={14} aria-hidden="true" /></button>
         <div className={styles.detailHeader}>
-          <strong>{formatDate(active.date)}</strong>
+          <strong>{formatDate(selectedDay.date)}</strong>
           <div className={styles.detailActions}>
-            <span>{active.count === 0 ? "No contributions" : `${active.count} contribution${active.count === 1 ? "" : "s"}`}</span>
+            <span>{selectedDay.count === 0 ? "No contributions" : `${selectedDay.count} contribution${selectedDay.count === 1 ? "" : "s"}`}</span>
           </div>
         </div>
-        {active.count > 0 && <div className={styles.analysisRow}>
+        {selectedDay.count > 0 && <div className={styles.analysisRow}>
           <button type="button" className={styles.analysisButton}
             disabled={!activity?.items.length || !!error}
-            aria-label={`Analyze ${formatDate(active.date)} with Bloop`}
+            aria-label={`Analyze ${formatDate(selectedDay.date)} with Bloop`}
             title={activity?.items.length ? "Analyze this day with Bloop" : "No public activity ready to analyze"}
             onClick={() => {
-              window.dispatchEvent(new CustomEvent("bloop:analyze-day", { detail: { date: active.date } }));
+              window.dispatchEvent(new CustomEvent("bloop:analyze-day", { detail: { date: selectedDay.date } }));
               closeDetails();
             }}>
             <Sparkles size={12} aria-hidden="true" /> AI
           </button>
         </div>}
-        {active.count > 0 && <div aria-live="polite">
+        {selectedDay.count > 0 && <div aria-live="polite">
           {error ? <p className={styles.detailNote}>Public activity details are temporarily unavailable.</p>
             : !activity ? <p className={styles.detailNote}>Loading public activity...</p>
               : activity.items.length === 0 ? <p className={styles.detailNote}>No public commit, pull request, or issue details found for this day.</p>
